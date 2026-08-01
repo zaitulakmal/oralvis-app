@@ -8,6 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ORAVIU — Interactive Prototype</title>
+<meta name="build" content="695240d">
 <script>
 /* Resolve mode BEFORE body parses so there is no layout flash.
    The start screen is injected as a CSS rule for the same reason. */
@@ -1793,7 +1794,8 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
 
   var picker = document.createElement('div');
   picker.className = 'picker';
-  picker.innerHTML = '<div class="picker-hd"><b>All screens</b>' +
+  picker.innerHTML = '<div class="picker-hd"><b>All screens</b>'+
+    '<span style="font-size:10px;opacity:.5;margin-left:auto;margin-right:12px">build '+(document.querySelector('meta[name=build]')||{content:'?'}).content+'</span>' +
     '<button class="pbtn" data-act="close"><span class="material-icons-round">close</span></button></div>' +
     '<div class="picker-list"></div>';
   document.body.appendChild(picker);
