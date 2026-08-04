@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ORAVIU — Interactive Prototype</title>
-<meta name="build" content="04 Aug 2026 · 12:11">
+<meta name="build" content="04 Aug 2026 · 12:40">
 <script>
 /* Resolve mode BEFORE body parses so there is no layout flash.
    The start screen is injected as a CSS rule for the same reason. */
@@ -517,23 +517,25 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
 <div class="cardwrap" data-screen="sign-in">
 <div class="phone"><div class="screen" id="scr-sign-in">
   <div class="notch"></div>
-  <div class="sb sb-d"><span>9:41</span><span>●●●</span></div>
-  <div class="fl1 fc g14" style="padding:16px 20px 20px;">
+  <div class="sb sb-d"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+  <div class="pad f jb ac" style="padding-bottom:0;"><span></span><span class="cap" style="color:var(--blue-d);font-weight:700;">Clear</span></div>
+  <div class="fl1 fc g14" style="padding:8px 20px 20px;">
     <div class="sq sq-54" style="background:var(--grad-s);box-shadow:var(--shb);">
       <span class="material-icons-round" style="font-size:27px;color:#fff;">medical_services</span></div>
-    <div class="fc g5" style="gap:5px;">
+    <div class="fc" style="gap:4px;">
       <div class="h1">Welcome back</div>
-      <div class="p">Sign in to continue your oral care journey</div>
+      <div class="p">Sign in to your account.</div>
     </div>
-    <div class="ig"><div class="lbl">Email</div>
-      <div class="iw"><span class="ii"><span class="material-icons-round">mail</span></span><div class="if on">demo@oraviu.com</div></div></div>
-    <div class="ig"><div class="lbl">Password</div>
-      <div class="iw"><span class="ii"><span class="material-icons-round">lock</span></span><div class="if"><span class="ph">••••••••••</span></div><span class="ia"><span class="material-icons-round">visibility_off</span></span></div></div>
-    <div style="text-align:right;margin-top:-4px;"><span style="font-size:11.5px;font-weight:700;color:var(--blue-d);">Forgot password?</span></div>
+    <div class="iw"><span class="ii"><span class="material-icons-round">mail</span></span><div class="if on">demo@oraviu.com</div></div>
+    <div class="iw"><span class="ii"><span class="material-icons-round">lock</span></span><div class="if"><span class="ph">Password</span></div><span class="ia"><span class="material-icons-round">visibility_off</span></span></div>
+    <div class="f ac jb">
+      <span class="pxs" style="color:var(--ink);">Keep me signed in</span>
+      <div class="sq" style="width:24px;height:24px;border-radius:7px;background:var(--blue);">
+        <span class="material-icons-round" style="font-size:17px;color:#fff;">check</span></div>
+    </div>
     <div class="btn btn-p">Sign In</div>
-    <div class="f ac g10"><div class="fl1 dv"></div><span class="cap">OR</span><div class="fl1 dv"></div></div>
-    <div class="btn btn-o" style="height:48px;font-size:13px;"><span class="material-icons-round">fingerprint</span> Use Biometrics</div>
-    <div class="tc pxs" style="margin-top:auto;">Don't have an account? <span class="lnk">Sign up</span></div>
+    <div class="tc"><span class="pxs lnk">Forgot password?</span></div>
+    <div class="tc pxs" style="margin-top:auto;">Don&#8217;t have an account? <span class="lnk">Sign up</span></div>
   </div>
 </div></div>
 <div class="slbl">Sign In</div>
@@ -565,63 +567,44 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
 <div class="cardwrap" data-screen="sign-up">
 <div class="phone"><div class="screen" id="scr-sign-up">
   <div class="notch"></div>
-  <div class="sb sb-d"><span>9:41</span><span>●●●</span></div>
-  <div class="fl1 fc g12" style="padding:16px 20px 20px;">
-    <div class="sq sq-54 tint-o"><span class="material-icons-round" style="font-size:26px;color:var(--ok-d);">person_add</span></div>
-    <div class="fc" style="gap:5px;">
+  <div class="sb sb-d"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+  <div class="pad f jb ac" style="padding-bottom:0;"><span></span><span class="cap" style="color:var(--blue-d);font-weight:700;">Clear</span></div>
+  <div class="fl1 fc g14" style="padding:8px 20px 20px;">
+    <div class="sq sq-54 tint-r"><span class="material-icons-round" style="font-size:27px;color:var(--bad-d);">person_add</span></div>
+    <div class="fc" style="gap:4px;">
       <div class="h1">Create account</div>
-      <div class="p">Join ORAVIU today — it's free</div>
+      <div class="p">Join ORAVIU today.</div>
     </div>
-    <div class="iw"><span class="ii"><span class="material-icons-round">person</span></span><div class="if"><span class="ph">Full name</span></div></div>
-    <div class="iw"><span class="ii"><span class="material-icons-round">mail</span></span><div class="if"><span class="ph">Email address</span></div></div>
-    <div class="iw"><span class="ii"><span class="material-icons-round">lock</span></span><div class="if"><span class="ph">Password</span></div><span class="ia"><span class="material-icons-round">visibility_off</span></span></div>
-    <div class="f g4 ac" style="padding-left:3px;">
-      <div style="height:5px;width:36px;border-radius:3px;background:var(--ok);"></div>
-      <div style="height:5px;width:36px;border-radius:3px;background:var(--ok);"></div>
-      <div style="height:5px;width:36px;border-radius:3px;background:var(--line);"></div>
-      <span class="cap" style="color:var(--ok-d);margin-left:5px;font-weight:700;">Strong</span>
-    </div>
-    <div class="f g8 as" style="padding:2px 3px;">
-      <div class="sq" style="width:20px;height:20px;border-radius:7px;background:var(--blue);margin-top:1px;">
-        <span class="material-icons-round" style="font-size:14px;color:#fff;">check</span></div>
-      <div class="pxs">I agree to the <span class="lnk">Terms</span> and <span class="lnk">Privacy Policy</span></div>
-    </div>
+    <div class="iw"><span class="ii"><span class="material-icons-round">mail</span></span><div class="if"><span class="ph">Email</span></div></div>
+    <div class="iw"><span class="ii"><span class="material-icons-round">lock</span></span><div class="if"><span class="ph">Password</span></div></div>
+    <div class="iw"><span class="ii"><span class="material-icons-round">lock_reset</span></span><div class="if"><span class="ph">Confirm password</span></div></div>
     <div class="btn btn-p">Create account</div>
-    <div class="tc pxs" style="margin-top:auto;">Already registered? <span class="lnk">Sign in</span></div>
+    <div class="tc pxs">By signing up you accept our <span class="lnk">Terms</span>.</div>
+    <div class="tc pxs" style="margin-top:auto;">Already have an account? <span class="lnk">Sign in</span></div>
   </div>
 </div></div>
 <div class="slbl">Account Registration</div>
 </div>
 
-</div>
-
-<!-- ═════════ 3 — PROFILE ═════════ -->
-<div class="sec"><div class="n">3 — Profile</div><div class="d">Stat strip · achievement tiles · settings list</div></div>
-<div class="row">
-
 <div class="cardwrap" data-screen="profile-setup">
 <div class="phone"><div class="screen" id="scr-profile-setup">
   <div class="notch"></div>
-  <div class="sb sb-d"><span>9:41</span><span>●●●</span></div>
-  <div class="fl1 fc g12" style="padding:16px 20px 20px;">
-    <div class="fc" style="gap:5px;">
-      <div class="h1">Almost there</div>
-      <div class="p">Help us personalise your oral care plan</div>
-    </div>
-    <div style="height:7px;border-radius:100px;background:var(--card);overflow:hidden;box-shadow:var(--sh);">
-      <div style="height:100%;width:66%;border-radius:100px;background:var(--grad-s);"></div></div>
-    <div class="ig"><div class="lbl">Age</div>
-      <div class="iw"><span class="ii"><span class="material-icons-round">cake</span></span><div class="if">28</div></div></div>
-    <div class="ig"><div class="lbl">Gender</div>
-      <div class="f g8"><div class="sel on fl1 jc">Male</div><div class="sel fl1 jc">Female</div></div></div>
-    <div class="ig"><div class="lbl">Health conditions</div>
-      <div class="f g6" style="flex-wrap:wrap;">
-        <div class="sel on">Diabetes</div><div class="sel">Dry mouth</div>
-        <div class="sel">Smoker</div><div class="sel">Braces</div><div class="sel">Pregnant</div></div></div>
-    <div class="ig"><div class="lbl">Brushing frequency</div>
-      <div class="f g8"><div class="sel fl1 jc">Once</div><div class="sel on fl1 jc">Twice</div><div class="sel fl1 jc">3×+</div></div></div>
-    <div class="btn btn-p" style="margin-top:auto;">Save profile</div>
+  <div class="sb sb-d"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+  <div class="pad f jb ac" style="padding-bottom:2px;"><span class="cap" style="font-weight:700;">Self</span>
+    <span class="cap" style="color:var(--blue-d);font-weight:700;">Clear</span></div>
+  <div class="pad" style="padding-top:2px;padding-bottom:8px;">
+    <div class="h1" style="font-size:26px;">Set up profile</div>
+    <div class="p" style="margin-top:2px;">Personalise your account now.</div></div>
+  <div class="body" style="gap:9px;">
+    <div class="iw"><span class="ii"><span class="material-icons-round">badge</span></span><div class="if" style="height:48px;"><span class="ph">Nick name</span></div></div>
+    <div class="iw"><span class="ii"><span class="material-icons-round">cake</span></span><div class="if" style="height:48px;"><span class="ph">Date of birth</span></div></div>
+    <div class="iw"><span class="ii"><span class="material-icons-round">wc</span></span><div class="if" style="height:48px;"><span class="ph">Gender</span></div><span class="ia"><span class="material-icons-round">expand_more</span></span></div>
+    <div class="iw"><span class="ii"><span class="material-icons-round">work</span></span><div class="if" style="height:48px;"><span class="ph">Profession</span></div></div>
+    <div class="iw"><span class="ii"><span class="material-icons-round">markunread_mailbox</span></span><div class="if" style="height:48px;"><span class="ph">Postcode</span></div></div>
+    <div class="iw"><span class="ii"><span class="material-icons-round">location_city</span></span><div class="if" style="height:48px;"><span class="ph">City</span></div></div>
+    <div class="iw"><span class="ii"><span class="material-icons-round">map</span></span><div class="if" style="height:48px;"><span class="ph">State</span></div></div>
   </div>
+  <div style="padding:0 20px 16px;" class="fs0"><div class="btn btn-p">Next</div></div>
 </div></div>
 <div class="slbl">Profile Setup</div>
 </div>
@@ -629,37 +612,35 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
 <div class="cardwrap" data-screen="profile-viewer">
 <div class="phone"><div class="screen" id="scr-profile-viewer">
   <div class="notch"></div>
-  <div class="sb sb-d"><span>9:41</span><span>●●●</span></div>
+  <div class="sb sb-d"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
   <div class="pad f jb ac"><div class="h2">Profile</div>
     <div class="cbtn"><span class="material-icons-round">settings</span></div></div>
-  <div class="body" style="gap:5px;">
-    <div class="card fc ac" style="padding:11px 15px;gap:2px;">
-      <div class="rel">
-        <div class="sq" style="width:48px;height:48px;border-radius:50%;background:var(--grad-s);box-shadow:var(--shb);">
-          <span class="material-icons-round" style="font-size:28px;color:#fff;">person</span></div>
-        <div class="cbtn" style="position:absolute;bottom:-3px;right:-3px;width:25px;height:25px;">
-          <span class="material-icons-round" style="font-size:14px;color:var(--blue-d);">photo_camera</span></div>
-      </div>
-      <div class="h3" style="margin-top:7px;">Alex Johnson</div>
-            <span class="chip c-b" style="margin-top:5px;">Level 3 · Smile Keeper</span>
-      <div class="f w100" style="margin-top:9px;background:var(--bg);border-radius:16px;overflow:hidden;">
-        <div class="fl1 tc" style="padding:8px 4px;"><div class="num" style="font-size:17px;color:var(--blue-d);">7</div><div class="cap" style="font-size:8.5px;">Total scans</div></div>
-        <div style="width:1.5px;background:var(--line);margin:9px 0;"></div>
-        <div class="fl1 tc" style="padding:8px 4px;"><div class="num" style="font-size:17px;color:var(--ok-d);">B</div><div class="cap" style="font-size:8.5px;">Avg grade</div></div>
-        <div style="width:1.5px;background:var(--line);margin:9px 0;"></div>
-        <div class="fl1 tc" style="padding:8px 4px;"><div class="num" style="font-size:17px;color:var(--gold-d);">5</div><div class="cap" style="font-size:8.5px;">Day streak</div></div>
-      </div>
-    </div><div class="eyebrow">Settings</div>
+  <div class="body" style="gap:7px;">
+    <div class="card fc ac" style="background:var(--grad);padding:12px 15px;gap:2px;">
+      <div class="sq" style="width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.22);">
+        <span class="material-icons-round" style="font-size:24px;color:#fff;">person</span></div>
+      <div style="color:#fff;font-size:17px;font-weight:800;margin-top:5px;">Alex Johnson</div>
+      <div style="color:rgba(255,255,255,.82);font-size:11.5px;font-weight:500;">12 March 1998 &#183; Male</div>
+    </div>
     <div class="card" style="padding:0;overflow:hidden;">
-      <div class="f ac" style="gap:11px;padding:8px 15px;"><div class="sq sq-34 tint-b"><span class="material-icons-round" style="font-size:17px;color:var(--blue-d);">badge</span></div><span class="fl1 h4">Edit profile</span><span class="material-icons-round" style="font-size:18px;color:var(--ink3);">chevron_right</span></div>
+      <div class="f ac" style="gap:12px;padding:7px 15px;"><div class="sq sq-34 tint-b"><span class="material-icons-round" style="font-size:17px;color:var(--blue-d);">mail</span></div>
+        <div class="fl1"><div class="cap" style="font-size:9.5px;">Email</div><div class="h4">demo@oraviu.com</div></div></div>
       <div class="dv" style="margin:0 15px;"></div>
-      <div class="f ac" style="gap:11px;padding:8px 15px;"><div class="sq sq-34 tint-w"><span class="material-icons-round" style="font-size:17px;color:var(--warn-d);">notifications</span></div><span class="fl1 h4">Brush reminders</span><div style="width:42px;height:25px;background:var(--ok);border-radius:13px;display:flex;align-items:center;padding:3px;"><div style="width:19px;height:19px;background:#fff;border-radius:50%;margin-left:auto;box-shadow:var(--sh);"></div></div></div>
+      <div class="f ac" style="gap:12px;padding:7px 15px;"><div class="sq sq-34 tint-b"><span class="material-icons-round" style="font-size:17px;color:var(--blue-d);">work</span></div>
+        <div class="fl1"><div class="cap" style="font-size:9.5px;">Profession</div><div class="h4">Engineer</div></div></div>
       <div class="dv" style="margin:0 15px;"></div>
-      <div class="f ac" style="gap:11px;padding:8px 15px;"><div class="sq sq-34 tint-b"><span class="material-icons-round" style="font-size:17px;color:var(--blue-d);">family_restroom</span></div><span class="fl1 h4">Dependents</span><span class="material-icons-round" style="font-size:17px;color:var(--ink3);">chevron_right</span></div>
+      <div class="f ac" style="gap:12px;padding:7px 15px;"><div class="sq sq-34 tint-b"><span class="material-icons-round" style="font-size:17px;color:var(--blue-d);">home</span></div>
+        <div class="fl1"><div class="cap" style="font-size:9.5px;">Address</div><div class="h4">Kuala Lumpur, WP</div></div></div>
       <div class="dv" style="margin:0 15px;"></div>
-      <div class="f ac" style="gap:11px;padding:8px 15px;"><div class="sq sq-34 tint-b"><span class="material-icons-round" style="font-size:17px;color:var(--blue-d);">forum</span></div><span class="fl1 h4">Chat with assistant</span><span class="material-icons-round" style="font-size:17px;color:var(--ink3);">chevron_right</span></div>
+      <div class="f ac" style="gap:12px;padding:7px 15px;"><div class="sq sq-34 tint-r"><span class="material-icons-round" style="font-size:17px;color:var(--bad-d);">monitor_heart</span></div>
+        <div class="fl1"><div class="cap" style="font-size:9.5px;">Medical condition</div><div class="h4">Diabetes</div></div></div>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div class="f ac" style="gap:12px;padding:7px 15px;"><div class="sq sq-34 tint-b"><span class="material-icons-round" style="font-size:17px;color:var(--blue-d);">family_restroom</span></div><span class="fl1 h4">Dependents</span><span class="material-icons-round" style="font-size:17px;color:var(--ink3);">chevron_right</span></div>
       <div class="dv" style="margin:0 15px;"></div>
-      <div class="f ac" style="gap:11px;padding:8px 15px;"><div class="sq sq-34 tint-b"><span class="material-icons-round" style="font-size:17px;color:var(--blue-d);">dark_mode</span></div><span class="fl1 h4">Dark mode</span><div class="thsw" data-theme-toggle><div class="thsw-k"></div></div></div>
+      <div class="f ac" style="gap:12px;padding:7px 15px;"><div class="sq sq-34 tint-b"><span class="material-icons-round" style="font-size:17px;color:var(--blue-d);">forum</span></div><span class="fl1 h4">Chat with assistant</span><span class="material-icons-round" style="font-size:17px;color:var(--ink3);">chevron_right</span></div>
+      <div class="dv" style="margin:0 15px;"></div>
+      <div class="f ac" style="gap:12px;padding:7px 15px;"><div class="sq sq-34 tint-b"><span class="material-icons-round" style="font-size:17px;color:var(--blue-d);">dark_mode</span></div><span class="fl1 h4">Dark mode</span><div class="thsw" data-theme-toggle><div class="thsw-k"></div></div></div>
     </div>
   </div>
   <div class="bnav">
@@ -671,7 +652,6 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
   </div>
 </div></div>
 <div class="slbl">Profile Viewer</div>
-<div class="note new"><span>Floating pill nav — active tab shows its label</span></div>
 </div>
 
 <div class="cardwrap" data-screen="camera-profile">
@@ -708,68 +688,59 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
 <div class="cardwrap" data-screen="dashboard">
 <div class="phone"><div class="screen" id="scr-dashboard">
   <div class="notch"></div>
-  <div class="sb sb-d"><span>9:41</span><span>●●●</span></div>
+  <div class="sb sb-d"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
   <div class="pad f jb ac" style="padding-bottom:10px;">
     <div class="f ac g10">
       <div class="sq" style="width:40px;height:40px;border-radius:50%;background:var(--grad-s);">
         <span class="material-icons-round" style="font-size:21px;color:#fff;">person</span></div>
-      <div><div class="cap">Hello,</div><div class="h3" style="font-size:15px;">Alex Johnson</div></div>
+      <div><div class="cap">Hi,</div><div class="h3" style="font-size:15px;">Alex Johnson</div></div>
     </div>
     <div class="rel"><div class="cbtn"><span class="material-icons-round">notifications_none</span></div>
-      <div style="position:absolute;top:1px;right:1px;width:10px;height:10px;background:var(--bad);border-radius:50%;border:2px solid #fff;"></div></div>
+      <div style="position:absolute;top:1px;right:1px;width:10px;height:10px;background:var(--bad);border-radius:50%;border:2px solid var(--card);"></div></div>
   </div>
 
-  <!-- gradient score card (Dentcor promo slot) -->
-  <div class="promo" style="margin:0 20px;padding:20px;">
+  <div class="promo" style="margin:0 20px;padding:18px;">
     <div class="f ac g14" style="position:relative;z-index:2;">
-      <div class="ring" style="width:104px;height:104px;--off:50.9;">
-        <svg width="104" height="104" viewBox="0 0 120 120">
+      <div class="ring" style="width:92px;height:92px;--off:50.9;">
+        <svg width="92" height="92" viewBox="0 0 120 120">
           <circle class="trk" cx="60" cy="60" r="54" stroke-width="10"/>
           <circle class="bar" cx="60" cy="60" r="54" stroke="#fff" stroke-width="10" stroke-dasharray="339.3" stroke-dashoffset="339.3"/>
         </svg>
-        <div class="mid"><span class="num" style="font-size:46px;color:#fff;line-height:1;">A</span></div>
+        <div class="mid"><span class="num" style="font-size:42px;color:#fff;line-height:1;">A</span></div>
       </div>
       <div class="fc g8 fl1">
-        <div style="font-size:9.5px;font-weight:700;letter-spacing:1.3px;color:rgba(255,255,255,.75);">ORAL HEALTH SCORE</div>
-        <div style="color:#fff;font-size:21px;font-weight:800;letter-spacing:-.3px;line-height:1.15;">Good condition</div>
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:1.3px;color:rgba(255,255,255,.78);">ORAL HEALTH SCORE</div>
+        <div style="color:#fff;font-size:20px;font-weight:800;letter-spacing:-.3px;line-height:1.15;">Good condition</div>
         <div class="f ac g4" style="background:rgba(255,255,255,.24);border-radius:100px;padding:4px 10px;width:fit-content;">
           <span class="material-icons-round" style="font-size:13px;color:#fff;">trending_up</span>
           <span style="color:#fff;font-size:10px;font-weight:700;white-space:nowrap;">Up from B</span></div>
       </div>
     </div>
-    <div class="btn btn-w" style="height:46px;border-radius:23px;font-size:13.5px;margin-top:18px;position:relative;z-index:2;">
-      View full report <span class="material-icons-round" style="font-size:16px;">arrow_forward</span></div>
   </div>
 
-  <div class="body" style="gap:18px;padding-top:18px;">
-    <div class="shead"><span class="h3">Our Services</span><span class="material-icons-round">arrow_forward</span></div>
+  <div class="body" style="gap:12px;padding-top:16px;">
+    <div class="shead"><span class="h3">Actions</span><span class="material-icons-round">arrow_forward</span></div>
     <div class="f g8">
-      <div class="fc ac g6" style="flex:1;">
-        <div class="sq sq-40" style="background:var(--blue);"><span class="material-icons-round" style="font-size:22px;color:#fff;">photo_camera</span></div>
-        <span class="cap" style="font-size:9px;color:var(--ink2);font-weight:700;">New Scan</span></div>
-      <div class="fc ac g6" style="flex:1;">
-        <div class="sq sq-40" style="background:var(--card);border:1px solid var(--brd);"><span class="material-icons-round" style="font-size:22px;color:var(--blue-d);">description</span></div>
-        <span class="cap" style="font-size:9px;color:var(--ink2);font-weight:700;">Reports</span></div>
-      <div class="fc ac g6" style="flex:1;">
-        <div class="sq sq-40" style="background:var(--card);border:1px solid var(--brd);"><span class="material-icons-round" style="font-size:22px;color:var(--ok-d);">place</span></div>
-        <span class="cap" style="font-size:9px;color:var(--ink2);font-weight:700;">Clinics</span></div>
-      <div class="fc ac g6" style="flex:1;">
-        <div class="sq sq-40" style="background:var(--card);border:1px solid var(--brd);"><span class="material-icons-round" style="font-size:22px;color:var(--gold-d);">shopping_bag</span></div>
-        <span class="cap" style="font-size:9px;color:var(--ink2);font-weight:700;">Store</span></div>
+      <div class="card fl1 fc ac g8" style="padding:13px 6px;">
+        <div class="sq sq-40" style="background:var(--grad-s);"><span class="material-icons-round" style="font-size:20px;color:#fff;">photo_camera</span></div>
+        <span class="cap" style="font-size:9px;color:var(--ink2);font-weight:700;text-align:center;">Start Scan</span></div>
+      <div class="card fl1 fc ac g8" style="padding:13px 6px;">
+        <div class="sq sq-40 tint-b"><span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">description</span></div>
+        <span class="cap" style="font-size:9px;color:var(--ink2);font-weight:700;text-align:center;">My Reports</span></div>
+      <div class="card fl1 fc ac g8" style="padding:13px 6px;">
+        <div class="sq sq-40 tint-b"><span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">family_restroom</span></div>
+        <span class="cap" style="font-size:9px;color:var(--ink2);font-weight:700;text-align:center;">My Dependents</span></div>
     </div>
-    <div class="shead"><span class="h3">Available Dentist</span><span class="material-icons-round">arrow_forward</span></div>
-    <div class="card f g11" style="padding:8px 12px;gap:10px;">
-      <div class="sq" style="width:54px;height:54px;border-radius:16px;background:linear-gradient(150deg,#BFDCF5,#7FB6E8);align-self:flex-start;">
-        <span class="material-icons-round" style="font-size:29px;color:#fff;">medical_information</span></div>
-      <div class="fl1 fc g3" style="gap:3px;">
-        <div class="f ac g4"><span class="h4" style="font-size:13px;">Dr. Phos Gray</span>
-          <span class="material-icons-round" style="font-size:14px;color:var(--blue-d);">verified</span></div>
-        <div style="font-size:10px;color:var(--blue-d);font-weight:700;">Orthodontist</div>
-        <div class="f ac g4" style="margin-top:2px;">
-          <span class="material-icons-round" style="font-size:12px;color:var(--gold-d);">star</span>
-          <span style="font-size:10px;font-weight:700;color:var(--ink);">4.5</span>
-          <span class="cap" style="font-size:9.5px;">· 1.2k reviews</span></div>
-      </div>
+    <div class="f g8">
+      <div class="card fl1 fc ac g8" style="padding:13px 6px;">
+        <div class="sq sq-40 tint-o"><span class="material-icons-round" style="font-size:20px;color:var(--ok-d);">place</span></div>
+        <span class="cap" style="font-size:9px;color:var(--ink2);font-weight:700;text-align:center;">Find Clinic</span></div>
+      <div class="card fl1 fc ac g8" style="padding:13px 6px;">
+        <div class="sq sq-40 tint-g"><span class="material-icons-round" style="font-size:20px;color:var(--gold-d);">shopping_bag</span></div>
+        <span class="cap" style="font-size:9px;color:var(--ink2);font-weight:700;text-align:center;">Store</span></div>
+      <div class="card fl1 fc ac g8" style="padding:13px 6px;">
+        <div class="sq sq-40 tint-b"><span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">forum</span></div>
+        <span class="cap" style="font-size:9px;color:var(--ink2);font-weight:700;text-align:center;">Chat</span></div>
     </div>
   </div>
 
@@ -782,7 +753,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
   </div>
 </div></div>
 <div class="slbl">Home</div>
-<div class="note new"><span>Dentcor layout: greeting · gradient card · services · dentist</span></div>
+<div class="note new"><span>All six actions from the live app</span></div>
 </div>
 
 <div class="cardwrap" data-screen="progress">
@@ -859,26 +830,30 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
 <div class="cardwrap" data-screen="device-connect">
 <div class="phone"><div class="screen" id="scr-device-connect">
   <div class="notch"></div>
-  <div class="sb sb-d"><span>9:41</span><span>●●●</span></div>
-  <div class="pad"><div class="back"><div class="cbtn"><span class="material-icons-round">arrow_back</span></div> Home</div></div>
-  <div class="fl1 fc ac g12" style="padding:6px 20px 20px;">
-    <div class="tc fc g5"><div class="h1">Connect your<br>scanner</div><div class="p">Make sure the device is powered on and nearby</div></div>
-    <div class="rel fs0" style="width:126px;height:126px;">
-      <div style="position:absolute;inset:0;border-radius:42px;background:var(--blue-t);animation:pulseb 2.4s ease-in-out infinite;"></div>
-      <div class="f ac jc" style="position:absolute;inset:0;"><span class="material-icons-round" style="font-size:54px;color:var(--blue-d);">sensors_off</span></div>
+  <div class="sb sb-d"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+  <div class="pad"><div class="back" style="margin-bottom:8px;"><div class="cbtn"><span class="material-icons-round">arrow_back</span></div> Back</div>
+    <div class="h1" style="font-size:26px;">Device connection</div></div>
+  <div class="body g12">
+    <div class="card" style="background:var(--grad);padding:18px 16px;">
+      <div class="tc" style="color:#fff;font-size:13px;font-weight:700;line-height:1.5;">
+        Results displayed by ORAVIU do not constitute a complete medical diagnosis.</div>
+      <div class="f jc" style="margin:12px 0;"><span class="material-icons-round" style="font-size:30px;color:var(--gold);">warning</span></div>
+      <div class="tc" style="color:rgba(255,255,255,.92);font-size:12px;line-height:1.55;font-weight:500;">
+        <b>DO NOT</b> interpret or take clinical action based on ORAVIU results without first
+        consulting a qualified healthcare professional.</div>
+      <div class="tc" style="color:rgba(255,255,255,.92);font-size:12px;line-height:1.55;font-weight:500;margin-top:10px;">
+        By tapping <b>Connect device</b> you agree to this disclaimer.</div>
+      <div class="tc" style="color:#fff;font-size:12px;font-weight:700;margin-top:10px;text-decoration:underline;">
+        Conditions of Use</div>
     </div>
-    <span class="chip c-r"><i class="dot" style="background:var(--bad)"></i> Not connected</span>
-    <div class="card w100" style="padding:0;overflow:hidden;">
-      <div class="f ac" style="gap:12px;padding:12px 15px;"><div class="sq" style="width:27px;height:27px;border-radius:50%;background:var(--blue-t);"><span class="num" style="font-size:12px;color:var(--blue-d);">1</span></div><span class="pxs" style="color:var(--ink);font-weight:600;">Power on the ORAVIU scanner</span></div>
-      <div class="dv" style="margin:0 15px;"></div>
-      <div class="f ac" style="gap:12px;padding:12px 15px;"><div class="sq" style="width:27px;height:27px;border-radius:50%;background:var(--blue-t);"><span class="num" style="font-size:12px;color:var(--blue-d);">2</span></div><span class="pxs" style="color:var(--ink);font-weight:600;">Turn on Wi-Fi on your phone</span></div>
-      <div class="dv" style="margin:0 15px;"></div>
-      <div class="f ac" style="gap:12px;padding:12px 15px;"><div class="sq" style="width:27px;height:27px;border-radius:50%;background:var(--blue-t);"><span class="num" style="font-size:12px;color:var(--blue-d);">3</span></div><span class="pxs" style="color:var(--ink);font-weight:600;">Tap Connect below</span></div>
-    </div>
-    <div class="btn btn-p w100" style="margin-top:auto;"><span class="material-icons-round">wifi</span> Connect device</div>
+  </div>
+  <div class="fc g8 fs0" style="padding:0 20px 16px;">
+    <div class="btn btn-p">Connect device</div>
+    <div class="btn btn-o">AI Analysis</div>
   </div>
 </div></div>
 <div class="slbl">Device Connection</div>
+<div class="note new"><span>Medical disclaimer, verbatim from the live app</span></div>
 </div>
 
 <div class="cardwrap" data-screen="device-connected">
