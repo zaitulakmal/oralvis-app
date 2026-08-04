@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ORAVIU — Interactive Prototype</title>
-<meta name="build" content="04 Aug 2026 · 12:40">
+<meta name="build" content="04 Aug 2026 · 12:53">
 <script>
 /* Resolve mode BEFORE body parses so there is no layout flash.
    The start screen is injected as a CSS rule for the same reason. */
@@ -1845,27 +1845,27 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
   var ROUTES = {
     'splash':           { btn: ['onboarding'] },
     'onboarding':       { btn: ['sign-in'], text: { 'SKIP': 'sign-in' } },
-    'sign-in':          { btn: ['dashboard', 'dashboard'],
+    'sign-in':          { btn: ['dashboard'],
                           text: { 'Forgot password?': 'password-reset', 'Sign up': 'sign-up' } },
     'password-reset':   { btn: ['sign-in'] },
     'sign-up':          { btn: ['profile-setup'], text: { 'Sign in': 'sign-in', 'Terms': 'conditions' } },
     'profile-setup':    { btn: ['medical-history'] },
     'medical-history':  { btn: ['dashboard'] },
-    'profile-viewer':   { text: { 'settings': 'about', 'Edit profile': 'profile-setup',
-                                  'Dependents': 'dependents', 'Chat with assistant': 'chat' },
-                          sel: { '.rel > .cbtn': 'camera-profile' } },
+    'profile-viewer':   { text: { 'settings': 'about', 'Dependents': 'dependents',
+                                  'Chat with assistant': 'chat' },
+                          sel: { '.card .sq': 'camera-profile' } },
     'camera-profile':   { sel: { '.sq[style*="width:72px"]': 'profile-viewer' } },
-    'dashboard':        { btn: ['report-map'], sel: { '.promo': 'report-map' },
-                          cards: { 0: 'near-clinic' },
-                          text: { 'New Scan': 'scan-select', 'Reports': 'report-map',
-                                  'Clinics': 'near-clinic', 'Store': 'store' } },
+    'dashboard':        { sel: { '.promo': 'report-map' },
+                          text: { 'Start Scan': 'scan-select', 'My Reports': 'report-map',
+                                  'My Dependents': 'dependents', 'Find Clinic': 'near-clinic',
+                                  'Store': 'store', 'Chat': 'chat' } },
     'progress':         { cards: { 2: 'perfect', 3: 'report-map', 4: 'report-map', 5: 'report-map' } },
     'scan-select':      { cards: { 0: 'device-connect', 1: 'device-connect', 2: 'ai-upload' } },
     'ai-upload':        { btn: ['ai-processing'] },
     'chat':             {},
     'dependents':       {},
     'conditions':       { btn: ['sign-up'] },
-    'device-connect':   { btn: ['device-connected'] },
+    'device-connect':   { btn: ['device-connected', 'ai-upload'] },
     'device-connected': { btn: ['live-scanner'] },
     'live-scanner':     { sel: { '.sq[style*="width:72px"]': 'image-capture' } },
     'image-capture':    { btn: ['report-form'], text: { 'Retake photo': 'live-scanner' } },
