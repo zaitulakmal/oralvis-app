@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ORAVIU — Interactive Prototype</title>
-<meta name="build" content="04 Aug 2026 · 10:13">
+<meta name="build" content="04 Aug 2026 · 10:43">
 <script>
 /* Resolve mode BEFORE body parses so there is no layout flash.
    The start screen is injected as a CSS rule for the same reason. */
@@ -57,7 +57,7 @@
   --sh:none;                            /* outlined: separation comes from borders, not elevation */
   --sh2:0 2px 10px rgba(22,50,79,.10);
   --shb:none;
-  --brd:#E2E4E8;     --brd2:#D6D9DE;
+  --brd:#E2E4E8;     --brd2:#D6D9DE; --barbg:#AFD0EF;
 }
 :root[data-theme="dark"]{
   --bg:#131417;      --bg2:#191B1F;   --card:#1B1D21;
@@ -72,7 +72,7 @@
   --sh:none;
   --sh2:0 2px 12px rgba(0,0,0,.5);
   --shb:none;
-  --brd:#2C2F34;     --brd2:#3A3E44;
+  --brd:#2C2F34;     --brd2:#3A3E44; --barbg:#2E4C68;
   --page:#0E0F11;
   --phone:#05080B;   --sk1:#18212A;   --sk2:#22303C;
   --map-bg:#0E1820;  --map-road:#1F2C38; --map-park:#14302A;
@@ -211,6 +211,20 @@ body{background:var(--page);
 
 /* ── divider ── */
 .dv{height:1.5px;background:var(--line);}
+/* grade faces: drawn, not emoji — emoji render differently on every OS */
+.face{display:block;flex-shrink:0;}
+/* finding badge: gradient disc + white glyph + status sub-badge */
+.fbadge{position:relative;width:38px;height:38px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;}
+.fbadge .material-icons-round{color:#fff;font-size:19px;}
+.fbadge .sub{position:absolute;right:-3px;bottom:-3px;width:16px;height:16px;border-radius:50%;
+  background:var(--card);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 1px 4px rgba(0,0,0,.2);}
+.fbadge .sub .material-icons-round{font-size:11px;}
+.fb-a{background:linear-gradient(180deg,#5FD9AA,#1E9E76);}
+.fb-b{background:linear-gradient(180deg,#F8CE6E,#D99B1C);}
+.fb-c{background:linear-gradient(180deg,#F5AC66,#D9772B);}
+.fb-d{background:linear-gradient(180deg,#F49094,#D9515D);}
 
 /* theme switch */
 .thsw{width:42px;height:25px;border-radius:13px;background:var(--line);display:flex;align-items:center;
@@ -258,7 +272,7 @@ body{background:var(--page);
 /* ══ TREND BARS ══ */
 .bars{display:flex;align-items:flex-end;justify-content:space-between;height:80px;gap:7px;}
 .bcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end;}
-.bar{width:100%;border-radius:8px;background:var(--blue-t);animation:grow 1s cubic-bezier(.22,1,.36,1) both;transform-origin:bottom;}
+.bar{width:100%;border-radius:8px;background:var(--barbg);animation:grow 1s cubic-bezier(.22,1,.36,1) both;transform-origin:bottom;}
 .bar.hi{background:var(--grad-s);}
 .bcol .bl{font-size:8.5px;font-weight:700;color:var(--ink3);}
 .bcol .bv{font-size:9px;font-weight:800;color:var(--blue-d);}
@@ -404,6 +418,39 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
   <filter id="fTooth" x="-30%" y="-30%" width="160%" height="170%">
     <feDropShadow dx="0" dy="1.1" stdDeviation="1.1" flood-color="#4A6B87" flood-opacity=".26"/>
   </filter>
+
+  <linearGradient id="fgA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5FD9AA"/><stop offset="1" stop-color="#1E9E76"/></linearGradient>
+  <linearGradient id="fgB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8CE6E"/><stop offset="1" stop-color="#D99B1C"/></linearGradient>
+  <linearGradient id="fgC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5AC66"/><stop offset="1" stop-color="#D9772B"/></linearGradient>
+  <linearGradient id="fgD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F49094"/><stop offset="1" stop-color="#D9515D"/></linearGradient>
+  <radialGradient id="fgGloss" cx="0.35" cy="0.22" r="0.55">
+    <stop offset="0" stop-color="#fff" stop-opacity=".42"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+  <symbol id="fc-great" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="23" fill="url(#fgA)"/><circle cx="24" cy="24" r="23" fill="url(#fgGloss)"/>
+    <path d="M12.5 18.5 q4.5-5 9 0" stroke="#fff" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+    <path d="M26.5 18.5 q4.5-5 9 0" stroke="#fff" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+    <path d="M13 28 q11 12 22 0" stroke="#fff" stroke-width="3.6" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="fc-good" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="23" fill="url(#fgA)"/><circle cx="24" cy="24" r="23" fill="url(#fgGloss)"/>
+    <circle cx="16.5" cy="19" r="3.1" fill="#fff"/><circle cx="31.5" cy="19" r="3.1" fill="#fff"/>
+    <path d="M14 28 q10 10 20 0" stroke="#fff" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="fc-ok" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="23" fill="url(#fgB)"/><circle cx="24" cy="24" r="23" fill="url(#fgGloss)"/>
+    <circle cx="16.5" cy="19.5" r="3" fill="#fff"/><circle cx="31.5" cy="19.5" r="3" fill="#fff"/>
+    <path d="M15.5 29 q8.5 5.5 17 0" stroke="#fff" stroke-width="3.3" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="fc-fair" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="23" fill="url(#fgC)"/><circle cx="24" cy="24" r="23" fill="url(#fgGloss)"/>
+    <circle cx="16.5" cy="19.5" r="3" fill="#fff"/><circle cx="31.5" cy="19.5" r="3" fill="#fff"/>
+    <path d="M15.5 30 h17" stroke="#fff" stroke-width="3.3" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="fc-poor" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="23" fill="url(#fgD)"/><circle cx="24" cy="24" r="23" fill="url(#fgGloss)"/>
+    <circle cx="16.5" cy="19.5" r="3" fill="#fff"/><circle cx="31.5" cy="19.5" r="3" fill="#fff"/>
+    <path d="M15.5 31 q8.5-6.5 17 0" stroke="#fff" stroke-width="3.3" fill="none" stroke-linecap="round"/>
+  </symbol>
 </defs></svg>
 
 <div class="hero">
@@ -710,7 +757,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
           <circle class="trk" cx="60" cy="60" r="54" stroke-width="10"/>
           <circle class="bar" cx="60" cy="60" r="54" stroke="#fff" stroke-width="10" stroke-dasharray="339.3" stroke-dashoffset="339.3"/>
         </svg>
-        <div class="mid"><span style="font-size:20px;line-height:1;">&#128516;</span>
+        <div class="mid"><svg class="face" width="24" height="24" viewBox="0 0 48 48"><use href="#fc-good"/></svg>
           <span class="num" style="font-size:26px;color:#fff;line-height:1.05;">A</span></div>
       </div>
       <div class="fc g8 fl1">
@@ -789,7 +836,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     <div class="card">
       <div class="f jb ac" style="margin-bottom:10px;">
         <div><div class="cap">AVERAGE SCORE</div>
-          <div class="f ac g6" style="margin-top:3px;"><span style="font-size:22px;line-height:1;">&#128578;</span><span class="num" style="font-size:26px;color:var(--ok-d);">B</span>
+          <div class="f ac g6" style="margin-top:3px;"><svg class="face" width="22" height="22" viewBox="0 0 48 48"><use href="#fc-ok"/></svg><span class="num" style="font-size:26px;color:var(--ok-d);">B</span>
             <span class="chip c-o">+12%</span></div></div>
         <div class="sq sq-40 tint-b"><span class="material-icons-round" style="font-size:21px;color:var(--blue-d);">insights</span></div>
       </div>
@@ -821,17 +868,17 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     <div class="card f ac g10" style="padding:8px 13px;">
       <div class="sq sq-34 tint-o"><span class="material-icons-round" style="font-size:17px;color:var(--ok-d);">verified</span></div>
       <div class="fl1"><div class="h4">Scan #8</div><div class="cap" style="font-size:9.5px;">5 Aug 2026 &#183; 08:40</div></div>
-      <div class="f ac g6"><span style="font-size:17px;">&#129321;</span><span class="num" style="font-size:18px;color:var(--ok-d);">A+</span></div>
+      <div class="f ac g6"><svg class="face" width="17" height="17" viewBox="0 0 48 48"><use href="#fc-great"/></svg><span class="num" style="font-size:18px;color:var(--ok-d);">A+</span></div>
     </div>
     <div class="card f ac g10" style="padding:8px 13px;">
       <div class="sq sq-34 tint-o"><span class="material-icons-round" style="font-size:17px;color:var(--ok-d);">check_circle</span></div>
       <div class="fl1"><div class="h4">Scan #7</div><div class="cap" style="font-size:9.5px;">29 July 2026 · 09:12</div></div>
-      <div class="f ac g6"><span style="font-size:17px;">&#128516;</span><span class="num" style="font-size:18px;color:var(--ok-d);">A</span></div>
+      <div class="f ac g6"><svg class="face" width="17" height="17" viewBox="0 0 48 48"><use href="#fc-good"/></svg><span class="num" style="font-size:18px;color:var(--ok-d);">A</span></div>
     </div>
     <div class="card f ac g10" style="padding:8px 13px;">
       <div class="sq sq-34 tint-w"><span class="material-icons-round" style="font-size:17px;color:var(--warn-d);">error_outline</span></div>
       <div class="fl1"><div class="h4">Scan #6</div><div class="cap" style="font-size:9.5px;">22 July 2026 · 21:40</div></div>
-      <div class="f ac g6"><span style="font-size:17px;">&#128578;</span><span class="num" style="font-size:18px;color:var(--gold-d);">B</span></div>
+      <div class="f ac g6"><svg class="face" width="17" height="17" viewBox="0 0 48 48"><use href="#fc-ok"/></svg><span class="num" style="font-size:18px;color:var(--gold-d);">B</span></div>
     </div>
   </div>
   <div class="bnav">
@@ -1085,7 +1132,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
       <div class="p tc" style="max-width:236px;font-size:13px;">No decay, no plaque or gum inflammation found.</div>
     </div>
     <div class="f ac jc g6">
-      <span style="font-size:32px;line-height:1;">&#129321;</span><span class="num" style="font-size:36px;font-weight:700;color:var(--ok-d);letter-spacing:-1.2px;margin-left:8px;">A+</span>
+      <svg class="face" width="32" height="32" viewBox="0 0 48 48"><use href="#fc-great"/></svg><span class="num" style="font-size:36px;font-weight:700;color:var(--ok-d);letter-spacing:-1.2px;margin-left:8px;">A+</span>
       <span class="cap" style="margin-top:11px;">/ 100</span>
     </div>
     <svg class="arch allclear" viewBox="40 39 220 322" style="max-height:134px;" preserveAspectRatio="xMidYMid meet">
@@ -1236,7 +1283,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     <div class="cbtn"><span class="material-icons-round">ios_share</span></div>
   </div>
   <div class="f jc ac g6 fs0" style="padding:2px 18px 4px;">
-    <span style="font-size:22px;line-height:1;">&#128516;</span><span class="num" style="font-size:24px;color:var(--ok-d);margin-left:6px;">A</span>
+    <svg class="face" width="22" height="22" viewBox="0 0 48 48"><use href="#fc-good"/></svg><span class="num" style="font-size:24px;color:var(--ok-d);margin-left:6px;">A</span>
     <span class="cap" style="font-size:9.5px;">Good condition</span>
     <span class="chip c-b" style="margin-left:4px;">Scan #7</span>
   </div>
@@ -1316,32 +1363,32 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     </div>
     <div class="card" style="padding:8px 13px;">
       <div class="f ac g10">
-        <div class="sq sq-34 tint-o"><span class="material-icons-round" style="font-size:18px;color:var(--ok-d);">check_circle</span></div>
+        <div class="fbadge fb-a"><span class="material-icons-round">health_and_safety</span><span class="sub"><span class="material-icons-round" style="color:var(--ok-d);">check</span></span></div>
         <div class="fl1"><div class="h4">Gum health</div><div class="cap" style="font-size:9.5px;">No signs of inflammation</div></div>
         <span class="chip c-o">Healthy</span>
       </div>
       <div class="f g6 ac jc" style="margin-top:6px;justify-content:flex-end;">
-        <span class="f ac g4"><span style="font-size:14px;">&#128516;</span><span class="num" style="font-size:16px;color:var(--ok-d);">A</span></span>
+        <span class="f ac g4"><svg class="face" width="14" height="14" viewBox="0 0 48 48"><use href="#fc-good"/></svg><span class="num" style="font-size:16px;color:var(--ok-d);">A</span></span>
       </div>
     </div>
     <div class="card" style="padding:8px 13px;">
       <div class="f ac g10">
-        <div class="sq sq-34 tint-g"><span class="material-icons-round" style="font-size:20px;color:var(--gold-d);">grain</span></div>
+        <div class="fbadge fb-b"><span class="material-icons-round">auto_awesome</span><span class="sub"><span class="material-icons-round" style="color:var(--gold-d);">priority_high</span></span></div>
         <div class="fl1"><div class="h4">Calculus</div><div class="cap" style="font-size:9.5px;">Hardened plaque, lower molars</div></div>
         <span class="chip c-g">Mild</span>
       </div>
       <div class="f g6 ac jc" style="margin-top:6px;justify-content:flex-end;">
-        <span class="f ac g4"><span style="font-size:14px;">&#128578;</span><span class="num" style="font-size:16px;color:var(--gold-d);">B</span></span>
+        <span class="f ac g4"><svg class="face" width="14" height="14" viewBox="0 0 48 48"><use href="#fc-ok"/></svg><span class="num" style="font-size:16px;color:var(--gold-d);">B</span></span>
       </div>
     </div>
     <div class="card" style="padding:8px 13px;">
       <div class="f ac g10">
-        <div class="sq sq-34 tint-r"><span class="material-icons-round" style="font-size:20px;color:var(--bad-d);">priority_high</span></div>
+        <div class="fbadge fb-c"><span class="material-icons-round">colorize</span><span class="sub"><span class="material-icons-round" style="color:var(--warn-d);">error_outline</span></span></div>
         <div class="fl1"><div class="h4">Stain</div><div class="cap" style="font-size:9.5px;">Surface discolouration</div></div>
         <span class="chip c-r">Attention</span>
       </div>
       <div class="f g6 ac jc" style="margin-top:6px;justify-content:flex-end;">
-        <span class="f ac g4"><span style="font-size:14px;">&#128528;</span><span class="num" style="font-size:16px;color:var(--warn-d);">C</span></span>
+        <span class="f ac g4"><svg class="face" width="14" height="14" viewBox="0 0 48 48"><use href="#fc-fair"/></svg><span class="num" style="font-size:16px;color:var(--warn-d);">C</span></span>
       </div>
       <div class="f ac g8 tint-r" style="margin-top:10px;border-radius:12px;padding:8px 10px;">
         <span class="material-icons-round" style="font-size:15px;color:var(--bad-d);">local_hospital</span>
@@ -1671,7 +1718,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
       <div style="position:absolute;left:10px;bottom:8px;"><span class="chip" style="background:rgba(0,0,0,.55);color:#fff;">2 detections</span></div>
     </div>
     <div class="card f ac g14" style="padding:14px;">
-      <span style="font-size:38px;line-height:1;">&#128528;</span>
+      <svg class="face" width="38" height="38" viewBox="0 0 48 48"><use href="#fc-fair"/></svg>
       <div class="fl1"><div class="lab" style="font-size:9.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--ink3);">Oral health score</div>
         <div class="f ac g8" style="margin-top:2px;"><span class="num" style="font-size:34px;color:var(--warn-d);">C</span>
           <span class="h4" style="color:var(--warn-d);">Fair</span></div></div>
@@ -1765,12 +1812,12 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     <div class="card f ac g12" style="padding:12px 14px;">
       <div class="sq sq-46" style="background:linear-gradient(150deg,#BFDCF5,#7FB6E8);"><span class="material-icons-round" style="font-size:22px;color:#fff;">face</span></div>
       <div class="fl1"><div class="h4">Aiman</div><div class="cap">9 years old · last scan 3 days ago</div></div>
-      <div class="f ac g6"><span style="font-size:20px;">&#128512;</span><span class="num" style="font-size:19px;color:var(--ok-d);">A</span></div>
+      <div class="f ac g6"><svg class="face" width="20" height="20" viewBox="0 0 48 48"><use href="#fc-good"/></svg><span class="num" style="font-size:19px;color:var(--ok-d);">A</span></div>
     </div>
     <div class="card f ac g12" style="padding:12px 14px;">
       <div class="sq sq-46" style="background:linear-gradient(150deg,#FBD9B8,#F0AE63);"><span class="material-icons-round" style="font-size:22px;color:#fff;">face_3</span></div>
       <div class="fl1"><div class="h4">Nadia</div><div class="cap">14 years old · last scan 2 weeks ago</div></div>
-      <div class="f ac g6"><span style="font-size:20px;">&#128578;</span><span class="num" style="font-size:19px;color:var(--gold-d);">B</span></div>
+      <div class="f ac g6"><svg class="face" width="20" height="20" viewBox="0 0 48 48"><use href="#fc-ok"/></svg><span class="num" style="font-size:19px;color:var(--gold-d);">B</span></div>
     </div>
     <div class="card f ac jc g10" style="padding:14px;border-style:dashed;">
       <span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">person_add</span>
