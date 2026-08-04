@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ORAVIU — Interactive Prototype</title>
-<meta name="build" content="04 Aug 2026 · 13:00">
+<meta name="build" content="04 Aug 2026 · 14:09">
 <script>
 /* Resolve mode BEFORE body parses so there is no layout flash.
    The start screen is injected as a CSS rule for the same reason. */
@@ -139,7 +139,7 @@ body{background:var(--page);
 .shead .material-icons-round{font-size:19px;color:var(--ink2);}
 
 /* ── circular icon button ── */
-.cbtn{width:38px;height:38px;border-radius:50%;background:var(--card);box-shadow:var(--sh);
+.cbtn{width:42px;height:42px;border-radius:50%;background:var(--card);box-shadow:var(--sh);
   display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .cbtn .material-icons-round{font-size:19px;color:var(--ink);}
 .back{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink2);font-weight:700;}
@@ -397,6 +397,8 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
 .pitem.on{background:var(--blue);border-color:#fff;}
 .pitem i{display:block;font-style:normal;font-size:9px;opacity:.62;font-weight:800;letter-spacing:.6px;margin-bottom:2px;}
 
+[data-go].tap-txt{display:inline-block;padding:14px 10px;margin:-14px -10px;}
+.back{padding:4px 0;}
 [data-go].tap-lg{position:relative;}
 [data-go].tap-lg::after{content:"";position:absolute;left:50%;top:50%;
   transform:translate(-50%,-50%);width:44px;height:44px;border-radius:12px;}
@@ -1926,9 +1928,10 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     while (n && n !== scr) {
       if (n.classList) {
         if (n.classList.contains('f') && n.parentElement && n.parentElement.classList &&
-            n.parentElement.classList.contains('card')) best = best || n;
+            n.parentElement.classList.contains('card')) best = n;
         if (n.classList.contains('card')) {
-          if (!n.querySelector('.dv')) best = best || n;
+          /* dividers mean a list, so keep the row; otherwise the card is the unit */
+          if (!n.querySelector('.dv')) best = n;
           break;
         }
       }
@@ -1946,6 +1949,12 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     }
     if (el.hasAttribute('data-go')) return;
     el.setAttribute('data-go', dest);
+    /* a bare text link is ~13px tall — far below a comfortable touch target */
+    if (!el.classList.contains('card') && !el.classList.contains('btn') &&
+        !el.classList.contains('f') && !el.classList.contains('sq') &&
+        !el.classList.contains('cbtn') && !el.classList.contains('ntab') &&
+        !el.classList.contains('back') && el.getAttribute('data-go') !== 'back' &&
+        (el.textContent || '').trim().length < 40) el.classList.add('tap-txt');
     /* Do NOT measure with getBoundingClientRect here: at wiring time only one
        screen is displayed, so the other 23 report 0x0 and every target would
        wrongly get the 44px expander (which creates phantom scroll in .body). */
