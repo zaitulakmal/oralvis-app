@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ORAVIU — Interactive Prototype</title>
-<meta name="build" content="04 Aug 2026 · 12:53">
+<meta name="build" content="04 Aug 2026 · 13:00">
 <script>
 /* Resolve mode BEFORE body parses so there is no layout flash.
    The start screen is injected as a CSS rule for the same reason. */
@@ -1917,8 +1917,34 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     }
     return best;
   }
-  function mark(el, dest) {
-    if (!el || el.hasAttribute('data-go')) return;
+  /* A text match lands on the label span, which leaves the icon and the rest
+     of the tile dead. Climb to the whole tap unit: the list row inside a card,
+     or a standalone card. Cards holding dividers are lists, so never lift to
+     those — that would make one row hijack the whole group. */
+  function unit(el, scr) {
+    var n = el, best = null;
+    while (n && n !== scr) {
+      if (n.classList) {
+        if (n.classList.contains('f') && n.parentElement && n.parentElement.classList &&
+            n.parentElement.classList.contains('card')) best = best || n;
+        if (n.classList.contains('card')) {
+          if (!n.querySelector('.dv')) best = best || n;
+          break;
+        }
+      }
+      n = n.parentElement;
+    }
+    return best || el;
+  }
+
+  function mark(el, dest, scr) {
+    if (!el) return;
+    if (scr) {
+      var u = unit(el, scr);
+      /* if the container is already wired, keep the inner element so both work */
+      if (u !== el && !u.hasAttribute('data-go')) el = u;
+    }
+    if (el.hasAttribute('data-go')) return;
     el.setAttribute('data-go', dest);
     /* Do NOT measure with getBoundingClientRect here: at wiring time only one
        screen is displayed, so the other 23 report 0x0 and every target would
@@ -1938,7 +1964,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
       Object.keys(spec.cards).forEach(function (n) { mark(cards[+n], spec.cards[n]); }); }
     if (spec.btn) { var btns = scr.querySelectorAll('.btn');
       spec.btn.forEach(function (d, n) { mark(btns[n], d); }); }
-    if (spec.text) Object.keys(spec.text).forEach(function (t) { mark(byText(scr, t), spec.text[t]); });
+    if (spec.text) Object.keys(spec.text).forEach(function (t) { mark(byText(scr, t), spec.text[t], scr); });
     scr.querySelectorAll(PRESSABLE).forEach(function (e) {
       if (!e.hasAttribute('data-go')) e.setAttribute('data-press', ''); });
     if (spec.self) scr.setAttribute('data-go', spec.self);
