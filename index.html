@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ORAVIU — Interactive Prototype</title>
-<meta name="build" content="04 Aug 2026 · 14:42">
+<meta name="build" content="04 Aug 2026 · 14:57">
 <script>
 /* Resolve mode BEFORE body parses so there is no layout flash.
    The start screen is injected as a CSS rule for the same reason. */
@@ -172,6 +172,8 @@ body{background:var(--page);
 /* ── cards ── */
 .card{background:var(--card);border-radius:22px;padding:15px;box-shadow:var(--sh);}
 .card.flat{box-shadow:none;border:1.5px solid var(--line);}
+/* bare border-style:dashed resolves to 3px currentColor — glaring white on black */
+.card.dash{border:1.5px dashed var(--blue-d);box-shadow:none;background:transparent;}
 .tint-b{background:var(--blue-t);} .tint-g{background:var(--gold-t);}
 .tint-o{background:var(--ok-t);} .tint-w{background:var(--warn-t);} .tint-r{background:var(--bad-t);}
 
@@ -1711,7 +1713,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
   <div class="pad"><div class="back" style="margin-bottom:10px;"><div class="cbtn"><span class="material-icons-round">arrow_back</span></div> AI Analysis</div>
     <div class="p">No scanner nearby? Upload a photo and the AI will read it.</div></div>
   <div class="body g14">
-    <div class="card fc ac jc g12" style="height:230px;border-style:dashed;border-width:1.5px;">
+    <div class="card dash fc ac jc g12" style="height:230px;">
       <div class="sq sq-54 tint-b"><span class="material-icons-round" style="font-size:26px;color:var(--blue-d);">add_photo_alternate</span></div>
       <div class="h4">Drop an image here</div>
       <div class="cap tc" style="max-width:200px;">JPG or PNG, taken in good light with the mouth open</div>
@@ -1784,7 +1786,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
       <div class="fl1"><div class="h4">Nadia</div><div class="cap">14 years old · last scan 2 weeks ago</div></div>
       <div class="f ac g6"><span class="num" style="font-size:19px;color:var(--gold-d);">B</span></div>
     </div>
-    <div class="card f ac jc g10" style="padding:14px;border-style:dashed;">
+    <div class="card dash f ac jc g10" style="padding:14px;">
       <span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">person_add</span>
       <span class="h4" style="color:var(--blue-d);">Add a dependent</span>
     </div>
@@ -1798,6 +1800,79 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
   </div>
 </div></div>
 <div class="slbl">Manage Dependents</div><div class="note new"><span>Was "under development" in the live app</span></div>
+</div>
+
+<div class="cardwrap" data-screen="add-dependent">
+<div class="phone"><div class="screen" id="scr-add-dependent">
+  <div class="notch"></div><div class="sb sb-d"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+  <div class="pad"><div class="back" style="margin-bottom:10px;"><div class="cbtn"><span class="material-icons-round">arrow_back</span></div> Add a dependent</div>
+    <div class="p">They get their own scans and reports under your account.</div></div>
+  <div class="body g14">
+    <div class="f jc" style="padding-top:2px;">
+      <div class="rel">
+        <div class="sq" style="width:74px;height:74px;border-radius:50%;background:var(--blue-t);border:1.5px dashed var(--blue-d);">
+          <span class="material-icons-round" style="font-size:28px;color:var(--blue-d);">add_a_photo</span></div>
+      </div>
+    </div>
+    <div class="ig"><div class="lbl">Full name</div>
+      <div class="iw"><div class="if on"><span>Danish Haziq</span></div>
+        <div class="ii"><span class="material-icons-round">badge</span></div></div></div>
+    <div class="f g10">
+      <div class="ig fl1"><div class="lbl">Date of birth</div>
+        <div class="iw"><div class="if"><span class="ph">12 / 03 / 2017</span></div>
+          <div class="ii"><span class="material-icons-round">cake</span></div></div></div>
+    </div>
+    <div class="ig"><div class="lbl">Relationship</div>
+      <div class="f g8"><span class="sel on">Son</span><span class="sel">Daughter</span><span class="sel">Other</span></div></div>
+    <div class="card tint-b f as g10" style="padding:11px 13px;">
+      <span class="material-icons-round" style="font-size:17px;color:var(--blue-d);">info</span>
+      <div class="pxs" style="color:var(--blue-d);">You stay the guardian on this profile until they turn 18.</div>
+    </div>
+  </div>
+  <div style="padding:0 20px 16px;" class="fs0"><div class="btn btn-p">Add dependent</div></div>
+</div></div>
+<div class="slbl">Add A Dependent</div><div class="note new"><span>New &#183; the dashed tile had no screen behind it</span></div>
+</div>
+
+<div class="cardwrap" data-screen="dependents-added">
+<div class="phone"><div class="screen" id="scr-dependents-added">
+  <div class="notch"></div><div class="sb sb-d"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+  <div class="pad"><div class="back" style="margin-bottom:10px;"><div class="cbtn"><span class="material-icons-round">arrow_back</span></div> Dependents</div>
+    <div class="p">Manage the oral health of your loved ones.</div></div>
+  <div class="body g10">
+    <div class="card tint-o f as g10" style="padding:11px 13px;">
+      <span class="material-icons-round" style="font-size:17px;color:var(--ok-d);">check_circle</span>
+      <div class="pxs" style="color:var(--ok-d);">Danish Haziq was added. Run their first scan any time.</div>
+    </div>
+    <div class="card f ac g12" style="padding:12px 14px;">
+      <div class="sq sq-46" style="background:linear-gradient(150deg,#BFDCF5,#7FB6E8);"><span class="material-icons-round" style="font-size:22px;color:#fff;">face</span></div>
+      <div class="fl1"><div class="h4">Aiman</div><div class="cap">9 years old &#183; last scan 3 days ago</div></div>
+      <div class="f ac g6"><span class="num" style="font-size:19px;color:var(--ok-d);">A</span></div>
+    </div>
+    <div class="card f ac g12" style="padding:12px 14px;">
+      <div class="sq sq-46" style="background:linear-gradient(150deg,#FBD9B8,#F0AE63);"><span class="material-icons-round" style="font-size:22px;color:#fff;">face_3</span></div>
+      <div class="fl1"><div class="h4">Nadia</div><div class="cap">14 years old &#183; last scan 2 weeks ago</div></div>
+      <div class="f ac g6"><span class="num" style="font-size:19px;color:var(--gold-d);">B</span></div>
+    </div>
+    <div class="card f ac g12" style="padding:12px 14px;">
+      <div class="sq sq-46" style="background:linear-gradient(150deg,#C9E6D8,#7FC9A8);"><span class="material-icons-round" style="font-size:22px;color:#fff;">child_care</span></div>
+      <div class="fl1"><div class="h4">Danish Haziq</div><div class="cap">8 years old &#183; no scans yet</div></div>
+      <div class="f ac g6"><span class="chip c-b">Scan now</span></div>
+    </div>
+    <div class="card dash f ac jc g10" style="padding:14px;">
+      <span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">person_add</span>
+      <span class="h4" style="color:var(--blue-d);">Add a dependent</span>
+    </div>
+  </div>
+  <div class="bnav">
+    <div class="ntab"><span class="material-icons-round">home</span><div class="ntab-l">Home</div></div>
+    <div class="ntab"><span class="material-icons-round">photo_camera</span><div class="ntab-l">Scan</div></div>
+    <div class="ntab"><span class="material-icons-round">insights</span><div class="ntab-l">Progress</div></div>
+    <div class="ntab"><span class="material-icons-round">menu_book</span><div class="ntab-l">Learn</div></div>
+    <div class="ntab on"><span class="material-icons-round">person</span><div class="ntab-l">Profile</div></div>
+  </div>
+</div></div>
+<div class="slbl">Dependent Added</div><div class="note new"><span>New &#183; confirms the add actually landed</span></div>
 </div>
 
 <div class="cardwrap" data-screen="medical-history">
@@ -1906,7 +1981,9 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     'scan-select':      { cards: { 0: 'device-connect', 1: 'device-connect', 2: 'ai-upload' } },
     'ai-upload':        { btn: ['ai-processing'] },
     'chat':             {},
-    'dependents':       {},
+    'dependents':       { text: { 'Add a dependent': 'add-dependent' } },
+    'add-dependent':    { btn: ['dependents-added'] },
+    'dependents-added': { text: { 'Add a dependent': 'add-dependent', 'Scan now': 'scan-select' } },
     'conditions':       { btn: ['sign-up'] },
     'device-connect':   { btn: ['device-connected', 'ai-upload'] },
     'device-connected': { btn: ['live-scanner'] },
