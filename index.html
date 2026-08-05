@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ORAVIU — Interactive Prototype</title>
-<meta name="build" content="05 Aug 2026 · 12:38">
+<meta name="build" content="05 Aug 2026 · 12:52">
 <script>
 /* Resolve mode BEFORE body parses so there is no layout flash.
    The start screen is injected as a CSS rule for the same reason. */
@@ -722,15 +722,6 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
 
   <div class="body" style="gap:10px;padding-top:2px;">
 
-    <!-- Promo banner (reference: SPECIAL OFFER card) -->
-    <div class="card" style="background:linear-gradient(120deg,#0678B8,#1E9AD6);padding:14px 18px;color:#fff;position:relative;overflow:hidden;">
-      <div class="eyebrow" style="color:rgba(255,255,255,.7);font-weight:700;">Special offer</div>
-      <div class="h3" style="color:#fff;margin-top:4px;max-width:200px;">40% off on selected dental tools</div>
-      <div class="btn-w" style="margin-top:12px;height:40px;border-radius:20px;width:fit-content;padding:0 18px;font-size:13px;box-shadow:0 6px 16px rgba(0,0,0,.18);">Claim now</div>
-      <div style="position:absolute;right:-8px;bottom:-10px;width:84px;height:84px;border-radius:50%;background:rgba(255,255,255,.14);"></div>
-      <span class="material-icons-round" style="position:absolute;right:14px;bottom:12px;font-size:38px;color:rgba(255,255,255,.85);">cleaning_services</span>
-    </div>
-
     <!-- Oral health score card -->
     <div class="card fc ac" style="padding:18px;">
       <div class="eyebrow" style="margin-bottom:8px;">Your oral health score</div>
@@ -749,22 +740,12 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
         <span class="cap" style="color:var(--ink);font-weight:500;">Up from B last week</span>
       </div>
       <div class="f ac w100" style="margin-top:14px;">
-        <div class="fc ac fl1 g3"><span class="h3" style="color:var(--ok-d);">A</span><span class="cap" style="font-size:11px;">Gums</span></div>
+        <div class="fc ac fl1 g3"><span class="h3" style="font-size:16px;color:var(--ok-d);">92%</span><span class="cap" style="font-size:11px;">Gums</span></div>
         <div style="width:1px;height:24px;background:var(--line);"></div>
-        <div class="fc ac fl1 g3"><span class="h3" style="color:var(--gold-d);">B</span><span class="cap" style="font-size:11px;">Plaque</span></div>
+        <div class="fc ac fl1 g3"><span class="h3" style="font-size:16px;color:var(--gold-d);">78%</span><span class="cap" style="font-size:11px;">Plaque</span></div>
         <div style="width:1px;height:24px;background:var(--line);"></div>
-        <div class="fc ac fl1 g3"><span class="h3" style="color:var(--ok-d);">A</span><span class="cap" style="font-size:11px;">Enamel</span></div>
+        <div class="fc ac fl1 g3"><span class="h3" style="font-size:16px;color:var(--ok-d);">90%</span><span class="cap" style="font-size:11px;">Enamel</span></div>
       </div>
-    </div>
-
-    <!-- Services (reference: horizontal carousel) -->
-    <div class="shead"><span class="h3">Services</span><span class="material-icons-round">arrow_forward</span></div>
-    <div class="hscroll">
-      <div class="svc"><div class="sq sq-46 tint-b"><span class="material-icons-round" style="font-size:22px;color:var(--blue-d);">cleaning_services</span></div><span class="lab">Scaling</span></div>
-      <div class="svc"><div class="sq sq-46 tint-g"><span class="material-icons-round" style="font-size:22px;color:var(--gold-d);">straighten</span></div><span class="lab">Braces</span></div>
-      <div class="svc"><div class="sq sq-46 tint-o"><span class="material-icons-round" style="font-size:22px;color:var(--ok-d);">diamond</span></div><span class="lab">Crown</span></div>
-      <div class="svc"><div class="sq sq-46 tint-w"><span class="material-icons-round" style="font-size:22px;color:var(--warn-d);">warning</span></div><span class="lab">Abscess</span></div>
-      <div class="svc"><div class="sq sq-46 tint-b"><span class="material-icons-round" style="font-size:22px;color:var(--blue-d);">search</span></div><span class="lab">Check-up</span></div>
     </div>
 
     <!-- Available clinic (reference: doctor card) -->
@@ -782,8 +763,6 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
       <span class="material-icons-round" style="font-size:19px;color:var(--ink3);">chevron_right</span>
     </div>
 
-  </div>
-    </div>
   </div>
 
   <div class="bnav">
@@ -1943,12 +1922,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
                           sel: { '.card .sq': 'camera-profile' } },
     'camera-profile':   { sel: { '.sq[style*="width:72px"]': 'profile-viewer' } },
     'dashboard':        { sel: { '.card.fc.ac': 'report-map' },
-                          text: { 'Claim now': 'store', '40% off': 'store',
-                                  'Services': 'disease-library',
-                                  'Scaling': 'disease-detail', 'Braces': 'disease-detail',
-                                  'Crown': 'disease-detail', 'Abscess': 'disease-detail',
-                                  'Check-up': 'scan-select',
-                                  'Bright Smile Dental': 'near-clinic' } },
+                          text: { 'Bright Smile Dental': 'near-clinic' } },
     'progress':         { cards: { 2: 'perfect', 3: 'report-map', 4: 'report-map', 5: 'report-map' } },
     'scan-select':      { cards: { 0: 'device-connect', 1: 'device-connect', 2: 'ai-upload' } },
     'ai-upload':        { btn: ['ai-processing'] },
