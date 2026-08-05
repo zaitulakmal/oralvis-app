@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ORAVIU — Interactive Prototype</title>
-<meta name="build" content="05 Aug 2026 · 10:04">
+<meta name="build" content="05 Aug 2026 · 12:15">
 <script>
 /* Resolve mode BEFORE body parses so there is no layout flash.
    The start screen is injected as a CSS rule for the same reason. */
@@ -17,11 +17,7 @@
   var st=null; try{ st=localStorage.getItem('oraviuMode'); }catch(e){}
   var auto=matchMedia('(max-width:760px),(display-mode:standalone)').matches?'app':'gallery';
   document.documentElement.setAttribute('data-mode', q||st||auto);
-  var th=null;
-  try{ th=new URLSearchParams(location.search).get('theme'); }catch(e){}
-  if(th!=='dark'&&th!=='light'){ try{ th=localStorage.getItem('oraviuTheme'); }catch(e){} }
-  if(th!=='dark'&&th!=='light') th = 'light';  /* pastel reads best on the light page */
-  document.documentElement.setAttribute('data-theme', th);
+  /* Light pastel only — no dark theme (client: Oral-B look, no dark mode) */
   var m=location.hash.match(/^#scr-([a-z-]+)$/), start=m?m[1]:'splash';
   var e=document.createElement('style'); e.id='oraviu-boot';
   e.textContent='html[data-mode="app"] .cardwrap[data-screen="'+start+'"]'+
@@ -38,81 +34,34 @@
    ORAVIU v5 — clinical blue system
    ══════════════════════════════════════════════════════════ */
 :root{
-  /* Pastel: soft tinted surfaces, ink softened off pure black.
-     -t tokens are pastel fills for dark text; -d tokens are the accent text
-     that has to stay readable ON those fills. */
-  --bg:#F6F5FB;      --bg2:#FFFFFF;   --card:#FFFFFF;
-  --blue:#3C7FBF;    --blue-d:#2B6CA8; --blue-l:#8FC2EA; --blue-t:#DCEBFB; --blue-t2:#EDF4FD;
-  --grad:#5A6BC4;
-  --grad-s:#5A6BC4;
-  --gold:#B0842A;    --gold-d:#8A6317; --gold-t:#FCEFD0;
-  --ok:#1F8A63;      --ok-t:#D7F2E3;
-  --warn:#BE6A2A;    --warn-t:#FDE4CE;
-  --bad:#C24F58;     --bad-t:#FBDDE0;
-  --ink:#332F45;     --ink2:#5A5570;  --ink3:#625D75;  --line:#EAE7F2;
-  --ok-d:#1F7A55;    --bad-d:#A83F49; --warn-d:#96551F;
-  --page:#F6F5FB;
-  --phone:#332F45;   --sk1:#EDEAF5;   --sk2:#F6F5FB;
-  --map-bg:#E7EDF6;  --map-road:#FFFFFF; --map-park:#D7EEDF;
-  --tooth-stroke:#D8DEEC; --tooth-fis:#C9D1E2; --tooth-cross:#DDE2EE; --tooth-lab:#9E99AE;
-  --gold-stroke:#BE8D1C;  --gold-fis:#A2780F;
-  --blue-stroke:#3C7FBF;  --blue-fis:#2B6CA8;  --note-brd:#B8E3CE;
-  --neutral:#F0EEF8;  --tooth-fill:#DDE4F2;
-  --sh:none;
+  /* Pastel cartoonish (light only) — soft candy tints, rounded & friendly.
+     -t tokens are pastel fills; -d tokens are the readable accent texts. */
+  --bg:#F8F6FF;      --bg2:#FFFFFF;   --card:#FFFFFF;
+  --blue:#4076BF;    --blue-d:#3B6FBC; --blue-l:#A6C8F2; --blue-t:#E3EEFC; --blue-t2:#F0F6FE;
+  --grad:#7060D6;
+  --grad-s:#7060D6;
+  --pink:#BA4A78;    --pink-d:#A83A68; --pink-t:#FDE8F0;
+  --gold:#B0842A;    --gold-d:#8A6317; --gold-t:#FBF0D3;
+  --ok:#1F8A63;      --ok-d:#1F7A55;  --ok-t:#E0F5EA;
+  --warn:#BE6A2A;    --warn-d:#96551F; --warn-t:#FDEEDC;
+  --bad:#C24F58;     --bad-d:#A83F49;  --bad-t:#FCDFE3;
+  --ink:#3B3550;     --ink2:#615B78;  --ink3:#6F6982;  --line:#EFEBF7;
+  --page:#F8F6FF;
+  --phone:#3B3550;   --sk1:#EDE9F7;   --sk2:#F8F6FF;
+  --map-bg:#E9F0FA;  --map-road:#FFFFFF; --map-park:#DDF1E4;
+  --tooth-stroke:#E0E3F0; --tooth-fis:#C9CFE4; --tooth-cross:#E5E8F2; --tooth-lab:#AAA4BE;
+  --gold-stroke:#B0842A;  --gold-fis:#8A6317;
+  --blue-stroke:#4076BF;  --blue-fis:#3B6FBC;  --note-brd:#C5EDD8;
+  --neutral:#F0EDFA;  --tooth-fill:#E6E9F7;
+  --sh:0 3px 0 rgba(59,53,80,.12);
   --sh2:0 -1px 0 var(--line);
-  --shb:none;
-  --brd:#EAE7F2;     --brd2:#DAD5E6; --barbg:#D9D4E6;
+  --shb:0 4px 14px rgba(138,124,224,.28);
+  --brd:#EFEBF7;     --brd2:#DCD6EA; --barbg:#DCD6EA;
 }
-:root[data-theme="dark"]{
-  /* Pastel after dark: the page warms off pure black so pastel accents
-     have something to sit on instead of punching holes in it. */
-  --bg:#14121C;      --bg2:#14121C;   --card:#221F2E;
-  --page:#14121C;    --phone:#0C0A12;  --neutral:#2B2739;  --tooth-fill:#E4E2F0;
-  --ink:#F4F2FA;     --ink2:#A9A3BE;  --ink3:#A39DB6;  --line:#332E44;
-  --brd:#332E44;     --brd2:#453F5A;  --barbg:#453F5A;
-  --sh:none;
-  --sh2:0 -1px 0 var(--line);
-  --shb:none;
-  --blue:#3C7FBF;    --blue-d:#9CCDF2; --blue-l:#9CCDF2;
-  --blue-t:#2A3A52;  --blue-t2:#232E42;
-  --grad:#5563C0;
-  --grad-s:#5563C0;
-  --ok:#1F8A63;      --ok-d:#8FE3BE;   --ok-t:#223F36;
-  --gold:#A87F1E;    --gold-d:#F5D68A; --gold-t:#3D3320;
-  --warn:#A8642A;    --warn-d:#F7BE8E; --warn-t:#402E20;
-  --bad:#A8484F;     --bad-d:#F7A6AC;  --bad-t:#3D2530;
-  --sk1:#221F2E;     --sk2:#332E44;
-  --map-bg:#100E17;  --map-road:#2B2739; --map-park:#1A2E26;
-  --tooth-stroke:#453F5A; --tooth-fis:#554E6E; --tooth-cross:#332E44; --tooth-lab:#7B7592;
-  --gold-stroke:#8A6510;  --gold-fis:#6E5210;
-  --blue-stroke:#3C7FBF;  --blue-fis:#2B6CA8;  --note-brd:#2A6B55;
-}
-/* flat on black: separation from hairlines, not elevation */
-:root[data-theme="dark"] .card{border:none;}
-/* screens that use the card colour as their page must stay black in dark */
-:root[data-theme="dark"] .screen[style*="background:var(--card)"]{background:var(--bg)!important;}
-:root[data-theme="dark"] .card.flat{border:1px solid var(--brd);background:transparent;}
-:root[data-theme="dark"] .promo{background:var(--card);border:none;}
-.promo .h1,.promo .h2{color:var(--ink);}
-/* the decorative white blobs are a Dentcor motif — iO panels are plain */
-:root[data-theme="dark"] .promo::after,:root[data-theme="dark"] .promo::before{display:none;}
-:root[data-theme="dark"] .sel{background:var(--card);border-color:transparent;}
-:root[data-theme="dark"] .sel.on{background:#fff;color:#000;border-color:#fff;}
-:root[data-theme="dark"] .btn-o{border-color:var(--brd2);color:#fff;}
-:root[data-theme="dark"] .dv{background:var(--line);height:1px;}
-:root[data-theme="dark"] .bnav{background:#000;border-top:1px solid var(--brd);margin:0;border-radius:0;}
-:root[data-theme="dark"] .ntab.on{background:transparent;}
-:root[data-theme="dark"] .ntab.on .material-icons-round,
-:root[data-theme="dark"] .ntab.on .ntab-l{color:#fff;}
-:root[data-theme="dark"] .btn-p{background:var(--grad-s);color:#fff;}
-:root[data-theme="dark"] .btn-o{background:var(--card);}
-:root[data-theme="dark"] .btn-w{background:#fff;color:#000;}
-:root[data-theme="dark"] .if{background:var(--card);border-color:var(--brd2);}
-:root[data-theme="dark"] .cbtn{background:var(--card);border:none;}
-:root[data-theme="dark"] .num,:root[data-theme="dark"] .big{font-weight:300;letter-spacing:-1px;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--page);
-     font-family:'Plus Jakarta Sans',system-ui,sans-serif;padding:44px 20px;color:var(--ink);}
+     font-family:'Plus Jakarta Sans',system-ui,sans-serif;padding:56px 20px 80px;color:var(--ink);
+     display:flex;flex-direction:column;align-items:center;scroll-behavior:smooth;}
 
 /* ── page chrome ── */
 .hero{text-align:center;margin-bottom:46px;}
@@ -123,11 +72,26 @@ body{background:var(--page);
 .hero .bdg{background:var(--card);border:1.5px solid var(--line);color:var(--ink2);font-size:11px;font-weight:700;
      padding:7px 15px;border-radius:100px;box-shadow:var(--sh);}
 .hero .bdg b{color:var(--blue-d);}
-.sec{text-align:center;margin:60px 0 26px;}
-.sec .n{display:inline-block;background:var(--card);border-radius:100px;padding:9px 24px;box-shadow:var(--sh);
-     font-size:11px;font-weight:800;letter-spacing:2.2px;text-transform:uppercase;color:var(--blue-d);}
-.sec .d{font-size:12px;color:var(--ink2);margin-top:8px;font-weight:600;}
-.row{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;align-items:flex-start;}
+.sec{text-align:center;margin:72px auto 34px;scroll-margin-top:66px;}
+.sec .n{display:inline-block;background:var(--card);border:1.5px solid var(--line);border-radius:100px;padding:10px 26px;box-shadow:var(--sh);
+     font-size:12px;font-weight:800;letter-spacing:2.2px;text-transform:uppercase;color:var(--blue-d);}
+.sec .d{font-size:12.5px;color:var(--ink2);margin-top:11px;font-weight:600;}
+.row{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;align-items:flex-start;width:100%;max-width:1180px;margin:0 auto;}
+.hero,.sec,.row{width:100%;max-width:1180px;}
+/* sticky gallery section nav */
+.gnav{position:sticky;top:0;z-index:60;margin:0 auto;width:100%;max-width:1180px;
+  display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:10px 12px;
+  background:rgba(248,246,255,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);}
+.gnav a{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:100px;
+  font-size:11.5px;font-weight:700;color:var(--ink2);text-decoration:none;
+  background:var(--card);border:1.5px solid var(--line);white-space:nowrap;cursor:pointer;
+  transition:transform .15s ease,background .15s ease,color .15s ease,box-shadow .15s ease;}
+.gnav a .ni{font-size:9px;font-weight:800;color:var(--blue-d);opacity:.7;letter-spacing:.5px;}
+.gnav a:hover{transform:translateY(-1px);color:var(--ink);box-shadow:var(--sh);}
+.gnav a.on{background:var(--grad-s);border-color:var(--grad-s);color:#fff;box-shadow:var(--shb);}
+.gnav a.on .ni{color:#fff;opacity:.85;}
+html[data-mode="app"] .gnav{display:none!important;}
 .phone{width:390px;background:var(--phone);border-radius:58px;padding:13px;box-shadow:0 30px 64px rgba(19,43,68,.34);flex-shrink:0;}
 .slbl{text-align:center;font-size:11px;color:var(--ink2);margin-top:11px;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;}
 .note{text-align:center;margin-top:5px;}
@@ -194,7 +158,6 @@ body{background:var(--page);
 .btn-gh{height:44px;display:flex;align-items:center;justify-content:center;gap:6px;
      color:var(--ink2);font-size:12.5px;font-weight:700;}
 .btn-gold{background:var(--gold-d);color:#fff;}
-:root[data-theme="dark"] .btn-gold{color:#1A1300;}
 .btn-sm{padding:8px 16px;border-radius:100px;font-size:11.5px;font-weight:700;display:inline-flex;align-items:center;gap:5px;}
 
 /* ── chips ── */
@@ -262,17 +225,31 @@ body{background:var(--page);
 .fb-c{background:linear-gradient(180deg,#F5AC66,#D9772B);}
 .fb-d{background:linear-gradient(180deg,#F49094,#D9515D);}
 
-/* theme switch */
-.thsw{width:42px;height:25px;border-radius:13px;background:var(--line);display:flex;align-items:center;
-  padding:3px;flex-shrink:0;transition:background .22s ease;}
-.thsw-k{width:19px;height:19px;border-radius:50%;background:var(--card);box-shadow:var(--sh);
-  transition:transform .22s cubic-bezier(.34,1.4,.64,1);}
-:root[data-theme="dark"] .thsw{background:var(--blue);}
-:root[data-theme="dark"] .thsw-k{transform:translateX(17px);}
-.themebtn{margin-top:18px;margin-left:10px;display:inline-flex;align-items:center;gap:8px;
-  background:var(--card);color:var(--ink2);border:1.5px solid var(--line);
-  font-size:13px;font-weight:600;padding:12px 22px;border-radius:100px;cursor:pointer;
-  font-family:'Plus Jakarta Sans',sans-serif;box-shadow:none;}
+/* ── cartoon motion: soft, bouncy, cute ── */
+.emoji{display:inline-block;animation:wiggle 2.6s ease-in-out infinite;}
+.emoji.pop{animation:pop .5s cubic-bezier(.34,1.8,.64,1) both;}
+@keyframes wiggle{
+  0%,100%{transform:rotate(-6deg) scale(1)}
+  50%{transform:rotate(6deg) scale(1.08)}
+}
+@keyframes pop{
+  0%{transform:scale(.3);opacity:0}
+  70%{transform:scale(1.15)}
+  100%{transform:scale(1);opacity:1}
+}
+@keyframes bounceIn{
+  0%{transform:translateY(18px) scale(.9);opacity:0}
+  60%{transform:translateY(-4px) scale(1.02)}
+  100%{transform:translateY(0) scale(1);opacity:1}
+}
+.bounce-in{animation:bounceIn .55s cubic-bezier(.22,1,.36,1) both;}
+@keyframes heartBeat{
+  0%,100%{transform:scale(1)}
+  12%{transform:scale(1.18)}
+  24%{transform:scale(1)}
+  36%{transform:scale(1.12)}
+}
+.heart{display:inline-block;animation:heartBeat 1.8s ease-in-out infinite;}
 
 /* ══ DENTAL ARCH ══ */
 .arch{width:100%;display:block;}
@@ -357,7 +334,7 @@ body{background:var(--page);
 .is-press{transform:scale(.962);filter:brightness(.96);transition:transform .07s ease,filter .07s ease;}
 .btn.is-press,.btn-sm.is-press{transform:scale(.962) translateY(2px);}
 
-html[data-mode="gallery"] .phone{position:relative;cursor:pointer;zoom:.77;}
+html[data-mode="gallery"] .phone{position:relative;cursor:pointer;zoom:.84;}
 .openbadge{position:absolute;inset:10px;border-radius:37px;z-index:45;pointer-events:none;
   background:rgba(19,43,68,.82);color:#fff;font-size:14px;font-weight:700;
   display:flex;align-items:center;justify-content:center;gap:8px;opacity:0;transition:opacity .18s ease;}
@@ -464,7 +441,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
   <div class="tag">Smart Scan, Sparkling Smile</div>
   <div class="badges">
     <span class="bdg">Interactive prototype · <b>35 screens</b></span>
-    <span class="bdg">Light &amp; dark mode</span>
+    <span class="bdg">Soft pastel & friendly</span>
     <span class="bdg">Opens full-screen on a phone</span>
   </div>
 </div>
@@ -676,7 +653,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
       <div class="dv" style="margin:0 15px;"></div>
       <div class="f ac" style="gap:12px;padding:7px 15px;"><div class="sq sq-34 tint-b"><span class="material-icons-round" style="font-size:17px;color:var(--blue-d);">forum</span></div><span class="fl1 h4">Chat with assistant</span><span class="material-icons-round" style="font-size:17px;color:var(--ink3);">chevron_right</span></div>
       <div class="dv" style="margin:0 15px;"></div>
-      <div class="f ac" style="gap:12px;padding:7px 15px;"><div class="sq sq-34 tint-b"><span class="material-icons-round" style="font-size:17px;color:var(--blue-d);">dark_mode</span></div><span class="fl1 h4">Dark mode</span><div class="thsw" data-theme-toggle><div class="thsw-k"></div></div></div>
+      <div class="f ac" style="gap:12px;padding:7px 15px;"><div class="sq sq-34 tint-b"><span class="material-icons-round" style="font-size:17px;color:var(--blue-d);">notifications_none</span></div><span class="fl1 h4">Notifications</span><span class="chip c-o">On</span></div>
     </div>
   </div>
   <div class="bnav">
@@ -735,50 +712,54 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
       <div style="position:absolute;top:1px;right:1px;width:10px;height:10px;background:var(--bad);border-radius:50%;border:2px solid var(--card);"></div></div>
   </div>
 
-  <div class="fc ac" style="padding:6px 20px 20px;flex-shrink:0;">
-    <div class="ring" style="width:186px;height:186px;--off:50.9;">
-      <svg width="186" height="186" viewBox="0 0 120 120">
-        <circle class="trk" cx="60" cy="60" r="54" stroke-width="5"/>
-        <circle class="bar" cx="60" cy="60" r="54" stroke="var(--grad-s)" stroke-width="5" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="339.3"/>
+  <div class="fc ac" style="padding:0 20px 10px;flex-shrink:0;">
+    <div class="eyebrow" style="margin-bottom:9px;">Oral health score</div>
+    <div class="ring" style="width:158px;height:158px;--off:50.9;">
+      <svg width="158" height="158" viewBox="0 0 120 120">
+        <circle class="trk" cx="60" cy="60" r="54" stroke-width="6"/>
+        <circle class="bar" cx="60" cy="60" r="54" stroke="var(--grad-s)" stroke-width="6" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="339.3"/>
       </svg>
-      <div class="mid fc ac g2">
-        <span class="num" style="font-size:76px;line-height:.9;color:var(--grad-s);">A</span>
-        <span class="eyebrow" style="font-size:10px;">Health score</span>
-      </div>
+      <div class="mid"><span class="num" style="font-size:66px;line-height:1;color:var(--grad-s);">A</span></div>
     </div>
-    <div class="h2" style="margin-top:16px;">Good condition</div>
-    <div class="f ac g5" style="margin-top:8px;background:var(--neutral);border-radius:100px;padding:6px 13px;">
-      <span class="material-icons-round" style="font-size:15px;color:var(--ok-d);">trending_up</span>
+    <div class="h2" style="margin-top:13px;">Good condition</div>
+    <div class="f ac g5" style="margin-top:7px;background:var(--neutral);border-radius:100px;padding:5px 12px;">
+      <span class="material-icons-round" style="font-size:14px;color:var(--ok-d);">trending_up</span>
       <span class="cap" style="color:var(--ink);font-weight:500;">Up from B last week</span>
+    </div>
+    <div class="f ac w100" style="margin-top:11px;">
+      <div class="fc ac fl1 g3"><span class="h3" style="color:var(--ok-d);">A</span><span class="cap" style="font-size:11px;">Gums</span></div>
+      <div style="width:1px;height:24px;background:var(--line);"></div>
+      <div class="fc ac fl1 g3"><span class="h3" style="color:var(--gold-d);">B</span><span class="cap" style="font-size:11px;">Plaque</span></div>
+      <div style="width:1px;height:24px;background:var(--line);"></div>
+      <div class="fc ac fl1 g3"><span class="h3" style="color:var(--ok-d);">A</span><span class="cap" style="font-size:11px;">Enamel</span></div>
     </div>
   </div>
 
-  <div class="body" style="gap:10px;padding-top:6px;">
-    <div class="shead"><span class="h3">Actions</span><span class="material-icons-round">arrow_forward</span></div>
-    <div class="f g8">
-      <div class="card fl1 fc ac g8" style="padding:13px 6px;">
+  <div class="body" style="gap:12px;padding-top:2px;">
+    <div class="f g10">
+      <div class="card fl1 fc ac g9" style="padding:15px 6px;box-shadow:var(--sh);border:1.5px solid var(--line);">
         <div class="sq sq-40" style="background:var(--grad-s);"><span class="material-icons-round" style="font-size:20px;color:#fff;">photo_camera</span></div>
         <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">Start Scan</span></div>
-      <div class="card fl1 fc ac g8" style="padding:13px 6px;">
+      <div class="card fl1 fc ac g9" style="padding:15px 6px;box-shadow:var(--sh);border:1.5px solid var(--line);">
         <div class="sq sq-40 tint-b"><span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">description</span></div>
         <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">My Reports</span></div>
-      <div class="card fl1 fc ac g8" style="padding:13px 6px;">
+      <div class="card fl1 fc ac g9" style="padding:15px 6px;box-shadow:var(--sh);border:1.5px solid var(--line);">
         <div class="sq sq-40 tint-b"><span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">family_restroom</span></div>
         <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">My Dependents</span></div>
     </div>
-    <div class="f g8">
-      <div class="card fl1 fc ac g8" style="padding:13px 6px;">
+    <div class="f g10">
+      <div class="card fl1 fc ac g9" style="padding:15px 6px;box-shadow:var(--sh);border:1.5px solid var(--line);">
         <div class="sq sq-40 tint-o"><span class="material-icons-round" style="font-size:20px;color:var(--ok-d);">place</span></div>
         <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">Find Clinic</span></div>
-      <div class="card fl1 fc ac g8" style="padding:13px 6px;">
+      <div class="card fl1 fc ac g9" style="padding:15px 6px;box-shadow:var(--sh);border:1.5px solid var(--line);">
         <div class="sq sq-40 tint-g"><span class="material-icons-round" style="font-size:20px;color:var(--gold-d);">shopping_bag</span></div>
         <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">Store</span></div>
-      <div class="card fl1 fc ac g8" style="padding:13px 6px;">
+      <div class="card fl1 fc ac g9" style="padding:15px 6px;box-shadow:var(--sh);border:1.5px solid var(--line);">
         <div class="sq sq-40 tint-b"><span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">forum</span></div>
         <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">Chat</span></div>
     </div>
 
-    <div class="card fc g12" style="padding:14px;">
+    <div class="card fc g12" style="padding:16px;box-shadow:var(--sh);">
       <div class="f ac g12">
       <div class="sq sq-40 tint-b"><span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">history</span></div>
       <div class="fc g2 fl1">
@@ -788,7 +769,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
       <span class="material-icons-round" style="font-size:19px;color:var(--ink3);">chevron_right</span>
       </div>
       <div class="dv"></div>
-      <div class="f jb ac"><span class="h4">Scan streak</span><span class="cap">4 of 7 days</span></div>
+      <div class="f jb ac"><span class="h4">Scan streak</span><span class="chip c-b" style="padding:3px 10px;font-size:9.5px;">4 of 7 days</span></div>
       <div class="f jb"><div class="fc ac g6"><div class="sq" style="width:32px;height:32px;border-radius:50%;background:var(--blue);"><span class="material-icons-round" style="font-size:17px;color:#fff;">check</span></div><span class="cap" style="font-size:9px;">M</span></div><div class="fc ac g6"><div class="sq" style="width:32px;height:32px;border-radius:50%;background:var(--blue);"><span class="material-icons-round" style="font-size:17px;color:#fff;">check</span></div><span class="cap" style="font-size:9px;">T</span></div><div class="fc ac g6"><div class="sq" style="width:32px;height:32px;border-radius:50%;border:1.5px solid var(--brd2);"></div><span class="cap" style="font-size:9px;">W</span></div><div class="fc ac g6"><div class="sq" style="width:32px;height:32px;border-radius:50%;background:var(--blue);"><span class="material-icons-round" style="font-size:17px;color:#fff;">check</span></div><span class="cap" style="font-size:9px;">T</span></div><div class="fc ac g6"><div class="sq" style="width:32px;height:32px;border-radius:50%;background:var(--blue);"><span class="material-icons-round" style="font-size:17px;color:#fff;">check</span></div><span class="cap" style="font-size:9px;">F</span></div><div class="fc ac g6"><div class="sq" style="width:32px;height:32px;border-radius:50%;border:1.5px solid var(--brd2);"></div><span class="cap" style="font-size:9px;">S</span></div><div class="fc ac g6"><div class="sq" style="width:32px;height:32px;border-radius:50%;border:1.5px solid var(--brd2);"></div><span class="cap" style="font-size:9px;">S</span></div></div>
     </div>
   </div>
@@ -1911,7 +1892,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
 
 </div>
 
-<div class="pagefoot" style="text-align:center;margin-top:56px;padding-bottom:56px;">
+<div class="pagefoot" id="pagefoot" style="text-align:center;margin-top:56px;padding-bottom:56px;">
   <div class="cap">ORAVIU · Smart Scan, Sparkling Smile</div>
 </div>
 
@@ -1928,6 +1909,11 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
    ═══════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
+
+  /* Light-only build — no dark theme. Old toggle hooks stay as no-ops so
+     the debug chrome (theme buttons) never throws. */
+  function theme() { return 'light'; }
+  function setTheme() {}
 
   var TABS = ['dashboard', 'live-scanner', 'progress', 'disease-library', 'profile-viewer'];
 
@@ -1948,6 +1934,8 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
                           text: { 'Start Scan': 'scan-select', 'My Reports': 'report-map',
                                   'My Dependents': 'dependents', 'Find Clinic': 'near-clinic',
                                   'Full mouth': 'report-map', 'Scan streak': 'progress',
+                                  'Gums': 'report-findings', 'Plaque': 'report-findings',
+                                  'Enamel': 'report-findings',
                                   'Store': 'store', 'Chat': 'chat' } },
     'progress':         { cards: { 2: 'perfect', 3: 'report-map', 4: 'report-map', 5: 'report-map' } },
     'scan-select':      { cards: { 0: 'device-connect', 1: 'device-connect', 2: 'ai-upload' } },
@@ -1980,21 +1968,50 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     'store':            {}
   };
 
-  var PRESSABLE = '.sel,.chip,.btn-sm,.if,.day .d,.ntab,.cbtn,.thsw';
+  var PRESSABLE = '.sel,.chip,.btn-sm,.if,.day .d,.ntab,.cbtn';
 
-  function theme() { return document.documentElement.getAttribute('data-theme') || 'light'; }
-  function setTheme(t) {
-    document.documentElement.setAttribute('data-theme', t);
-    try { localStorage.setItem('oraviuTheme', t); } catch (e) {}
-    var b = document.querySelector('.themebtn');
-    if (b) b.innerHTML = ICON(t) + (t === 'dark' ? 'Dark mode' : 'Light mode');
-    var p = document.querySelector('.pbtn[data-act="theme"] .material-icons-round');
-    if (p) p.textContent = t === 'dark' ? 'light_mode' : 'dark_mode';
+  /* ── grade → emoji (client: "grade to emoji") ── */
+  function emojiFor(g) {
+    var m = { 'A+':'😍','A':'😁','B':'🙂','C':'😐','D':'😟','E':'😣','F':'😖' };
+    return m[g] || '🙂';
   }
-  function ICON(t) {
-    return '<span class="material-icons-round" style="font-size:18px">' +
-           (t === 'dark' ? 'dark_mode' : 'light_mode') + '</span>';
+  /* ── randomize the AI report text (client: "randomize text report") ── */
+  var REPORT_VARIANTS = [
+    'Your gums look healthy overall. There is light plaque on the lower molars and one spot worth a dentist\'s eye — nothing urgent.',
+    'Everything looks calm except a little buildup behind the lower front teeth. A quick clean will sort it out.',
+    'No serious signs found. Keep up the brushing — just pay a little more attention to the back molars.',
+    'Your scan looks good! A gentle polish will remove the surface stain and keep that smile bright.'
+  ];
+  function randomizeReport() {
+    document.querySelectorAll('[data-report-text]').forEach(function (el) {
+      var src = el.getAttribute('data-report-text') || 'gums';
+      var pool = src === 'perfect' ?
+        ['Perfect teeth! No decay, no plaque and no gum inflammation found. Keep doing what you\'re doing!',
+         'Sparkling clean! Every tooth is clear. Your routine is working beautifully.',
+         'Zero findings today. Floss is clearly your friend — amazing result!'] :
+        REPORT_VARIANTS;
+      el.textContent = pool[Math.floor(Math.random() * pool.length)];
+      el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop');
+    });
   }
+  /* grade letters shown in the UI become emoji (keeps the score context intact) */
+  document.addEventListener('DOMContentLoaded', function () {
+    randomizeReport();
+    /* .num alone: the .num inside .ring .mid already matches, and matching .mid
+       too meant overwriting the wrapper that centres it in the ring.
+       classList.add, not className= — the latter wiped .mid/.num outright, which
+       dropped the grade out of the ring and shrank it to the inherited size. */
+    document.querySelectorAll('.num').forEach(function (el) {
+      var txt = norm(el.textContent);
+      if (/^[A-F][+-]?$/.test(txt)) {
+        el.classList.add('emoji', 'pop');
+        el.textContent = emojiFor(txt.replace(/[+-]/g, '')) + (txt.indexOf('+') > -1 ? '✨' : '');
+      }
+    });
+  });
+
+
+
 
   var wraps = [].slice.call(document.querySelectorAll('.cardwrap'));
   var byId = {}; wraps.forEach(function (w) { byId[w.dataset.screen] = w; });
@@ -2170,6 +2187,33 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     b.innerHTML = '<span class="material-icons-round">play_arrow</span> Open prototype';
     ph.appendChild(b);
   });
+  /* sticky gallery section nav, built from .sec headers */
+  var nav = document.createElement('nav');
+  nav.className = 'gnav';
+  var secs = [].slice.call(document.querySelectorAll('.sec'));
+  secs.forEach(function (sec, idx) {
+    sec.id = sec.id || ('sec-' + (idx + 1));
+    var num = sec.querySelector('.n'), desc = sec.querySelector('.d');
+    var a = document.createElement('a');
+    a.href = '#';
+    a.dataset.target = sec.id;
+    a.innerHTML = (num ? '<span class="ni">' + norm(num.textContent).replace(/[^0-9].*$/, '') + '</span>' : '') +
+                  '<span>' + (desc ? norm(desc.textContent) : norm((num||sec).textContent)) + '</span>';
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    nav.appendChild(a);
+  });
+  if (secs.length) document.body.insertBefore(nav, secs[0]);
+  var navLinks = [].slice.call(nav.querySelectorAll('a'));
+  function syncNav() {
+    var mid = window.scrollY + 120, active = secs[0];
+    secs.forEach(function (sec) { if (sec.offsetTop <= mid) active = sec; });
+    navLinks.forEach(function (a) { a.classList.toggle('on', active && a.dataset.target === active.id); });
+  }
+  if (secs.length) { window.addEventListener('scroll', syncNav, { passive: true }); syncNav(); }
+
   var hero = document.querySelector('.hero');
   if (hero) {
     var L = document.createElement('button');
