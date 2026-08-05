@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ORAVIU — Interactive Prototype</title>
-<meta name="build" content="05 Aug 2026 · 13:00">
+<meta name="build" content="05 Aug 2026 · 13:05">
 <script>
 /* Resolve mode BEFORE body parses so there is no layout flash.
    The start screen is injected as a CSS rule for the same reason. */
@@ -730,9 +730,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
           <circle class="trk" cx="60" cy="60" r="50" stroke-width="6"/>
           <circle class="bar" cx="60" cy="60" r="50" stroke="var(--grad-s)" stroke-width="6" stroke-linecap="round" stroke-dasharray="314.2" stroke-dashoffset="314.2"/>
         </svg>
-        <div class="mid"><div class="f" style="align-items:flex-start;">
-          <span class="num" style="font-size:52px;line-height:1;color:var(--grad-s);">86</span>
-          <span class="num" style="font-size:21px;line-height:1.35;color:var(--grad-s);">%</span></div></div>
+        <div class="mid"><span class="num" style="font-size:62px;line-height:1;color:var(--grad-s);">A</span></div>
       </div>
       <div class="h3" style="margin-top:16px;">Good condition</div>
       <div class="f ac g5" style="margin-top:7px;background:var(--neutral);border-radius:100px;padding:6px 13px;">
@@ -740,11 +738,11 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
         <span class="cap" style="color:var(--ink);font-weight:500;">Up from B last week</span>
       </div>
       <div class="f ac w100" style="margin-top:14px;">
-        <div class="fc ac fl1 g3"><span class="h3" style="font-size:16px;color:var(--ok-d);">92%</span><span class="cap" style="font-size:11px;">Gums</span></div>
+        <div class="fc ac fl1 g3"><span class="h3" style="color:var(--ok-d);">A</span><span class="cap" style="font-size:11px;">Gums</span></div>
         <div style="width:1px;height:24px;background:var(--line);"></div>
-        <div class="fc ac fl1 g3"><span class="h3" style="font-size:16px;color:var(--gold-d);">78%</span><span class="cap" style="font-size:11px;">Plaque</span></div>
+        <div class="fc ac fl1 g3"><span class="h3" style="color:var(--gold-d);">B</span><span class="cap" style="font-size:11px;">Plaque</span></div>
         <div style="width:1px;height:24px;background:var(--line);"></div>
-        <div class="fc ac fl1 g3"><span class="h3" style="font-size:16px;color:var(--ok-d);">90%</span><span class="cap" style="font-size:11px;">Enamel</span></div>
+        <div class="fc ac fl1 g3"><span class="h3" style="color:var(--ok-d);">A</span><span class="cap" style="font-size:11px;">Enamel</span></div>
       </div>
     </div>
 
@@ -1984,11 +1982,6 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
 
   var PRESSABLE = '.sel,.chip,.btn-sm,.if,.day .d,.ntab,.cbtn';
 
-  /* ── grade → emoji (client: "grade to emoji") ── */
-  function emojiFor(g) {
-    var m = { 'A+':'😍','A':'😁','B':'🙂','C':'😐','D':'😟','E':'😣','F':'😖' };
-    return m[g] || '🙂';
-  }
   /* ── randomize the AI report text (client: "randomize text report") ── */
   var REPORT_VARIANTS = [
     'Your gums look healthy overall. There is light plaque on the lower molars and one spot worth a dentist\'s eye — nothing urgent.',
