@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ORAVIU — Interactive Prototype</title>
-<meta name="build" content="05 Aug 2026 · 12:15">
+<meta name="build" content="05 Aug 2026 · 12:38">
 <script>
 /* Resolve mode BEFORE body parses so there is no layout flash.
    The start screen is injected as a CSS rule for the same reason. */
@@ -36,27 +36,27 @@
 :root{
   /* Pastel cartoonish (light only) — soft candy tints, rounded & friendly.
      -t tokens are pastel fills; -d tokens are the readable accent texts. */
-  --bg:#F8F6FF;      --bg2:#FFFFFF;   --card:#FFFFFF;
-  --blue:#4076BF;    --blue-d:#3B6FBC; --blue-l:#A6C8F2; --blue-t:#E3EEFC; --blue-t2:#F0F6FE;
-  --grad:#7060D6;
-  --grad-s:#7060D6;
+  --bg:#F1F7FC;      --bg2:#FFFFFF;   --card:#FFFFFF;
+  --blue:#0678B8;    --blue-d:#0A6497; --blue-l:#8FCBEE; --blue-t:#DFF0FB; --blue-t2:#EFF8FE;
+  --grad:#0678B8;
+  --grad-s:#0678B8;
   --pink:#BA4A78;    --pink-d:#A83A68; --pink-t:#FDE8F0;
   --gold:#B0842A;    --gold-d:#8A6317; --gold-t:#FBF0D3;
   --ok:#1F8A63;      --ok-d:#1F7A55;  --ok-t:#E0F5EA;
   --warn:#BE6A2A;    --warn-d:#96551F; --warn-t:#FDEEDC;
   --bad:#C24F58;     --bad-d:#A83F49;  --bad-t:#FCDFE3;
-  --ink:#3B3550;     --ink2:#615B78;  --ink3:#6F6982;  --line:#EFEBF7;
-  --page:#F8F6FF;
-  --phone:#3B3550;   --sk1:#EDE9F7;   --sk2:#F8F6FF;
-  --map-bg:#E9F0FA;  --map-road:#FFFFFF; --map-park:#DDF1E4;
-  --tooth-stroke:#E0E3F0; --tooth-fis:#C9CFE4; --tooth-cross:#E5E8F2; --tooth-lab:#AAA4BE;
+  --ink:#17323F;     --ink2:#4A6472;  --ink3:#5C7382;  --line:#DCE9F2;
+  --page:#F1F7FC;
+  --phone:#17323F;   --sk1:#E3EEF6;   --sk2:#F1F7FC;
+  --map-bg:#E4EFF8;  --map-road:#FFFFFF; --map-park:#DDF1E4;
+  --tooth-stroke:#CFE0EE; --tooth-fis:#BCD2E2; --tooth-cross:#DDE8F1; --tooth-lab:#8FA3B1;
   --gold-stroke:#B0842A;  --gold-fis:#8A6317;
-  --blue-stroke:#4076BF;  --blue-fis:#3B6FBC;  --note-brd:#C5EDD8;
-  --neutral:#F0EDFA;  --tooth-fill:#E6E9F7;
-  --sh:0 3px 0 rgba(59,53,80,.12);
+  --blue-stroke:#0678B8;  --blue-fis:#0A6497;  --note-brd:#C5EDD8;
+  --neutral:#EAF3FA;  --tooth-fill:#DCE9F5;
+  --sh:0 3px 0 rgba(23,50,63,.10);
   --sh2:0 -1px 0 var(--line);
-  --shb:0 4px 14px rgba(138,124,224,.28);
-  --brd:#EFEBF7;     --brd2:#DCD6EA; --barbg:#DCD6EA;
+  --shb:0 4px 14px rgba(6,120,184,.26);
+  --brd:#DCE9F2;     --brd2:#C7DCE9; --barbg:#C7DCE9;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--page);
@@ -81,7 +81,7 @@ body{background:var(--page);
 /* sticky gallery section nav */
 .gnav{position:sticky;top:0;z-index:60;margin:0 auto;width:100%;max-width:1180px;
   display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:10px 12px;
-  background:rgba(248,246,255,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  background:rgba(241,247,252,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);}
 .gnav a{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:100px;
   font-size:11.5px;font-weight:700;color:var(--ink2);text-decoration:none;
@@ -133,14 +133,22 @@ html[data-mode="app"] .gnav{display:none!important;}
 .shead .material-icons-round{font-size:19px;color:var(--ink2);}
 
 /* ── circular icon button ── */
-.cbtn{width:42px;height:42px;border-radius:50%;background:var(--neutral);box-shadow:none;
+.cbtn{width:42px;height:42px;border-radius:50%;background:var(--neutral);box-shadow:var(--sh);
   display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .cbtn .material-icons-round{font-size:19px;color:var(--ink);}
 .back{display:flex;align-items:center;gap:10px;font-size:17px;color:var(--ink);font-weight:600;letter-spacing:-.3px;}
 .back .cbtn .material-icons-round{font-size:17px;}
 
-/* ── cards ── */
-.card{background:var(--card);border-radius:20px;padding:15px;box-shadow:none;}
+/* ── horizontal scroll row (reference: services carousel) ── */
+.hscroll{display:flex;gap:12px;overflow-x:auto;padding:2px 2px 6px;margin:0 -2px;
+  scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;}
+.hscroll::-webkit-scrollbar{display:none;}
+.hscroll{scrollbar-width:none;}
+.svc{flex:0 0 auto;width:104px;scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;gap:9px;
+  background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:16px 10px;box-shadow:var(--sh);}
+.svc .sq{border-radius:14px;}
+.svc .lab{font-size:11.5px;font-weight:600;color:var(--ink);text-align:center;line-height:1.2;}/* ── cards ── */
+.card{background:var(--card);border-radius:20px;padding:15px;box-shadow:var(--sh);}
 .card.flat{box-shadow:none;border:1.5px solid var(--line);}
 /* bare border-style:dashed resolves to 3px currentColor — glaring white on black */
 .card.dash{border:1.5px dashed var(--blue-d);box-shadow:none;background:transparent;}
@@ -149,16 +157,16 @@ html[data-mode="app"] .gnav{display:none!important;}
 
 /* ── buttons ── */
 .btn{height:56px;border-radius:28px;display:flex;align-items:center;justify-content:center;gap:8px;
-     font-size:16px;font-weight:600;letter-spacing:-.2px;flex-shrink:0;}
+     font-size:16px;font-weight:600;letter-spacing:-.2px;flex-shrink:0;box-shadow:var(--shb);}
 .btn .material-icons-round{font-size:19px;}
-.btn-p{background:var(--grad-s);color:#fff;box-shadow:none;}
-.btn-w{background:#fff;color:var(--blue);}
-.btn-o{background:transparent;border:1.8px solid var(--blue);color:var(--blue-d);}
+.btn-p{background:var(--grad-s);color:#fff;box-shadow:var(--shb);}
+.btn-w{background:#fff;color:var(--blue);box-shadow:var(--sh);}
+.btn-o{background:transparent;border:1.8px solid var(--blue);color:var(--blue-d);box-shadow:var(--sh);}
 .btn-r{background:linear-gradient(135deg,#EC7A83,#D9515D);color:#fff;box-shadow:0 10px 24px rgba(217,81,93,.3);}
 .btn-gh{height:44px;display:flex;align-items:center;justify-content:center;gap:6px;
      color:var(--ink2);font-size:12.5px;font-weight:700;}
 .btn-gold{background:var(--gold-d);color:#fff;}
-.btn-sm{padding:8px 16px;border-radius:100px;font-size:11.5px;font-weight:700;display:inline-flex;align-items:center;gap:5px;}
+.btn-sm{padding:8px 16px;border-radius:100px;font-size:11.5px;font-weight:700;display:inline-flex;align-items:center;gap:5px;box-shadow:var(--sh);}
 
 /* ── chips ── */
 .chip{padding:5px 11px;border-radius:6px;font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:5px;}
@@ -170,7 +178,7 @@ html[data-mode="app"] .gnav{display:none!important;}
 .dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0;}
 .sel{padding:10px 16px;border-radius:100px;font-size:13px;font-weight:500;background:var(--neutral);
      color:var(--ink2);border:1.5px solid transparent;display:inline-flex;align-items:center;gap:5px;}
-.sel.on{background:var(--grad-s);border-color:var(--grad-s);color:#fff;font-weight:600;}
+.sel.on{background:var(--grad-s);border-color:var(--grad-s);color:#fff;font-weight:600;box-shadow:var(--sh);}
 
 /* ── inputs ── */
 .ig{display:flex;flex-direction:column;gap:7px;}
@@ -712,65 +720,69 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
       <div style="position:absolute;top:1px;right:1px;width:10px;height:10px;background:var(--bad);border-radius:50%;border:2px solid var(--card);"></div></div>
   </div>
 
-  <div class="fc ac" style="padding:0 20px 10px;flex-shrink:0;">
-    <div class="eyebrow" style="margin-bottom:9px;">Oral health score</div>
-    <div class="ring" style="width:158px;height:158px;--off:50.9;">
-      <svg width="158" height="158" viewBox="0 0 120 120">
-        <circle class="trk" cx="60" cy="60" r="54" stroke-width="6"/>
-        <circle class="bar" cx="60" cy="60" r="54" stroke="var(--grad-s)" stroke-width="6" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="339.3"/>
-      </svg>
-      <div class="mid"><span class="num" style="font-size:66px;line-height:1;color:var(--grad-s);">A</span></div>
-    </div>
-    <div class="h2" style="margin-top:13px;">Good condition</div>
-    <div class="f ac g5" style="margin-top:7px;background:var(--neutral);border-radius:100px;padding:5px 12px;">
-      <span class="material-icons-round" style="font-size:14px;color:var(--ok-d);">trending_up</span>
-      <span class="cap" style="color:var(--ink);font-weight:500;">Up from B last week</span>
-    </div>
-    <div class="f ac w100" style="margin-top:11px;">
-      <div class="fc ac fl1 g3"><span class="h3" style="color:var(--ok-d);">A</span><span class="cap" style="font-size:11px;">Gums</span></div>
-      <div style="width:1px;height:24px;background:var(--line);"></div>
-      <div class="fc ac fl1 g3"><span class="h3" style="color:var(--gold-d);">B</span><span class="cap" style="font-size:11px;">Plaque</span></div>
-      <div style="width:1px;height:24px;background:var(--line);"></div>
-      <div class="fc ac fl1 g3"><span class="h3" style="color:var(--ok-d);">A</span><span class="cap" style="font-size:11px;">Enamel</span></div>
-    </div>
-  </div>
+  <div class="body" style="gap:10px;padding-top:2px;">
 
-  <div class="body" style="gap:12px;padding-top:2px;">
-    <div class="f g10">
-      <div class="card fl1 fc ac g9" style="padding:15px 6px;box-shadow:var(--sh);border:1.5px solid var(--line);">
-        <div class="sq sq-40" style="background:var(--grad-s);"><span class="material-icons-round" style="font-size:20px;color:#fff;">photo_camera</span></div>
-        <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">Start Scan</span></div>
-      <div class="card fl1 fc ac g9" style="padding:15px 6px;box-shadow:var(--sh);border:1.5px solid var(--line);">
-        <div class="sq sq-40 tint-b"><span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">description</span></div>
-        <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">My Reports</span></div>
-      <div class="card fl1 fc ac g9" style="padding:15px 6px;box-shadow:var(--sh);border:1.5px solid var(--line);">
-        <div class="sq sq-40 tint-b"><span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">family_restroom</span></div>
-        <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">My Dependents</span></div>
-    </div>
-    <div class="f g10">
-      <div class="card fl1 fc ac g9" style="padding:15px 6px;box-shadow:var(--sh);border:1.5px solid var(--line);">
-        <div class="sq sq-40 tint-o"><span class="material-icons-round" style="font-size:20px;color:var(--ok-d);">place</span></div>
-        <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">Find Clinic</span></div>
-      <div class="card fl1 fc ac g9" style="padding:15px 6px;box-shadow:var(--sh);border:1.5px solid var(--line);">
-        <div class="sq sq-40 tint-g"><span class="material-icons-round" style="font-size:20px;color:var(--gold-d);">shopping_bag</span></div>
-        <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">Store</span></div>
-      <div class="card fl1 fc ac g9" style="padding:15px 6px;box-shadow:var(--sh);border:1.5px solid var(--line);">
-        <div class="sq sq-40 tint-b"><span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">forum</span></div>
-        <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">Chat</span></div>
+    <!-- Promo banner (reference: SPECIAL OFFER card) -->
+    <div class="card" style="background:linear-gradient(120deg,#0678B8,#1E9AD6);padding:14px 18px;color:#fff;position:relative;overflow:hidden;">
+      <div class="eyebrow" style="color:rgba(255,255,255,.7);font-weight:700;">Special offer</div>
+      <div class="h3" style="color:#fff;margin-top:4px;max-width:200px;">40% off on selected dental tools</div>
+      <div class="btn-w" style="margin-top:12px;height:40px;border-radius:20px;width:fit-content;padding:0 18px;font-size:13px;box-shadow:0 6px 16px rgba(0,0,0,.18);">Claim now</div>
+      <div style="position:absolute;right:-8px;bottom:-10px;width:84px;height:84px;border-radius:50%;background:rgba(255,255,255,.14);"></div>
+      <span class="material-icons-round" style="position:absolute;right:14px;bottom:12px;font-size:38px;color:rgba(255,255,255,.85);">cleaning_services</span>
     </div>
 
-    <div class="card fc g12" style="padding:16px;box-shadow:var(--sh);">
-      <div class="f ac g12">
-      <div class="sq sq-40 tint-b"><span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">history</span></div>
-      <div class="fc g2 fl1">
-        <span class="h4">2 Aug &#183; Full mouth</span>
-        <span class="cap">3 findings &#183; graded A</span>
+    <!-- Oral health score card -->
+    <div class="card fc ac" style="padding:18px;">
+      <div class="eyebrow" style="margin-bottom:8px;">Your oral health score</div>
+      <div class="ring" style="width:150px;height:150px;--off:44.0;">
+        <svg width="150" height="150" viewBox="0 0 120 120">
+          <circle class="trk" cx="60" cy="60" r="50" stroke-width="6"/>
+          <circle class="bar" cx="60" cy="60" r="50" stroke="var(--grad-s)" stroke-width="6" stroke-linecap="round" stroke-dasharray="314.2" stroke-dashoffset="314.2"/>
+        </svg>
+        <div class="mid"><div class="f" style="align-items:flex-start;">
+          <span class="num" style="font-size:52px;line-height:1;color:var(--grad-s);">86</span>
+          <span class="num" style="font-size:21px;line-height:1.35;color:var(--grad-s);">%</span></div></div>
+      </div>
+      <div class="h3" style="margin-top:16px;">Good condition</div>
+      <div class="f ac g5" style="margin-top:7px;background:var(--neutral);border-radius:100px;padding:6px 13px;">
+        <span class="material-icons-round" style="font-size:14px;color:var(--ok-d);">trending_up</span>
+        <span class="cap" style="color:var(--ink);font-weight:500;">Up from B last week</span>
+      </div>
+      <div class="f ac w100" style="margin-top:14px;">
+        <div class="fc ac fl1 g3"><span class="h3" style="color:var(--ok-d);">A</span><span class="cap" style="font-size:11px;">Gums</span></div>
+        <div style="width:1px;height:24px;background:var(--line);"></div>
+        <div class="fc ac fl1 g3"><span class="h3" style="color:var(--gold-d);">B</span><span class="cap" style="font-size:11px;">Plaque</span></div>
+        <div style="width:1px;height:24px;background:var(--line);"></div>
+        <div class="fc ac fl1 g3"><span class="h3" style="color:var(--ok-d);">A</span><span class="cap" style="font-size:11px;">Enamel</span></div>
+      </div>
+    </div>
+
+    <!-- Services (reference: horizontal carousel) -->
+    <div class="shead"><span class="h3">Services</span><span class="material-icons-round">arrow_forward</span></div>
+    <div class="hscroll">
+      <div class="svc"><div class="sq sq-46 tint-b"><span class="material-icons-round" style="font-size:22px;color:var(--blue-d);">cleaning_services</span></div><span class="lab">Scaling</span></div>
+      <div class="svc"><div class="sq sq-46 tint-g"><span class="material-icons-round" style="font-size:22px;color:var(--gold-d);">straighten</span></div><span class="lab">Braces</span></div>
+      <div class="svc"><div class="sq sq-46 tint-o"><span class="material-icons-round" style="font-size:22px;color:var(--ok-d);">diamond</span></div><span class="lab">Crown</span></div>
+      <div class="svc"><div class="sq sq-46 tint-w"><span class="material-icons-round" style="font-size:22px;color:var(--warn-d);">warning</span></div><span class="lab">Abscess</span></div>
+      <div class="svc"><div class="sq sq-46 tint-b"><span class="material-icons-round" style="font-size:22px;color:var(--blue-d);">search</span></div><span class="lab">Check-up</span></div>
+    </div>
+
+    <!-- Available clinic (reference: doctor card) -->
+    <div class="card f ac g12" style="padding:14px;">
+      <div class="sq sq-54" style="background:linear-gradient(150deg,#8FCBEE,#0678B8);"><span class="material-icons-round" style="font-size:27px;color:#fff;">medical_services</span></div>
+      <div class="fl1">
+        <div class="h4">Bright Smile Dental</div>
+        <div class="f ac g4" style="margin-top:3px;">
+          <span class="material-icons-round" style="font-size:13px;color:var(--gold-d);">star</span>
+          <span class="cap" style="color:var(--ink);font-weight:700;">4.9</span>
+          <span class="cap">(312 reviews)</span>
+        </div>
+        <div class="cap" style="margin-top:2px;">Open today &#183; 9:00 – 18:00</div>
       </div>
       <span class="material-icons-round" style="font-size:19px;color:var(--ink3);">chevron_right</span>
-      </div>
-      <div class="dv"></div>
-      <div class="f jb ac"><span class="h4">Scan streak</span><span class="chip c-b" style="padding:3px 10px;font-size:9.5px;">4 of 7 days</span></div>
-      <div class="f jb"><div class="fc ac g6"><div class="sq" style="width:32px;height:32px;border-radius:50%;background:var(--blue);"><span class="material-icons-round" style="font-size:17px;color:#fff;">check</span></div><span class="cap" style="font-size:9px;">M</span></div><div class="fc ac g6"><div class="sq" style="width:32px;height:32px;border-radius:50%;background:var(--blue);"><span class="material-icons-round" style="font-size:17px;color:#fff;">check</span></div><span class="cap" style="font-size:9px;">T</span></div><div class="fc ac g6"><div class="sq" style="width:32px;height:32px;border-radius:50%;border:1.5px solid var(--brd2);"></div><span class="cap" style="font-size:9px;">W</span></div><div class="fc ac g6"><div class="sq" style="width:32px;height:32px;border-radius:50%;background:var(--blue);"><span class="material-icons-round" style="font-size:17px;color:#fff;">check</span></div><span class="cap" style="font-size:9px;">T</span></div><div class="fc ac g6"><div class="sq" style="width:32px;height:32px;border-radius:50%;background:var(--blue);"><span class="material-icons-round" style="font-size:17px;color:#fff;">check</span></div><span class="cap" style="font-size:9px;">F</span></div><div class="fc ac g6"><div class="sq" style="width:32px;height:32px;border-radius:50%;border:1.5px solid var(--brd2);"></div><span class="cap" style="font-size:9px;">S</span></div><div class="fc ac g6"><div class="sq" style="width:32px;height:32px;border-radius:50%;border:1.5px solid var(--brd2);"></div><span class="cap" style="font-size:9px;">S</span></div></div>
+    </div>
+
+  </div>
     </div>
   </div>
 
@@ -1930,13 +1942,13 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
                                   'Chat with assistant': 'chat' },
                           sel: { '.card .sq': 'camera-profile' } },
     'camera-profile':   { sel: { '.sq[style*="width:72px"]': 'profile-viewer' } },
-    'dashboard':        { sel: { '.ring': 'report-map' },
-                          text: { 'Start Scan': 'scan-select', 'My Reports': 'report-map',
-                                  'My Dependents': 'dependents', 'Find Clinic': 'near-clinic',
-                                  'Full mouth': 'report-map', 'Scan streak': 'progress',
-                                  'Gums': 'report-findings', 'Plaque': 'report-findings',
-                                  'Enamel': 'report-findings',
-                                  'Store': 'store', 'Chat': 'chat' } },
+    'dashboard':        { sel: { '.card.fc.ac': 'report-map' },
+                          text: { 'Claim now': 'store', '40% off': 'store',
+                                  'Services': 'disease-library',
+                                  'Scaling': 'disease-detail', 'Braces': 'disease-detail',
+                                  'Crown': 'disease-detail', 'Abscess': 'disease-detail',
+                                  'Check-up': 'scan-select',
+                                  'Bright Smile Dental': 'near-clinic' } },
     'progress':         { cards: { 2: 'perfect', 3: 'report-map', 4: 'report-map', 5: 'report-map' } },
     'scan-select':      { cards: { 0: 'device-connect', 1: 'device-connect', 2: 'ai-upload' } },
     'ai-upload':        { btn: ['ai-processing'] },
@@ -2056,8 +2068,11 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     }
     if (el.hasAttribute('data-go')) return;
     el.setAttribute('data-go', dest);
-    /* a bare text link is ~13px tall — far below a comfortable touch target */
-    if (!el.classList.contains('card') && !el.classList.contains('btn') &&
+    /* a bare text link is ~13px tall — far below a comfortable touch target.
+       Graphic targets (a ring, a chart, an illustration) are already big, and
+       tap-txt's negative margin would drag them into whatever sits below. */
+    if (!el.querySelector('svg') && !el.querySelector('img') &&
+        !el.classList.contains('card') && !el.classList.contains('btn') &&
         !el.classList.contains('f') && !el.classList.contains('sq') &&
         !el.classList.contains('cbtn') && !el.classList.contains('ntab') &&
         !el.classList.contains('back') && el.getAttribute('data-go') !== 'back' &&
