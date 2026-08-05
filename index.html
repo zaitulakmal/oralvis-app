@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ORAVIU — Interactive Prototype</title>
-<meta name="build" content="04 Aug 2026 · 14:57">
+<meta name="build" content="05 Aug 2026 · 09:52">
 <script>
 /* Resolve mode BEFORE body parses so there is no layout flash.
    The start screen is injected as a CSS rule for the same reason. */
@@ -38,41 +38,43 @@
    ORAVIU v5 — clinical blue system
    ══════════════════════════════════════════════════════════ */
 :root{
-  --bg:#EDF3FA;      --bg2:#F6F9FD;   --card:#FFFFFF;
-  --blue:#2E7DD2;    --blue-d:#1B5FA8; --blue-l:#5AA6E8; --blue-t:#E7F0FB; --blue-t2:#F2F7FD;
-  --grad:linear-gradient(155deg,#5AA6E8 0%,#2E7DD2 48%,#1B5FA8 100%);
-  --grad-s:linear-gradient(135deg,#4E9BE4 0%,#2971C6 100%);
-  --gold:#E9B949;    --gold-d:#96700F; --gold-t:#FCF3DE;
-  --ok:#17805F;      --ok-t:#E4F6F0;
+  /* Oral-B iO light: near-white page, true-black ink, colour only for status */
+  --bg:#F2F2F7;      --bg2:#FFFFFF;   --card:#FFFFFF;
+  --blue:#0069D9;    --blue-d:#0060DF; --blue-l:#5AA6E8; --blue-t:#EAF2FE; --blue-t2:#F4F8FE;
+  --grad:#000000;
+  --grad-s:#000000;
+  --gold:#E9B949;    --gold-d:#8A6100; --gold-t:#FBF2DC;
+  --ok:#0A7D57;      --ok-t:#E3F7EF;
   --warn:#E8913C;    --warn-t:#FDF0E2;
-  --bad:#CE4A57;     --bad-t:#FCEBEC;
-  --ink:#16324F;     --ink2:#54697F;  --ink3:#61768B;  --line:#E3ECF6;
-  --ok-d:#1E8A67;    --bad-d:#C0414D; --warn-d:#B96A16;
-  --page:linear-gradient(165deg,#DCE9F7 0%,#EDF3FA 50%,#E4EFF9 100%);
-  --phone:#132B44;   --sk1:#E4EDF6;   --sk2:#F4F9FD;
-  --map-bg:#DCEAF8;  --map-road:#FFFFFF; --map-park:#CDE6DA;
-  --tooth-stroke:#BFD3E5; --tooth-fis:#B3C8DC; --tooth-cross:#C4D6E7; --tooth-lab:#9CAFC2;
+  --bad:#E5484D;     --bad-t:#FDEBEC;
+  --ink:#000000;     --ink2:#5A5A5F;  --ink3:#6E6E73;  --line:#E5E5EA;
+  --ok-d:#0A7D57;    --bad-d:#C4363B; --warn-d:#9A5B12;
+  --page:#F2F2F7;
+  --phone:#1C1C1E;   --sk1:#E5E5EA;   --sk2:#F2F2F7;
+  --map-bg:#E8E8ED;  --map-road:#FFFFFF; --map-park:#DCEBE1;
+  --tooth-stroke:#D1D1D6; --tooth-fis:#C7C7CC; --tooth-cross:#D8D8DD; --tooth-lab:#AEAEB2;
   --gold-stroke:#BE8D1C;  --gold-fis:#A2780F;
-  --blue-stroke:#1B5FA8;  --blue-fis:#14497F;  --note-brd:#A9DCC8;
-  --sh:0 8px 24px rgba(27,95,168,.08);
-  --sh2:0 14px 34px rgba(27,95,168,.16);
-  --shb:0 10px 24px rgba(46,125,210,.34);
-  --brd:#E2E4E8;     --brd2:#D6D9DE; --barbg:#AFD0EF;
+  --blue-stroke:#0A84FF;  --blue-fis:#0060DF;  --note-brd:#B8E3CE;
+  --neutral:#F2F2F7;  --tooth-fill:#D3D8DE;
+  --sh:none;
+  --sh2:0 -1px 0 var(--line);
+  --shb:none;
+  --brd:#E5E5EA;     --brd2:#D1D1D6; --barbg:#C7C7CC;
 }
 :root[data-theme="dark"]{
   /* Oral-B iO: pure black, white and one pale blue. Fills stay deep enough
      for white labels; the -d tokens are the light accent-text variants. */
-  --bg:#000000;      --bg2:#000000;   --card:#1A1A1C;
-  --page:#000000;    --phone:#000000;
+  --bg:#000000;      --bg2:#000000;   --card:#1C1C1E;
+  --page:#000000;    --phone:#000000;  --neutral:#2C2C2E;  --tooth-fill:#E8E8ED;
   --ink:#FFFFFF;     --ink2:#A1A1A6;  --ink3:#8A8A8F;  --line:#2C2C2E;
-  --brd:#2C2C2E;     --brd2:#3A3A3C;  --barbg:#3A3A3C;
+  --brd:#2C2C2E;     --brd2:#48484A;  --barbg:#48484A;
   --sh:none;
-  --sh2:0 2px 16px rgba(0,0,0,.85);
+  --sh2:0 -1px 0 var(--line);
   --shb:none;
-  --blue:#2E7DD2;    --blue-d:#7FC4EE; --blue-l:#7FC4EE;
+  --blue:#0069D9;    --blue-d:#64B5FF; --blue-l:#64B5FF;
   --blue-t:rgba(127,196,238,.18);      --blue-t2:rgba(127,196,238,.10);
-  --grad:linear-gradient(155deg,#12232E 0%,#0A141B 60%,#000 100%);
-  --grad-s:linear-gradient(135deg,#14242F 0%,#0B151C 100%);
+  --grad:#1C1C1E;
+  --grad-s:#1C1C1E;
   --ok:#1E8F6B;      --ok-d:#5FD3A6;   --ok-t:rgba(95,211,166,.18);
   --gold:#9A7213;    --gold-d:#F2C14E; --gold-t:rgba(242,193,78,.18);
   --warn:#9C5C12;    --warn-d:#F2A24E; --warn-t:rgba(242,162,78,.18);
@@ -89,6 +91,7 @@
 :root[data-theme="dark"] .screen[style*="background:var(--card)"]{background:var(--bg)!important;}
 :root[data-theme="dark"] .card.flat{border:1px solid var(--brd);background:transparent;}
 :root[data-theme="dark"] .promo{background:var(--card);border:none;}
+.promo .h1,.promo .h2{color:var(--ink);}
 /* the decorative white blobs are a Dentcor motif — iO panels are plain */
 :root[data-theme="dark"] .promo::after,:root[data-theme="dark"] .promo::before{display:none;}
 :root[data-theme="dark"] .sel{background:var(--card);border-color:transparent;}
@@ -100,6 +103,7 @@
 :root[data-theme="dark"] .ntab.on .material-icons-round,
 :root[data-theme="dark"] .ntab.on .ntab-l{color:#fff;}
 :root[data-theme="dark"] .btn-p{background:#fff;color:#000;}
+:root[data-theme="dark"] .btn-o{background:var(--card);}
 :root[data-theme="dark"] .btn-w{background:#fff;color:#000;}
 :root[data-theme="dark"] .if{background:var(--card);border-color:var(--brd2);}
 :root[data-theme="dark"] .cbtn{background:var(--card);border:none;}
@@ -147,41 +151,42 @@ body{background:var(--page);
 .pad{padding:6px 18px 12px;flex-shrink:0;}
 
 /* ── type ── */
-.h1{font-size:25px;font-weight:800;letter-spacing:-.5px;line-height:1.22;color:var(--ink);}
-.h2{font-size:19px;font-weight:800;letter-spacing:-.3px;color:var(--ink);}
-.h3{font-size:14.5px;font-weight:700;color:var(--ink);}
-.h4{font-size:12.5px;font-weight:700;color:var(--ink);}
-.p{font-size:12.5px;color:var(--ink2);line-height:1.62;font-weight:500;}
-.pxs{font-size:11px;color:var(--ink2);line-height:1.58;font-weight:500;}
-.cap{font-size:10.5px;color:var(--ink3);font-weight:600;}
-.eyebrow{font-size:9.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);}
-.lnk{color:var(--blue-d);font-weight:700;}
-.num{font-weight:800;letter-spacing:-1px;}
+.h1{font-size:33px;font-weight:300;letter-spacing:-1.1px;line-height:1.14;color:var(--ink);}
+.h2{font-size:24px;font-weight:400;letter-spacing:-.6px;color:var(--ink);}
+.h3{font-size:17px;font-weight:600;letter-spacing:-.3px;color:var(--ink);}
+.h4{font-size:15px;font-weight:600;letter-spacing:-.2px;color:var(--ink);}
+.p{font-size:14px;color:var(--ink2);line-height:1.5;font-weight:400;}
+.pxs{font-size:12.5px;color:var(--ink2);line-height:1.45;font-weight:400;}
+.cap{font-size:12px;color:var(--ink3);font-weight:400;}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--ink3);}
+.lnk{color:var(--blue-d);font-weight:500;}
+.num{font-weight:200;letter-spacing:-2px;}
 
 /* ── section header with arrow ── */
 .shead{display:flex;align-items:center;justify-content:space-between;}
 .shead .material-icons-round{font-size:19px;color:var(--ink2);}
 
 /* ── circular icon button ── */
-.cbtn{width:42px;height:42px;border-radius:50%;background:var(--card);box-shadow:var(--sh);
+.cbtn{width:42px;height:42px;border-radius:50%;background:var(--neutral);box-shadow:none;
   display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .cbtn .material-icons-round{font-size:19px;color:var(--ink);}
-.back{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink2);font-weight:700;}
+.back{display:flex;align-items:center;gap:10px;font-size:17px;color:var(--ink);font-weight:600;letter-spacing:-.3px;}
 .back .cbtn .material-icons-round{font-size:17px;}
 
 /* ── cards ── */
-.card{background:var(--card);border-radius:22px;padding:15px;box-shadow:var(--sh);}
+.card{background:var(--card);border-radius:16px;padding:15px;box-shadow:none;}
 .card.flat{box-shadow:none;border:1.5px solid var(--line);}
 /* bare border-style:dashed resolves to 3px currentColor — glaring white on black */
 .card.dash{border:1.5px dashed var(--blue-d);box-shadow:none;background:transparent;}
-.tint-b{background:var(--blue-t);} .tint-g{background:var(--gold-t);}
-.tint-o{background:var(--ok-t);} .tint-w{background:var(--warn-t);} .tint-r{background:var(--bad-t);}
+/* iO carries status in the glyph, not in a pastel tile — squircles go neutral */
+.tint-b,.tint-g,.tint-o,.tint-w,.tint-r{background:var(--neutral);}
+.card.tint-b,.card.tint-g,.card.tint-o,.card.tint-w,.card.tint-r{background:var(--neutral);}
 
 /* ── buttons ── */
-.btn{height:52px;border-radius:26px;display:flex;align-items:center;justify-content:center;gap:8px;
-     font-size:14.5px;font-weight:700;flex-shrink:0;}
+.btn{height:56px;border-radius:28px;display:flex;align-items:center;justify-content:center;gap:8px;
+     font-size:16px;font-weight:600;letter-spacing:-.2px;flex-shrink:0;}
 .btn .material-icons-round{font-size:19px;}
-.btn-p{background:var(--grad-s);color:#fff;box-shadow:var(--shb);}
+.btn-p{background:var(--ink);color:var(--card);box-shadow:none;}
 .btn-w{background:#fff;color:var(--blue);}
 .btn-o{background:transparent;border:1.8px solid var(--blue);color:var(--blue-d);}
 .btn-r{background:linear-gradient(135deg,#EC7A83,#D9515D);color:#fff;box-shadow:0 10px 24px rgba(217,81,93,.3);}
@@ -192,58 +197,57 @@ body{background:var(--page);
 .btn-sm{padding:8px 16px;border-radius:100px;font-size:11.5px;font-weight:700;display:inline-flex;align-items:center;gap:5px;}
 
 /* ── chips ── */
-.chip{padding:5px 11px;border-radius:100px;font-size:10.5px;font-weight:700;display:inline-flex;align-items:center;gap:5px;}
+.chip{padding:5px 11px;border-radius:6px;font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:5px;}
 .c-b{background:var(--blue-t);color:var(--blue-d);}
 .c-g{background:var(--gold-t);color:var(--gold-d);}
 .c-o{background:var(--ok-t);color:var(--ok-d);}
 .c-w{background:var(--warn-t);color:var(--warn-d);}
 .c-r{background:var(--bad-t);color:var(--bad-d);}
 .dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0;}
-.sel{padding:9px 14px;border-radius:100px;font-size:11.5px;font-weight:600;background:var(--card);
-     color:var(--ink2);border:1.5px solid var(--line);display:inline-flex;align-items:center;gap:5px;}
-.sel.on{background:var(--blue);border-color:var(--blue-d);color:#fff;font-weight:700;}
+.sel{padding:10px 16px;border-radius:100px;font-size:13px;font-weight:500;background:var(--neutral);
+     color:var(--ink2);border:1.5px solid transparent;display:inline-flex;align-items:center;gap:5px;}
+.sel.on{background:var(--ink);border-color:var(--ink);color:var(--card);font-weight:600;}
 
 /* ── inputs ── */
 .ig{display:flex;flex-direction:column;gap:7px;}
-.lbl{font-size:11.5px;font-weight:700;color:var(--ink2);padding-left:3px;}
+.lbl{font-size:12px;font-weight:400;color:var(--ink3);padding-left:2px;}
 .iw{position:relative;}
-.if{height:52px;border:1.8px solid transparent;border-radius:16px;padding:0 14px 0 46px;font-size:13.5px;
-    font-weight:600;color:var(--ink);background:var(--card);display:flex;align-items:center;box-shadow:var(--sh);}
+.if{height:54px;border:1.5px solid transparent;border-radius:12px;padding:0 14px 0 46px;font-size:15px;
+    font-weight:400;color:var(--ink);background:var(--neutral);display:flex;align-items:center;box-shadow:none;}
 .if .ph{color:var(--ink3);font-weight:500;}
-.if.on{border-color:var(--blue-d);box-shadow:0 0 0 4px rgba(46,125,210,.13),var(--sh);}
-.ii{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--blue-d);display:flex;}
-.ii .material-icons-round{font-size:19px;}
+.if.on{border-color:var(--ink);box-shadow:none;}
+.ii{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--ink3);display:flex;}
+.ii .material-icons-round{font-size:20px;}
 .ia{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:var(--ink3);display:flex;}
 .ia .material-icons-round{font-size:19px;}
 
 /* ── icon squircle ── */
-.sq{border-radius:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.sq-34{width:34px;height:34px;border-radius:12px;} .sq-40{width:40px;height:40px;}
-.sq-46{width:46px;height:46px;border-radius:16px;} .sq-54{width:54px;height:54px;border-radius:18px;}
+.sq{border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sq-34{width:34px;height:34px;border-radius:9px;} .sq-40{width:40px;height:40px;}
+.sq-46{width:46px;height:46px;border-radius:12px;} .sq-54{width:54px;height:54px;border-radius:14px;}
 
 /* ── floating pill bottom nav ── */
-.bnav{margin:0 14px 14px;background:var(--card);height:60px;display:flex;align-items:center;
-  justify-content:space-around;flex-shrink:0;border-radius:30px;padding:0 8px;box-shadow:var(--sh2);}
+.bnav{margin:0;background:var(--bg2);height:64px;display:flex;align-items:center;
+  justify-content:space-around;flex-shrink:0;border-radius:0;padding:0 8px;border-top:1px solid var(--line);}
 .ntab{display:flex;align-items:center;gap:6px;padding:9px 12px;border-radius:22px;}
-.ntab .material-icons-round{font-size:20px;color:var(--ink3);}
-.ntab-l{font-size:11.5px;font-weight:700;color:#fff;display:none;}
-.ntab.on{background:var(--grad-s);box-shadow:var(--shb);padding:9px 15px;}
-.ntab.on .material-icons-round{color:#fff;}
+.ntab .material-icons-round{font-size:23px;color:var(--ink3);}
+.ntab-l{font-size:11.5px;font-weight:600;color:var(--ink);display:none;}
+.ntab.on{background:transparent;box-shadow:none;padding:9px 12px;}
+.ntab.on .material-icons-round{color:var(--ink);}
 .ntab.on .ntab-l{display:block;}
 
 /* ── gradient hero panel ── */
 .gr{background:var(--grad);color:#fff;}
+.gr .h1,.gr .h2,.gr .h3{color:#fff;}
 .gr-soft{background:var(--grad-s);color:#fff;}
 
 /* ── promo card ── */
-.promo{background:var(--grad);border-radius:24px;padding:15px 16px;position:relative;overflow:hidden;flex-shrink:0;}
-.promo::after{content:"";position:absolute;width:150px;height:150px;border-radius:50%;
-  background:rgba(255,255,255,.09);right:-52px;top:-58px;}
-.promo::before{content:"";position:absolute;width:96px;height:96px;border-radius:50%;
-  background:rgba(255,255,255,.07);right:8px;bottom:-52px;}
+.promo{background:var(--card);border-radius:18px;padding:15px 16px;position:relative;overflow:hidden;flex-shrink:0;}
+.promo::after{content:none;}
+.promo::before{content:none;}
 
 /* ── divider ── */
-.dv{height:1.5px;background:var(--line);}
+.dv{height:1px;background:var(--line);}
 /* finding badge: gradient disc + white glyph + status sub-badge */
 .fbadge{position:relative;width:38px;height:38px;border-radius:50%;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;}
@@ -266,32 +270,32 @@ body{background:var(--page);
 :root[data-theme="dark"] .thsw-k{transform:translateX(17px);}
 .themebtn{margin-top:18px;margin-left:10px;display:inline-flex;align-items:center;gap:8px;
   background:var(--card);color:var(--ink2);border:1.5px solid var(--line);
-  font-size:13px;font-weight:800;padding:12px 22px;border-radius:100px;cursor:pointer;
-  font-family:'Plus Jakarta Sans',sans-serif;box-shadow:var(--sh);}
+  font-size:13px;font-weight:600;padding:12px 22px;border-radius:100px;cursor:pointer;
+  font-family:'Plus Jakarta Sans',sans-serif;box-shadow:none;}
 
 /* ══ DENTAL ARCH ══ */
 .arch{width:100%;display:block;}
 /* anatomical crowns: lobed silhouette + cusp highlights + fissure grooves */
-.arch .th{filter:url(#fTooth);}
-.arch.allclear .th .crown{fill:var(--ok-t);stroke:var(--ok);}
+.arch .th{filter:none;}
+.arch.allclear .th .crown{fill:var(--ok);opacity:.55;stroke:none;}
 .arch.allclear .th .fis{stroke:var(--ok);opacity:.5;}
 .arch.allclear .th .cusp{fill:#fff;opacity:.5;}
-.arch .th .crown{fill:url(#gTooth);stroke:var(--tooth-stroke);stroke-width:.9;stroke-linejoin:round;}
+.arch .th .crown{fill:var(--tooth-fill);stroke:none;}
 .arch .th .cusp{fill:#fff;opacity:.62;}
 .arch .th .fis{fill:none;stroke:var(--tooth-fis);stroke-width:.8;stroke-linecap:round;opacity:.75;}
-.arch .gold .crown{fill:url(#gGold);stroke:var(--gold-stroke);}
+.arch .gold .crown{fill:var(--gold);stroke:none;}
 .arch .gold .cusp{opacity:.3;}
 .arch .gold .fis{stroke:var(--gold-fis);}
-.arch .blue .crown{fill:url(#gBlue);stroke:var(--blue-stroke);}
+.arch .blue .crown{fill:var(--blue);stroke:none;}
 .arch .blue .cusp{opacity:.28;}
 .arch .blue .fis{stroke:var(--blue-fis);}
-.arch .glow{fill:#2E7DD2;opacity:.15;animation:beat 2.4s ease-in-out infinite;}
+.arch .glow{fill:var(--blue);opacity:.22;animation:beat 2.4s ease-in-out infinite;}
 .arch .cross{stroke:var(--tooth-cross);stroke-width:1.2;stroke-linecap:round;}
-.arch .alab{font-family:'Plus Jakarta Sans';font-size:10px;font-weight:700;fill:var(--tooth-lab);letter-spacing:.4px;}
+.arch .alab{font-family:'Plus Jakarta Sans';font-size:9px;font-weight:600;fill:var(--tooth-lab);letter-spacing:2.2px;}
 
 /* callout tooltip */
-.callout{background:var(--card);border-radius:14px;padding:9px 11px;box-shadow:var(--sh2);position:absolute;}
-.callout::after{content:"";position:absolute;width:10px;height:10px;background:var(--card);transform:rotate(45deg);}
+.callout{background:var(--neutral);border-radius:14px;padding:10px 12px;box-shadow:none;position:absolute;}
+.callout::after{content:"";position:absolute;width:10px;height:10px;background:var(--neutral);transform:rotate(45deg);}
 
 /* ══ SCORE RING ══ */
 .ring{position:relative;flex-shrink:0;}
@@ -301,22 +305,23 @@ body{background:var(--page);
 .ring .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
 
 /* ══ TREND BARS ══ */
-.bars{display:flex;align-items:flex-end;justify-content:space-between;height:80px;gap:7px;}
-.bcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end;}
-.bar{width:100%;border-radius:8px;background:var(--barbg);animation:grow 1s cubic-bezier(.22,1,.36,1) both;transform-origin:bottom;}
-.bar.hi{background:var(--grad-s);}
-.bcol .bl{font-size:8.5px;font-weight:700;color:var(--ink3);}
-.bcol .bv{font-size:9px;font-weight:800;color:var(--blue-d);}
+.bars{display:flex;align-items:flex-end;justify-content:space-between;gap:7px;}
+.bcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;justify-content:flex-end;}
+.btrack{width:100%;height:66px;display:flex;align-items:flex-end;flex-shrink:0;}
+.bar{width:100%;flex-shrink:0;border-radius:5px;background:var(--barbg);animation:grow 1s cubic-bezier(.22,1,.36,1) both;transform-origin:bottom;}
+.bar.hi{background:var(--ink);}
+.bcol .bl{font-size:9.5px;font-weight:400;color:var(--ink3);}
+.bcol .bv{font-size:10px;font-weight:500;color:var(--ink3);}
 
 /* ══ STREAK ══ */
 .days{display:flex;justify-content:space-between;}
 .day{display:flex;flex-direction:column;align-items:center;gap:5px;}
-.day .d{width:28px;height:28px;border-radius:10px;display:flex;align-items:center;justify-content:center;
-  background:var(--bg);color:var(--ink3);}
+.day .d{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:transparent;border:1.5px solid var(--brd2);color:var(--ink3);}
 .day .d .material-icons-round{font-size:16px;}
-.day .d.on{background:var(--grad-s);color:#fff;}
-.day .d.today{background:var(--card);border:2px dashed var(--blue);color:var(--blue-d);}
-.day .n{font-size:9px;font-weight:700;color:var(--ink3);}
+.day .d.on{background:var(--ink);color:var(--card);}
+.day .d.today{background:transparent;border:1.5px dashed var(--ink2);color:var(--ink);}
+.day .n{font-size:10px;font-weight:400;color:var(--ink3);}
 
 /* ══ SKELETON ══ */
 .sk{background:linear-gradient(90deg,var(--sk1) 25%,var(--sk2) 50%,var(--sk1) 75%);background-size:400px 100%;
@@ -457,7 +462,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
   <h1>ORAVIU<span>.</span></h1>
   <div class="tag">Smart Scan, Sparkling Smile</div>
   <div class="badges">
-    <span class="bdg">Interactive prototype · <b>33 screens</b></span>
+    <span class="bdg">Interactive prototype · <b>35 screens</b></span>
     <span class="bdg">Light &amp; dark mode</span>
     <span class="bdg">Opens full-screen on a phone</span>
   </div>
@@ -685,7 +690,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
 </div>
 
 <div class="cardwrap" data-screen="camera-profile">
-<div class="phone"><div class="screen" id="scr-camera-profile" style="background:#0E2136;">
+<div class="phone"><div class="screen" id="scr-camera-profile" style="background:#1C1C1E;">
   <div class="notch"></div>
   <div class="sb sb-l"><span>9:41</span><span>●●●</span></div>
   <div class="f jb ac fs0" style="padding:6px 18px 10px;">
@@ -693,13 +698,13 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     <span style="color:#fff;font-size:13.5px;font-weight:700;">Profile Photo</span>
     <div class="cbtn" style="background:rgba(255,255,255,.12);box-shadow:none;"><span class="material-icons-round" style="color:#fff;">bolt</span></div>
   </div>
-  <div class="fl1 fc ac jc g12" style="background:#132B44;">
+  <div class="fl1 fc ac jc g12" style="background:#0A0A0B;">
     <div class="sq" style="width:184px;height:184px;border-radius:50%;border:2px dashed rgba(110,192,255,.5);background:rgba(110,192,255,.06);">
       <span class="material-icons-round" style="font-size:60px;color:rgba(255,255,255,.2);">person</span></div>
     <span style="color:rgba(255,255,255,.45);font-size:11.5px;font-weight:600;">Position your face in the circle</span>
     <span style="color:rgba(255,255,255,.18);font-size:9.5px;">Thunkable: Camera Component</span>
   </div>
-  <div class="f ac ja fs0" style="background:#0A192B;padding:16px 28px 26px;border-radius:0 0 45px 45px;">
+  <div class="f ac ja fs0" style="background:#0A0A0B;padding:16px 28px 26px;border-radius:0 0 45px 45px;">
     <div class="fc ac g5"><div class="sq" style="width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.1);"><span class="material-icons-round" style="font-size:20px;color:rgba(255,255,255,.65);">photo_library</span></div><span style="color:rgba(255,255,255,.4);font-size:9px;font-weight:600;">Gallery</span></div>
     <div class="sq" style="width:72px;height:72px;border-radius:50%;background:#fff;box-shadow:0 0 0 5px rgba(110,192,255,.26);"><span class="material-icons-round" style="font-size:30px;color:var(--blue);">photo_camera</span></div>
     <div class="fc ac g5"><div class="sq" style="width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.1);"><span class="material-icons-round" style="font-size:20px;color:rgba(255,255,255,.65);">flip_camera_ios</span></div><span style="color:rgba(255,255,255,.4);font-size:9px;font-weight:600;">Flip</span></div>
@@ -729,26 +734,25 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
       <div style="position:absolute;top:1px;right:1px;width:10px;height:10px;background:var(--bad);border-radius:50%;border:2px solid var(--card);"></div></div>
   </div>
 
-  <div class="promo" style="margin:0 20px;padding:18px;">
-    <div class="f ac g14" style="position:relative;z-index:2;">
-      <div class="ring" style="width:92px;height:92px;--off:50.9;">
-        <svg width="92" height="92" viewBox="0 0 120 120">
-          <circle class="trk" cx="60" cy="60" r="54" stroke-width="10"/>
-          <circle class="bar" cx="60" cy="60" r="54" stroke="#fff" stroke-width="10" stroke-dasharray="339.3" stroke-dashoffset="339.3"/>
-        </svg>
-        <div class="mid"><span class="num" style="font-size:42px;color:#fff;line-height:1;">A</span></div>
+  <div class="fc ac" style="padding:6px 20px 20px;flex-shrink:0;">
+    <div class="ring" style="width:186px;height:186px;--off:50.9;">
+      <svg width="186" height="186" viewBox="0 0 120 120">
+        <circle class="trk" cx="60" cy="60" r="54" stroke-width="5"/>
+        <circle class="bar" cx="60" cy="60" r="54" stroke="var(--ink)" stroke-width="5" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="339.3"/>
+      </svg>
+      <div class="mid fc ac g2">
+        <span class="num" style="font-size:76px;line-height:.9;color:var(--ink);">A</span>
+        <span class="eyebrow" style="font-size:10px;">Health score</span>
       </div>
-      <div class="fc g8 fl1">
-        <div style="font-size:9.5px;font-weight:700;letter-spacing:1.3px;color:rgba(255,255,255,.78);">ORAL HEALTH SCORE</div>
-        <div style="color:#fff;font-size:20px;font-weight:800;letter-spacing:-.3px;line-height:1.15;">Good condition</div>
-        <div class="f ac g4" style="background:rgba(255,255,255,.24);border-radius:100px;padding:4px 10px;width:fit-content;">
-          <span class="material-icons-round" style="font-size:13px;color:#fff;">trending_up</span>
-          <span style="color:#fff;font-size:10px;font-weight:700;white-space:nowrap;">Up from B</span></div>
-      </div>
+    </div>
+    <div class="h2" style="margin-top:16px;">Good condition</div>
+    <div class="f ac g5" style="margin-top:8px;background:var(--neutral);border-radius:100px;padding:6px 13px;">
+      <span class="material-icons-round" style="font-size:15px;color:var(--ok-d);">trending_up</span>
+      <span class="cap" style="color:var(--ink);font-weight:500;">Up from B last week</span>
     </div>
   </div>
 
-  <div class="body" style="gap:12px;padding-top:16px;">
+  <div class="body" style="gap:10px;padding-top:6px;">
     <div class="shead"><span class="h3">Actions</span><span class="material-icons-round">arrow_forward</span></div>
     <div class="f g8">
       <div class="card fl1 fc ac g8" style="padding:13px 6px;">
@@ -813,13 +817,13 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
             <span class="chip c-o">+12%</span></div></div>
         <div class="sq sq-40 tint-b"><span class="material-icons-round" style="font-size:21px;color:var(--blue-d);">insights</span></div>
       </div>
-      <div class="bars" style="height:62px;">
-        <div class="bcol"><span class="bv">D</span><div class="bar" style="height:30%;animation-delay:.05s"></div><span class="bl">FEB</span></div>
-        <div class="bcol"><span class="bv">C</span><div class="bar" style="height:45%;animation-delay:.13s"></div><span class="bl">MAR</span></div>
-        <div class="bcol"><span class="bv">C</span><div class="bar" style="height:53%;animation-delay:.21s"></div><span class="bl">APR</span></div>
-        <div class="bcol"><span class="bv">B</span><div class="bar" style="height:74%;animation-delay:.29s"></div><span class="bl">MAY</span></div>
-        <div class="bcol"><span class="bv">B</span><div class="bar" style="height:82%;animation-delay:.37s"></div><span class="bl">JUN</span></div>
-        <div class="bcol"><span class="bv">A</span><div class="bar hi" style="height:100%;animation-delay:.45s"></div><span class="bl">JUL</span></div>
+      <div class="bars">
+        <div class="bcol"><span class="bv">D</span><div class="btrack"><div class="bar" style="height:30%;animation-delay:.05s"></div></div><span class="bl">FEB</span></div>
+        <div class="bcol"><span class="bv">C</span><div class="btrack"><div class="bar" style="height:45%;animation-delay:.13s"></div></div><span class="bl">MAR</span></div>
+        <div class="bcol"><span class="bv">C</span><div class="btrack"><div class="bar" style="height:53%;animation-delay:.21s"></div></div><span class="bl">APR</span></div>
+        <div class="bcol"><span class="bv">B</span><div class="btrack"><div class="bar" style="height:74%;animation-delay:.29s"></div></div><span class="bl">MAY</span></div>
+        <div class="bcol"><span class="bv">B</span><div class="btrack"><div class="bar" style="height:82%;animation-delay:.37s"></div></div><span class="bl">JUN</span></div>
+        <div class="bcol"><span class="bv">A</span><div class="btrack"><div class="bar hi" style="height:100%;animation-delay:.45s"></div></div><span class="bl">JUL</span></div>
       </div>
     </div>
     <div class="card" style="padding:13px 15px;">
@@ -933,7 +937,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
 <div class="row">
 
 <div class="cardwrap" data-screen="live-scanner">
-<div class="phone"><div class="screen" id="scr-live-scanner" style="background:#0A192B;">
+<div class="phone"><div class="screen" id="scr-live-scanner" style="background:#0A0A0B;">
   <div class="notch"></div>
   <div class="sb sb-l"><span>9:41</span><span>●●●</span></div>
   <div class="f jb ac fs0" style="padding:6px 18px 8px;">
@@ -942,8 +946,8 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     <div style="background:rgba(47,174,134,.22);border-radius:100px;padding:5px 11px;">
       <span style="color:#4FD1A5;font-size:9.5px;font-weight:700;">● LIVE</span></div>
   </div>
-  <div class="fl1 rel fc ac jc" style="background:#061423;overflow:hidden;">
-    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 58%,#123B5C 0%,#04101C 100%);"></div>
+  <div class="fl1 rel fc ac jc" style="background:#000000;overflow:hidden;">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 58%,#48484A 0%,#000000 100%);"></div>
     <div class="vig" style="top:0;left:0;right:0;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:12px;gap:4px;">
       <span style="color:#fff;font-size:11.5px;font-weight:700;">Open your mouth wide</span>
       <span style="color:rgba(255,255,255,.5);font-size:10px;font-weight:500;">Align your teeth inside the frame</span>
@@ -965,7 +969,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     <span class="material-icons-round" style="font-size:14px;color:rgba(255,255,255,.4);">lightbulb</span>
     <span style="color:rgba(255,255,255,.46);font-size:10.5px;font-weight:500;">Hold steady for 3 seconds</span>
   </div>
-  <div class="f ac ja fs0" style="background:#0A192B;padding:14px 28px 24px;border-radius:0 0 45px 45px;">
+  <div class="f ac ja fs0" style="background:#0A0A0B;padding:14px 28px 24px;border-radius:0 0 45px 45px;">
     <div class="fc ac g5"><div class="sq" style="width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.1);"><span class="material-icons-round" style="font-size:20px;color:rgba(255,255,255,.65);">bolt</span></div><span style="color:rgba(255,255,255,.4);font-size:9px;font-weight:600;">Flash</span></div>
     <div class="rel">
       <div style="position:absolute;inset:-9px;border-radius:50%;background:rgba(110,192,255,.22);animation:pulseb 2s ease-in-out infinite;"></div>
@@ -978,7 +982,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
 </div>
 
 <div class="cardwrap" data-screen="image-capture">
-<div class="phone"><div class="screen" id="scr-image-capture" style="background:#0A192B;">
+<div class="phone"><div class="screen" id="scr-image-capture" style="background:#0A0A0B;">
   <div class="notch"></div>
   <div class="sb sb-l"><span>9:41</span><span>●●●</span></div>
   <div class="f jb ac fs0" style="padding:6px 18px 8px;">
@@ -986,8 +990,8 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     <span style="color:#fff;font-size:13.5px;font-weight:700;">Review Photo</span>
     <div style="width:38px;"></div>
   </div>
-  <div class="fl1 fc ac jc g12" style="background:#0F2438;">
-    <div class="sq fc g8" style="width:230px;height:196px;border-radius:24px;background:#08192A;border:2px solid rgba(110,192,255,.18);">
+  <div class="fl1 fc ac jc g12" style="background:#1C1C1E;">
+    <div class="sq fc g8" style="width:230px;height:196px;border-radius:24px;background:#000000;border:2px solid rgba(110,192,255,.18);">
       <span class="material-icons-round" style="font-size:44px;color:rgba(255,255,255,.16);">image</span>
       <span style="color:rgba(255,255,255,.3);font-size:11px;font-weight:600;">Captured image</span>
       <span style="color:rgba(255,255,255,.15);font-size:9px;">Thunkable: Image Component</span>
@@ -997,14 +1001,14 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
       <span class="chip" style="background:rgba(47,174,134,.16);color:#4FD1A5;">Enough light</span>
     </div>
   </div>
-  <div class="f ja fs0" style="background:#132B44;padding:11px 18px;">
+  <div class="f ja fs0" style="background:#1C1C1E;padding:11px 18px;">
     <div class="tc"><div class="num" style="color:#fff;font-size:14px;">1</div><div style="color:rgba(255,255,255,.42);font-size:9.5px;font-weight:600;">Image</div></div>
     <div style="width:1.5px;background:rgba(255,255,255,.1);"></div>
     <div class="tc"><div class="num" style="color:#fff;font-size:14px;">HD</div><div style="color:rgba(255,255,255,.42);font-size:9.5px;font-weight:600;">Quality</div></div>
     <div style="width:1.5px;background:rgba(255,255,255,.1);"></div>
     <div class="tc"><div class="num" style="color:#4FD1A5;font-size:14px;">Ready</div><div style="color:rgba(255,255,255,.42);font-size:9.5px;font-weight:600;">Status</div></div>
   </div>
-  <div class="fc g8 fs0" style="padding:12px 18px 22px;background:#0A192B;border-radius:0 0 45px 45px;">
+  <div class="fc g8 fs0" style="padding:12px 18px 22px;background:#0A0A0B;border-radius:0 0 45px 45px;">
     <div class="btn btn-p"><span class="material-icons-round">auto_awesome</span> Analyse with AI</div>
     <div class="btn-gh" style="color:rgba(255,255,255,.55);"><span class="material-icons-round" style="font-size:17px;">replay</span> Retake photo</div>
   </div>
@@ -1270,45 +1274,12 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
   </div>
   <div class="fl1 rel" style="padding:0 10px;">
     <svg class="arch" viewBox="40 39 220 322" style="height:100%;" preserveAspectRatio="xMidYMid meet">
-      <text class="alab" x="150" y="140" text-anchor="middle">Upper Dental Arch</text>
-      <path class="cross" d="M143,171 H157 M150,164 V178"/>
-      <text class="alab" x="150" y="270" text-anchor="middle">Lower Dental Arch</text>
-        <!-- UPPER DENTAL ARCH -->
-        <g class="th" transform="translate(57.3,161.7) rotate(285.0)"><path class="crown" d="M9.38,0.00 C9.38,1.08 9.45,2.34 9.51,3.24 C9.57,4.14 9.71,4.72 9.72,5.40 C9.74,6.09 9.76,6.77 9.61,7.34 C9.46,7.91 9.20,8.45 8.83,8.83 C8.45,9.20 7.91,9.46 7.34,9.61 C6.77,9.76 6.09,9.74 5.40,9.72 C4.72,9.71 4.14,9.57 3.24,9.51 C2.34,9.45 1.08,9.38 0.00,9.38 C-1.08,9.38 -2.34,9.45 -3.24,9.51 C-4.14,9.57 -4.72,9.71 -5.40,9.72 C-6.09,9.74 -6.77,9.76 -7.34,9.61 C-7.91,9.46 -8.45,9.20 -8.83,8.83 C-9.20,8.45 -9.46,7.91 -9.61,7.34 C-9.76,6.77 -9.74,6.09 -9.72,5.40 C-9.71,4.72 -9.57,4.14 -9.51,3.24 C-9.45,2.34 -9.38,1.08 -9.38,0.00 C-9.38,-1.08 -9.45,-2.34 -9.51,-3.24 C-9.57,-4.14 -9.71,-4.72 -9.72,-5.40 C-9.74,-6.09 -9.76,-6.77 -9.61,-7.34 C-9.46,-7.91 -9.20,-8.45 -8.83,-8.83 C-8.45,-9.20 -7.91,-9.46 -7.34,-9.61 C-6.77,-9.76 -6.09,-9.74 -5.40,-9.72 C-4.72,-9.71 -4.14,-9.57 -3.24,-9.51 C-2.34,-9.45 -1.08,-9.38 -0.00,-9.38 C1.08,-9.38 2.34,-9.45 3.24,-9.51 C4.14,-9.57 4.72,-9.71 5.40,-9.72 C6.09,-9.74 6.77,-9.76 7.34,-9.61 C7.91,-9.46 8.45,-9.20 8.83,-8.83 C9.20,-8.45 9.46,-7.91 9.61,-7.34 C9.76,-6.77 9.74,-6.09 9.72,-5.40 C9.71,-4.72 9.57,-4.14 9.51,-3.24 C9.45,-2.34 9.38,-1.08 9.38,0.00 Z"/><ellipse class="cusp" cx="-4.1" cy="-4.1" rx="3.4" ry="3.2"/><ellipse class="cusp" cx="-4.1" cy="4.1" rx="3.4" ry="3.2"/><ellipse class="cusp" cx="4.1" cy="-4.1" rx="3.4" ry="3.2"/><ellipse class="cusp" cx="4.1" cy="4.1" rx="3.4" ry="3.2"/><path class="fis" d="M-4.3,0 H4.3 M0,-4.3 V4.3"/></g>
-        <g class="th" transform="translate(63.0,137.5) rotate(295.0)"><path class="crown" d="M10.39,0.00 C10.39,1.11 10.47,2.41 10.53,3.34 C10.59,4.26 10.75,4.86 10.77,5.56 C10.78,6.26 10.80,6.97 10.64,7.56 C10.47,8.15 10.19,8.70 9.77,9.09 C9.36,9.47 8.76,9.74 8.13,9.89 C7.50,10.04 6.74,10.02 5.98,10.01 C5.23,9.99 4.59,9.85 3.59,9.79 C2.59,9.73 1.20,9.65 0.00,9.65 C-1.20,9.65 -2.59,9.73 -3.59,9.79 C-4.59,9.85 -5.23,9.99 -5.98,10.01 C-6.74,10.02 -7.50,10.04 -8.13,9.89 C-8.76,9.74 -9.36,9.47 -9.77,9.09 C-10.19,8.70 -10.47,8.15 -10.64,7.56 C-10.80,6.97 -10.78,6.26 -10.77,5.56 C-10.75,4.86 -10.59,4.26 -10.53,3.34 C-10.47,2.41 -10.39,1.11 -10.39,0.00 C-10.39,-1.11 -10.47,-2.41 -10.53,-3.34 C-10.59,-4.26 -10.75,-4.86 -10.77,-5.56 C-10.78,-6.26 -10.80,-6.97 -10.64,-7.56 C-10.47,-8.15 -10.19,-8.70 -9.77,-9.09 C-9.36,-9.47 -8.76,-9.74 -8.13,-9.89 C-7.50,-10.04 -6.74,-10.02 -5.98,-10.01 C-5.23,-9.99 -4.59,-9.85 -3.59,-9.79 C-2.59,-9.73 -1.20,-9.65 -0.00,-9.65 C1.20,-9.65 2.59,-9.73 3.59,-9.79 C4.59,-9.85 5.23,-9.99 5.98,-10.01 C6.74,-10.02 7.50,-10.04 8.13,-9.89 C8.76,-9.74 9.36,-9.47 9.77,-9.09 C10.19,-8.70 10.47,-8.15 10.64,-7.56 C10.80,-6.97 10.78,-6.26 10.77,-5.56 C10.75,-4.86 10.59,-4.26 10.53,-3.34 C10.47,-2.41 10.39,-1.11 10.39,0.00 Z"/><ellipse class="cusp" cx="-4.5" cy="-4.2" rx="3.7" ry="3.3"/><ellipse class="cusp" cx="-4.5" cy="4.2" rx="3.7" ry="3.3"/><ellipse class="cusp" cx="4.5" cy="-4.2" rx="3.7" ry="3.3"/><ellipse class="cusp" cx="4.5" cy="4.2" rx="3.7" ry="3.3"/><path class="fis" d="M-4.8,0 H4.8 M0,-4.4 V4.4"/></g>
-        <g class="th gold" transform="translate(71.4,115.1) rotate(305.0)"><path class="crown" d="M10.89,0.00 C10.89,1.14 10.97,2.47 11.04,3.41 C11.11,4.36 11.27,4.97 11.29,5.69 C11.31,6.41 11.33,7.14 11.15,7.74 C10.98,8.34 10.69,8.90 10.25,9.30 C9.81,9.70 9.19,9.97 8.53,10.12 C7.86,10.28 7.07,10.26 6.27,10.24 C5.48,10.23 4.81,10.08 3.76,10.02 C2.72,9.96 1.25,9.88 0.00,9.88 C-1.25,9.88 -2.72,9.96 -3.76,10.02 C-4.81,10.08 -5.48,10.23 -6.27,10.24 C-7.07,10.26 -7.86,10.28 -8.53,10.12 C-9.19,9.97 -9.81,9.70 -10.25,9.30 C-10.69,8.90 -10.98,8.34 -11.15,7.74 C-11.33,7.14 -11.31,6.41 -11.29,5.69 C-11.27,4.97 -11.11,4.36 -11.04,3.41 C-10.97,2.47 -10.89,1.14 -10.89,0.00 C-10.89,-1.14 -10.97,-2.47 -11.04,-3.41 C-11.11,-4.36 -11.27,-4.97 -11.29,-5.69 C-11.31,-6.41 -11.33,-7.14 -11.15,-7.74 C-10.98,-8.34 -10.69,-8.90 -10.25,-9.30 C-9.81,-9.70 -9.19,-9.97 -8.53,-10.12 C-7.86,-10.28 -7.07,-10.26 -6.27,-10.24 C-5.48,-10.23 -4.81,-10.08 -3.76,-10.02 C-2.72,-9.96 -1.25,-9.88 -0.00,-9.88 C1.25,-9.88 2.72,-9.96 3.76,-10.02 C4.81,-10.08 5.48,-10.23 6.27,-10.24 C7.07,-10.26 7.86,-10.28 8.53,-10.12 C9.19,-9.97 9.81,-9.70 10.25,-9.30 C10.69,-8.90 10.98,-8.34 11.15,-7.74 C11.33,-7.14 11.31,-6.41 11.29,-5.69 C11.27,-4.97 11.11,-4.36 11.04,-3.41 C10.97,-2.47 10.89,-1.14 10.89,0.00 Z"/><ellipse class="cusp" cx="-4.8" cy="-4.3" rx="3.9" ry="3.3"/><ellipse class="cusp" cx="-4.8" cy="4.3" rx="3.9" ry="3.3"/><ellipse class="cusp" cx="4.8" cy="-4.3" rx="3.9" ry="3.3"/><ellipse class="cusp" cx="4.8" cy="4.3" rx="3.9" ry="3.3"/><path class="fis" d="M-5.0,0 H5.0 M0,-4.5 V4.5"/></g>
-        <g class="th" transform="translate(82.1,95.3) rotate(315.0)"><path class="crown" d="M8.00,0.00 C8.00,0.99 7.99,2.20 7.95,2.98 C7.91,3.76 7.87,4.17 7.78,4.69 C7.70,5.21 7.60,5.67 7.46,6.12 C7.31,6.56 7.14,6.98 6.92,7.36 C6.69,7.74 6.43,8.09 6.09,8.40 C5.75,8.71 5.38,8.99 4.90,9.21 C4.42,9.42 4.04,9.60 3.22,9.72 C2.41,9.83 1.07,9.89 0.00,9.89 C-1.07,9.89 -2.41,9.83 -3.22,9.72 C-4.04,9.60 -4.42,9.42 -4.90,9.21 C-5.38,8.99 -5.75,8.71 -6.09,8.40 C-6.43,8.09 -6.69,7.74 -6.92,7.36 C-7.14,6.98 -7.31,6.56 -7.46,6.12 C-7.60,5.67 -7.70,5.21 -7.78,4.69 C-7.87,4.17 -7.91,3.76 -7.95,2.98 C-7.99,2.20 -8.00,0.99 -8.00,0.00 C-8.00,-0.99 -7.99,-2.20 -7.95,-2.98 C-7.91,-3.76 -7.87,-4.17 -7.78,-4.69 C-7.70,-5.21 -7.60,-5.67 -7.46,-6.12 C-7.31,-6.56 -7.14,-6.98 -6.92,-7.36 C-6.69,-7.74 -6.43,-8.09 -6.09,-8.40 C-5.75,-8.71 -5.38,-8.99 -4.90,-9.21 C-4.42,-9.42 -4.04,-9.60 -3.22,-9.72 C-2.41,-9.83 -1.07,-9.89 -0.00,-9.89 C1.07,-9.89 2.41,-9.83 3.22,-9.72 C4.04,-9.60 4.42,-9.42 4.90,-9.21 C5.38,-8.99 5.75,-8.71 6.09,-8.40 C6.43,-8.09 6.69,-7.74 6.92,-7.36 C7.14,-6.98 7.31,-6.56 7.46,-6.12 C7.60,-5.67 7.70,-5.21 7.78,-4.69 C7.87,-4.17 7.91,-3.76 7.95,-2.98 C7.99,-2.20 8.00,-0.99 8.00,0.00 Z"/><ellipse class="cusp" cx="0" cy="-3.1" rx="3.8" ry="2.4"/><ellipse class="cusp" cx="0" cy="3.1" rx="3.8" ry="2.4"/><path class="fis" d="M-4.0,0 H4.0"/></g>
-        <g class="th" transform="translate(94.9,78.8) rotate(325.0)"><path class="crown" d="M8.00,0.00 C8.00,0.99 7.99,2.20 7.95,2.98 C7.91,3.76 7.87,4.17 7.78,4.69 C7.70,5.21 7.60,5.67 7.46,6.12 C7.31,6.56 7.14,6.98 6.92,7.36 C6.69,7.74 6.43,8.09 6.09,8.40 C5.75,8.71 5.38,8.99 4.90,9.21 C4.42,9.42 4.04,9.60 3.22,9.72 C2.41,9.83 1.07,9.89 0.00,9.89 C-1.07,9.89 -2.41,9.83 -3.22,9.72 C-4.04,9.60 -4.42,9.42 -4.90,9.21 C-5.38,8.99 -5.75,8.71 -6.09,8.40 C-6.43,8.09 -6.69,7.74 -6.92,7.36 C-7.14,6.98 -7.31,6.56 -7.46,6.12 C-7.60,5.67 -7.70,5.21 -7.78,4.69 C-7.87,4.17 -7.91,3.76 -7.95,2.98 C-7.99,2.20 -8.00,0.99 -8.00,0.00 C-8.00,-0.99 -7.99,-2.20 -7.95,-2.98 C-7.91,-3.76 -7.87,-4.17 -7.78,-4.69 C-7.70,-5.21 -7.60,-5.67 -7.46,-6.12 C-7.31,-6.56 -7.14,-6.98 -6.92,-7.36 C-6.69,-7.74 -6.43,-8.09 -6.09,-8.40 C-5.75,-8.71 -5.38,-8.99 -4.90,-9.21 C-4.42,-9.42 -4.04,-9.60 -3.22,-9.72 C-2.41,-9.83 -1.07,-9.89 -0.00,-9.89 C1.07,-9.89 2.41,-9.83 3.22,-9.72 C4.04,-9.60 4.42,-9.42 4.90,-9.21 C5.38,-8.99 5.75,-8.71 6.09,-8.40 C6.43,-8.09 6.69,-7.74 6.92,-7.36 C7.14,-6.98 7.31,-6.56 7.46,-6.12 C7.60,-5.67 7.70,-5.21 7.78,-4.69 C7.87,-4.17 7.91,-3.76 7.95,-2.98 C7.99,-2.20 8.00,-0.99 8.00,0.00 Z"/><ellipse class="cusp" cx="0" cy="-3.1" rx="3.8" ry="2.4"/><ellipse class="cusp" cx="0" cy="3.1" rx="3.8" ry="2.4"/><path class="fis" d="M-4.0,0 H4.0"/></g>
-        <g class="th" transform="translate(109.4,65.9) rotate(335.0)"><path class="crown" d="M-8.7,3.3 C-8.7,-1.9 -2.9,-8.7 0,-8.7 C2.9,-8.7 8.7,-1.9 8.7,3.3 Q0,10.2 -8.7,3.3 Z"/><ellipse class="cusp" cx="0" cy="-2.4" rx="2.9" ry="2.6"/><path class="fis" d="M0,-2.9 V2.6"/></g>
-        <g class="th" transform="translate(125.2,57.0) rotate(345.0)"><path class="crown" d="M8.35,0.00 C8.35,0.91 8.32,2.06 8.26,2.72 C8.20,3.38 8.11,3.60 7.99,3.96 C7.87,4.32 7.72,4.60 7.54,4.87 C7.35,5.14 7.14,5.36 6.89,5.57 C6.64,5.77 6.36,5.94 6.02,6.09 C5.69,6.24 5.34,6.36 4.90,6.46 C4.45,6.56 4.18,6.63 3.37,6.68 C2.55,6.73 1.12,6.75 0.00,6.75 C-1.12,6.75 -2.55,6.73 -3.37,6.68 C-4.18,6.63 -4.45,6.56 -4.90,6.46 C-5.34,6.36 -5.69,6.24 -6.02,6.09 C-6.36,5.94 -6.64,5.77 -6.89,5.57 C-7.14,5.36 -7.35,5.14 -7.54,4.87 C-7.72,4.60 -7.87,4.32 -7.99,3.96 C-8.11,3.60 -8.20,3.38 -8.26,2.72 C-8.32,2.06 -8.35,0.91 -8.35,0.00 C-8.35,-0.91 -8.32,-2.06 -8.26,-2.72 C-8.20,-3.38 -8.11,-3.60 -7.99,-3.96 C-7.87,-4.32 -7.72,-4.60 -7.54,-4.87 C-7.35,-5.14 -7.14,-5.36 -6.89,-5.57 C-6.64,-5.77 -6.36,-5.94 -6.02,-6.09 C-5.69,-6.24 -5.34,-6.36 -4.90,-6.46 C-4.45,-6.56 -4.18,-6.63 -3.37,-6.68 C-2.55,-6.73 -1.12,-6.75 -0.00,-6.75 C1.12,-6.75 2.55,-6.73 3.37,-6.68 C4.18,-6.63 4.45,-6.56 4.90,-6.46 C5.34,-6.36 5.69,-6.24 6.02,-6.09 C6.36,-5.94 6.64,-5.77 6.89,-5.57 C7.14,-5.36 7.35,-5.14 7.54,-4.87 C7.72,-4.60 7.87,-4.32 7.99,-3.96 C8.11,-3.60 8.20,-3.38 8.26,-2.72 C8.32,-2.06 8.35,-0.91 8.35,0.00 Z"/><ellipse class="cusp" cx="0" cy="-1.8" rx="5.2" ry="2.0"/><path class="fis" d="M-4.3,-0.4 Q0,-2.3 4.3,-0.4"/></g>
-        <g class="th" transform="translate(141.6,52.6) rotate(355.0)"><path class="crown" d="M9.70,0.00 C9.70,0.94 9.67,2.14 9.60,2.82 C9.53,3.51 9.42,3.73 9.28,4.11 C9.14,4.48 8.97,4.77 8.75,5.05 C8.54,5.33 8.29,5.56 8.00,5.77 C7.71,5.99 7.38,6.16 7.00,6.32 C6.61,6.47 6.20,6.60 5.69,6.70 C5.17,6.80 4.86,6.87 3.91,6.92 C2.96,6.98 1.30,7.00 0.00,7.00 C-1.30,7.00 -2.96,6.98 -3.91,6.92 C-4.86,6.87 -5.17,6.80 -5.69,6.70 C-6.20,6.60 -6.61,6.47 -7.00,6.32 C-7.38,6.16 -7.71,5.99 -8.00,5.77 C-8.29,5.56 -8.54,5.33 -8.75,5.05 C-8.97,4.77 -9.14,4.48 -9.28,4.11 C-9.42,3.73 -9.53,3.51 -9.60,2.82 C-9.67,2.14 -9.70,0.94 -9.70,0.00 C-9.70,-0.94 -9.67,-2.14 -9.60,-2.82 C-9.53,-3.51 -9.42,-3.73 -9.28,-4.11 C-9.14,-4.48 -8.97,-4.77 -8.75,-5.05 C-8.54,-5.33 -8.29,-5.56 -8.00,-5.77 C-7.71,-5.99 -7.38,-6.16 -7.00,-6.32 C-6.61,-6.47 -6.20,-6.60 -5.69,-6.70 C-5.17,-6.80 -4.86,-6.87 -3.91,-6.92 C-2.96,-6.98 -1.30,-7.00 -0.00,-7.00 C1.30,-7.00 2.96,-6.98 3.91,-6.92 C4.86,-6.87 5.17,-6.80 5.69,-6.70 C6.20,-6.60 6.61,-6.47 7.00,-6.32 C7.38,-6.16 7.71,-5.99 8.00,-5.77 C8.29,-5.56 8.54,-5.33 8.75,-5.05 C8.97,-4.77 9.14,-4.48 9.28,-4.11 C9.42,-3.73 9.53,-3.51 9.60,-2.82 C9.67,-2.14 9.70,-0.94 9.70,0.00 Z"/><ellipse class="cusp" cx="0" cy="-1.8" rx="6.0" ry="2.1"/><path class="fis" d="M-5.0,-0.4 Q0,-2.4 5.0,-0.4"/></g>
-        <g class="th" transform="translate(158.4,52.6) rotate(365.0)"><path class="crown" d="M9.70,0.00 C9.70,0.94 9.67,2.14 9.60,2.82 C9.53,3.51 9.42,3.73 9.28,4.11 C9.14,4.48 8.97,4.77 8.75,5.05 C8.54,5.33 8.29,5.56 8.00,5.77 C7.71,5.99 7.38,6.16 7.00,6.32 C6.61,6.47 6.20,6.60 5.69,6.70 C5.17,6.80 4.86,6.87 3.91,6.92 C2.96,6.98 1.30,7.00 0.00,7.00 C-1.30,7.00 -2.96,6.98 -3.91,6.92 C-4.86,6.87 -5.17,6.80 -5.69,6.70 C-6.20,6.60 -6.61,6.47 -7.00,6.32 C-7.38,6.16 -7.71,5.99 -8.00,5.77 C-8.29,5.56 -8.54,5.33 -8.75,5.05 C-8.97,4.77 -9.14,4.48 -9.28,4.11 C-9.42,3.73 -9.53,3.51 -9.60,2.82 C-9.67,2.14 -9.70,0.94 -9.70,0.00 C-9.70,-0.94 -9.67,-2.14 -9.60,-2.82 C-9.53,-3.51 -9.42,-3.73 -9.28,-4.11 C-9.14,-4.48 -8.97,-4.77 -8.75,-5.05 C-8.54,-5.33 -8.29,-5.56 -8.00,-5.77 C-7.71,-5.99 -7.38,-6.16 -7.00,-6.32 C-6.61,-6.47 -6.20,-6.60 -5.69,-6.70 C-5.17,-6.80 -4.86,-6.87 -3.91,-6.92 C-2.96,-6.98 -1.30,-7.00 -0.00,-7.00 C1.30,-7.00 2.96,-6.98 3.91,-6.92 C4.86,-6.87 5.17,-6.80 5.69,-6.70 C6.20,-6.60 6.61,-6.47 7.00,-6.32 C7.38,-6.16 7.71,-5.99 8.00,-5.77 C8.29,-5.56 8.54,-5.33 8.75,-5.05 C8.97,-4.77 9.14,-4.48 9.28,-4.11 C9.42,-3.73 9.53,-3.51 9.60,-2.82 C9.67,-2.14 9.70,-0.94 9.70,0.00 Z"/><ellipse class="cusp" cx="0" cy="-1.8" rx="6.0" ry="2.1"/><path class="fis" d="M-5.0,-0.4 Q0,-2.4 5.0,-0.4"/></g>
-        <g class="th" transform="translate(174.8,57.0) rotate(375.0)"><path class="crown" d="M8.35,0.00 C8.35,0.91 8.32,2.06 8.26,2.72 C8.20,3.38 8.11,3.60 7.99,3.96 C7.87,4.32 7.72,4.60 7.54,4.87 C7.35,5.14 7.14,5.36 6.89,5.57 C6.64,5.77 6.36,5.94 6.02,6.09 C5.69,6.24 5.34,6.36 4.90,6.46 C4.45,6.56 4.18,6.63 3.37,6.68 C2.55,6.73 1.12,6.75 0.00,6.75 C-1.12,6.75 -2.55,6.73 -3.37,6.68 C-4.18,6.63 -4.45,6.56 -4.90,6.46 C-5.34,6.36 -5.69,6.24 -6.02,6.09 C-6.36,5.94 -6.64,5.77 -6.89,5.57 C-7.14,5.36 -7.35,5.14 -7.54,4.87 C-7.72,4.60 -7.87,4.32 -7.99,3.96 C-8.11,3.60 -8.20,3.38 -8.26,2.72 C-8.32,2.06 -8.35,0.91 -8.35,0.00 C-8.35,-0.91 -8.32,-2.06 -8.26,-2.72 C-8.20,-3.38 -8.11,-3.60 -7.99,-3.96 C-7.87,-4.32 -7.72,-4.60 -7.54,-4.87 C-7.35,-5.14 -7.14,-5.36 -6.89,-5.57 C-6.64,-5.77 -6.36,-5.94 -6.02,-6.09 C-5.69,-6.24 -5.34,-6.36 -4.90,-6.46 C-4.45,-6.56 -4.18,-6.63 -3.37,-6.68 C-2.55,-6.73 -1.12,-6.75 -0.00,-6.75 C1.12,-6.75 2.55,-6.73 3.37,-6.68 C4.18,-6.63 4.45,-6.56 4.90,-6.46 C5.34,-6.36 5.69,-6.24 6.02,-6.09 C6.36,-5.94 6.64,-5.77 6.89,-5.57 C7.14,-5.36 7.35,-5.14 7.54,-4.87 C7.72,-4.60 7.87,-4.32 7.99,-3.96 C8.11,-3.60 8.20,-3.38 8.26,-2.72 C8.32,-2.06 8.35,-0.91 8.35,0.00 Z"/><ellipse class="cusp" cx="0" cy="-1.8" rx="5.2" ry="2.0"/><path class="fis" d="M-4.3,-0.4 Q0,-2.3 4.3,-0.4"/></g>
-        <g class="th" transform="translate(190.6,65.9) rotate(385.0)"><path class="crown" d="M-8.7,3.3 C-8.7,-1.9 -2.9,-8.7 0,-8.7 C2.9,-8.7 8.7,-1.9 8.7,3.3 Q0,10.2 -8.7,3.3 Z"/><ellipse class="cusp" cx="0" cy="-2.4" rx="2.9" ry="2.6"/><path class="fis" d="M0,-2.9 V2.6"/></g>
-        <g class="th" transform="translate(205.1,78.8) rotate(395.0)"><path class="crown" d="M8.00,0.00 C8.00,0.99 7.99,2.20 7.95,2.98 C7.91,3.76 7.87,4.17 7.78,4.69 C7.70,5.21 7.60,5.67 7.46,6.12 C7.31,6.56 7.14,6.98 6.92,7.36 C6.69,7.74 6.43,8.09 6.09,8.40 C5.75,8.71 5.38,8.99 4.90,9.21 C4.42,9.42 4.04,9.60 3.22,9.72 C2.41,9.83 1.07,9.89 0.00,9.89 C-1.07,9.89 -2.41,9.83 -3.22,9.72 C-4.04,9.60 -4.42,9.42 -4.90,9.21 C-5.38,8.99 -5.75,8.71 -6.09,8.40 C-6.43,8.09 -6.69,7.74 -6.92,7.36 C-7.14,6.98 -7.31,6.56 -7.46,6.12 C-7.60,5.67 -7.70,5.21 -7.78,4.69 C-7.87,4.17 -7.91,3.76 -7.95,2.98 C-7.99,2.20 -8.00,0.99 -8.00,0.00 C-8.00,-0.99 -7.99,-2.20 -7.95,-2.98 C-7.91,-3.76 -7.87,-4.17 -7.78,-4.69 C-7.70,-5.21 -7.60,-5.67 -7.46,-6.12 C-7.31,-6.56 -7.14,-6.98 -6.92,-7.36 C-6.69,-7.74 -6.43,-8.09 -6.09,-8.40 C-5.75,-8.71 -5.38,-8.99 -4.90,-9.21 C-4.42,-9.42 -4.04,-9.60 -3.22,-9.72 C-2.41,-9.83 -1.07,-9.89 -0.00,-9.89 C1.07,-9.89 2.41,-9.83 3.22,-9.72 C4.04,-9.60 4.42,-9.42 4.90,-9.21 C5.38,-8.99 5.75,-8.71 6.09,-8.40 C6.43,-8.09 6.69,-7.74 6.92,-7.36 C7.14,-6.98 7.31,-6.56 7.46,-6.12 C7.60,-5.67 7.70,-5.21 7.78,-4.69 C7.87,-4.17 7.91,-3.76 7.95,-2.98 C7.99,-2.20 8.00,-0.99 8.00,0.00 Z"/><ellipse class="cusp" cx="0" cy="-3.1" rx="3.8" ry="2.4"/><ellipse class="cusp" cx="0" cy="3.1" rx="3.8" ry="2.4"/><path class="fis" d="M-4.0,0 H4.0"/></g>
-        <g class="th" transform="translate(217.9,95.3) rotate(405.0)"><path class="crown" d="M8.00,0.00 C8.00,0.99 7.99,2.20 7.95,2.98 C7.91,3.76 7.87,4.17 7.78,4.69 C7.70,5.21 7.60,5.67 7.46,6.12 C7.31,6.56 7.14,6.98 6.92,7.36 C6.69,7.74 6.43,8.09 6.09,8.40 C5.75,8.71 5.38,8.99 4.90,9.21 C4.42,9.42 4.04,9.60 3.22,9.72 C2.41,9.83 1.07,9.89 0.00,9.89 C-1.07,9.89 -2.41,9.83 -3.22,9.72 C-4.04,9.60 -4.42,9.42 -4.90,9.21 C-5.38,8.99 -5.75,8.71 -6.09,8.40 C-6.43,8.09 -6.69,7.74 -6.92,7.36 C-7.14,6.98 -7.31,6.56 -7.46,6.12 C-7.60,5.67 -7.70,5.21 -7.78,4.69 C-7.87,4.17 -7.91,3.76 -7.95,2.98 C-7.99,2.20 -8.00,0.99 -8.00,0.00 C-8.00,-0.99 -7.99,-2.20 -7.95,-2.98 C-7.91,-3.76 -7.87,-4.17 -7.78,-4.69 C-7.70,-5.21 -7.60,-5.67 -7.46,-6.12 C-7.31,-6.56 -7.14,-6.98 -6.92,-7.36 C-6.69,-7.74 -6.43,-8.09 -6.09,-8.40 C-5.75,-8.71 -5.38,-8.99 -4.90,-9.21 C-4.42,-9.42 -4.04,-9.60 -3.22,-9.72 C-2.41,-9.83 -1.07,-9.89 -0.00,-9.89 C1.07,-9.89 2.41,-9.83 3.22,-9.72 C4.04,-9.60 4.42,-9.42 4.90,-9.21 C5.38,-8.99 5.75,-8.71 6.09,-8.40 C6.43,-8.09 6.69,-7.74 6.92,-7.36 C7.14,-6.98 7.31,-6.56 7.46,-6.12 C7.60,-5.67 7.70,-5.21 7.78,-4.69 C7.87,-4.17 7.91,-3.76 7.95,-2.98 C7.99,-2.20 8.00,-0.99 8.00,0.00 Z"/><ellipse class="cusp" cx="0" cy="-3.1" rx="3.8" ry="2.4"/><ellipse class="cusp" cx="0" cy="3.1" rx="3.8" ry="2.4"/><path class="fis" d="M-4.0,0 H4.0"/></g>
-        <g class="th gold" transform="translate(228.6,115.1) rotate(415.0)"><path class="crown" d="M10.89,0.00 C10.89,1.14 10.97,2.47 11.04,3.41 C11.11,4.36 11.27,4.97 11.29,5.69 C11.31,6.41 11.33,7.14 11.15,7.74 C10.98,8.34 10.69,8.90 10.25,9.30 C9.81,9.70 9.19,9.97 8.53,10.12 C7.86,10.28 7.07,10.26 6.27,10.24 C5.48,10.23 4.81,10.08 3.76,10.02 C2.72,9.96 1.25,9.88 0.00,9.88 C-1.25,9.88 -2.72,9.96 -3.76,10.02 C-4.81,10.08 -5.48,10.23 -6.27,10.24 C-7.07,10.26 -7.86,10.28 -8.53,10.12 C-9.19,9.97 -9.81,9.70 -10.25,9.30 C-10.69,8.90 -10.98,8.34 -11.15,7.74 C-11.33,7.14 -11.31,6.41 -11.29,5.69 C-11.27,4.97 -11.11,4.36 -11.04,3.41 C-10.97,2.47 -10.89,1.14 -10.89,0.00 C-10.89,-1.14 -10.97,-2.47 -11.04,-3.41 C-11.11,-4.36 -11.27,-4.97 -11.29,-5.69 C-11.31,-6.41 -11.33,-7.14 -11.15,-7.74 C-10.98,-8.34 -10.69,-8.90 -10.25,-9.30 C-9.81,-9.70 -9.19,-9.97 -8.53,-10.12 C-7.86,-10.28 -7.07,-10.26 -6.27,-10.24 C-5.48,-10.23 -4.81,-10.08 -3.76,-10.02 C-2.72,-9.96 -1.25,-9.88 -0.00,-9.88 C1.25,-9.88 2.72,-9.96 3.76,-10.02 C4.81,-10.08 5.48,-10.23 6.27,-10.24 C7.07,-10.26 7.86,-10.28 8.53,-10.12 C9.19,-9.97 9.81,-9.70 10.25,-9.30 C10.69,-8.90 10.98,-8.34 11.15,-7.74 C11.33,-7.14 11.31,-6.41 11.29,-5.69 C11.27,-4.97 11.11,-4.36 11.04,-3.41 C10.97,-2.47 10.89,-1.14 10.89,0.00 Z"/><ellipse class="cusp" cx="-4.8" cy="-4.3" rx="3.9" ry="3.3"/><ellipse class="cusp" cx="-4.8" cy="4.3" rx="3.9" ry="3.3"/><ellipse class="cusp" cx="4.8" cy="-4.3" rx="3.9" ry="3.3"/><ellipse class="cusp" cx="4.8" cy="4.3" rx="3.9" ry="3.3"/><path class="fis" d="M-5.0,0 H5.0 M0,-4.5 V4.5"/></g>
-        <g class="th" transform="translate(237.0,137.5) rotate(425.0)"><path class="crown" d="M10.39,0.00 C10.39,1.11 10.47,2.41 10.53,3.34 C10.59,4.26 10.75,4.86 10.77,5.56 C10.78,6.26 10.80,6.97 10.64,7.56 C10.47,8.15 10.19,8.70 9.77,9.09 C9.36,9.47 8.76,9.74 8.13,9.89 C7.50,10.04 6.74,10.02 5.98,10.01 C5.23,9.99 4.59,9.85 3.59,9.79 C2.59,9.73 1.20,9.65 0.00,9.65 C-1.20,9.65 -2.59,9.73 -3.59,9.79 C-4.59,9.85 -5.23,9.99 -5.98,10.01 C-6.74,10.02 -7.50,10.04 -8.13,9.89 C-8.76,9.74 -9.36,9.47 -9.77,9.09 C-10.19,8.70 -10.47,8.15 -10.64,7.56 C-10.80,6.97 -10.78,6.26 -10.77,5.56 C-10.75,4.86 -10.59,4.26 -10.53,3.34 C-10.47,2.41 -10.39,1.11 -10.39,0.00 C-10.39,-1.11 -10.47,-2.41 -10.53,-3.34 C-10.59,-4.26 -10.75,-4.86 -10.77,-5.56 C-10.78,-6.26 -10.80,-6.97 -10.64,-7.56 C-10.47,-8.15 -10.19,-8.70 -9.77,-9.09 C-9.36,-9.47 -8.76,-9.74 -8.13,-9.89 C-7.50,-10.04 -6.74,-10.02 -5.98,-10.01 C-5.23,-9.99 -4.59,-9.85 -3.59,-9.79 C-2.59,-9.73 -1.20,-9.65 -0.00,-9.65 C1.20,-9.65 2.59,-9.73 3.59,-9.79 C4.59,-9.85 5.23,-9.99 5.98,-10.01 C6.74,-10.02 7.50,-10.04 8.13,-9.89 C8.76,-9.74 9.36,-9.47 9.77,-9.09 C10.19,-8.70 10.47,-8.15 10.64,-7.56 C10.80,-6.97 10.78,-6.26 10.77,-5.56 C10.75,-4.86 10.59,-4.26 10.53,-3.34 C10.47,-2.41 10.39,-1.11 10.39,0.00 Z"/><ellipse class="cusp" cx="-4.5" cy="-4.2" rx="3.7" ry="3.3"/><ellipse class="cusp" cx="-4.5" cy="4.2" rx="3.7" ry="3.3"/><ellipse class="cusp" cx="4.5" cy="-4.2" rx="3.7" ry="3.3"/><ellipse class="cusp" cx="4.5" cy="4.2" rx="3.7" ry="3.3"/><path class="fis" d="M-4.8,0 H4.8 M0,-4.4 V4.4"/></g>
-        <g class="th" transform="translate(242.7,161.7) rotate(435.0)"><path class="crown" d="M9.38,0.00 C9.38,1.08 9.45,2.34 9.51,3.24 C9.57,4.14 9.71,4.72 9.72,5.40 C9.74,6.09 9.76,6.77 9.61,7.34 C9.46,7.91 9.20,8.45 8.83,8.83 C8.45,9.20 7.91,9.46 7.34,9.61 C6.77,9.76 6.09,9.74 5.40,9.72 C4.72,9.71 4.14,9.57 3.24,9.51 C2.34,9.45 1.08,9.38 0.00,9.38 C-1.08,9.38 -2.34,9.45 -3.24,9.51 C-4.14,9.57 -4.72,9.71 -5.40,9.72 C-6.09,9.74 -6.77,9.76 -7.34,9.61 C-7.91,9.46 -8.45,9.20 -8.83,8.83 C-9.20,8.45 -9.46,7.91 -9.61,7.34 C-9.76,6.77 -9.74,6.09 -9.72,5.40 C-9.71,4.72 -9.57,4.14 -9.51,3.24 C-9.45,2.34 -9.38,1.08 -9.38,0.00 C-9.38,-1.08 -9.45,-2.34 -9.51,-3.24 C-9.57,-4.14 -9.71,-4.72 -9.72,-5.40 C-9.74,-6.09 -9.76,-6.77 -9.61,-7.34 C-9.46,-7.91 -9.20,-8.45 -8.83,-8.83 C-8.45,-9.20 -7.91,-9.46 -7.34,-9.61 C-6.77,-9.76 -6.09,-9.74 -5.40,-9.72 C-4.72,-9.71 -4.14,-9.57 -3.24,-9.51 C-2.34,-9.45 -1.08,-9.38 -0.00,-9.38 C1.08,-9.38 2.34,-9.45 3.24,-9.51 C4.14,-9.57 4.72,-9.71 5.40,-9.72 C6.09,-9.74 6.77,-9.76 7.34,-9.61 C7.91,-9.46 8.45,-9.20 8.83,-8.83 C9.20,-8.45 9.46,-7.91 9.61,-7.34 C9.76,-6.77 9.74,-6.09 9.72,-5.40 C9.71,-4.72 9.57,-4.14 9.51,-3.24 C9.45,-2.34 9.38,-1.08 9.38,0.00 Z"/><ellipse class="cusp" cx="-4.1" cy="-4.1" rx="3.4" ry="3.2"/><ellipse class="cusp" cx="-4.1" cy="4.1" rx="3.4" ry="3.2"/><ellipse class="cusp" cx="4.1" cy="-4.1" rx="3.4" ry="3.2"/><ellipse class="cusp" cx="4.1" cy="4.1" rx="3.4" ry="3.2"/><path class="fis" d="M-4.3,0 H4.3 M0,-4.3 V4.3"/></g>
-        <!-- LOWER DENTAL ARCH -->
-        <g class="th" transform="translate(242.7,238.3) rotate(105.0)"><path class="crown" d="M9.38,0.00 C9.38,1.08 9.45,2.34 9.51,3.24 C9.57,4.14 9.71,4.72 9.72,5.40 C9.74,6.09 9.76,6.77 9.61,7.34 C9.46,7.91 9.20,8.45 8.83,8.83 C8.45,9.20 7.91,9.46 7.34,9.61 C6.77,9.76 6.09,9.74 5.40,9.72 C4.72,9.71 4.14,9.57 3.24,9.51 C2.34,9.45 1.08,9.38 0.00,9.38 C-1.08,9.38 -2.34,9.45 -3.24,9.51 C-4.14,9.57 -4.72,9.71 -5.40,9.72 C-6.09,9.74 -6.77,9.76 -7.34,9.61 C-7.91,9.46 -8.45,9.20 -8.83,8.83 C-9.20,8.45 -9.46,7.91 -9.61,7.34 C-9.76,6.77 -9.74,6.09 -9.72,5.40 C-9.71,4.72 -9.57,4.14 -9.51,3.24 C-9.45,2.34 -9.38,1.08 -9.38,0.00 C-9.38,-1.08 -9.45,-2.34 -9.51,-3.24 C-9.57,-4.14 -9.71,-4.72 -9.72,-5.40 C-9.74,-6.09 -9.76,-6.77 -9.61,-7.34 C-9.46,-7.91 -9.20,-8.45 -8.83,-8.83 C-8.45,-9.20 -7.91,-9.46 -7.34,-9.61 C-6.77,-9.76 -6.09,-9.74 -5.40,-9.72 C-4.72,-9.71 -4.14,-9.57 -3.24,-9.51 C-2.34,-9.45 -1.08,-9.38 -0.00,-9.38 C1.08,-9.38 2.34,-9.45 3.24,-9.51 C4.14,-9.57 4.72,-9.71 5.40,-9.72 C6.09,-9.74 6.77,-9.76 7.34,-9.61 C7.91,-9.46 8.45,-9.20 8.83,-8.83 C9.20,-8.45 9.46,-7.91 9.61,-7.34 C9.76,-6.77 9.74,-6.09 9.72,-5.40 C9.71,-4.72 9.57,-4.14 9.51,-3.24 C9.45,-2.34 9.38,-1.08 9.38,0.00 Z"/><ellipse class="cusp" cx="-4.1" cy="-4.1" rx="3.4" ry="3.2"/><ellipse class="cusp" cx="-4.1" cy="4.1" rx="3.4" ry="3.2"/><ellipse class="cusp" cx="4.1" cy="-4.1" rx="3.4" ry="3.2"/><ellipse class="cusp" cx="4.1" cy="4.1" rx="3.4" ry="3.2"/><path class="fis" d="M-4.3,0 H4.3 M0,-4.3 V4.3"/></g>
-        <g class="th" transform="translate(237.0,262.5) rotate(115.0)"><path class="crown" d="M10.39,0.00 C10.39,1.11 10.47,2.41 10.53,3.34 C10.59,4.26 10.75,4.86 10.77,5.56 C10.78,6.26 10.80,6.97 10.64,7.56 C10.47,8.15 10.19,8.70 9.77,9.09 C9.36,9.47 8.76,9.74 8.13,9.89 C7.50,10.04 6.74,10.02 5.98,10.01 C5.23,9.99 4.59,9.85 3.59,9.79 C2.59,9.73 1.20,9.65 0.00,9.65 C-1.20,9.65 -2.59,9.73 -3.59,9.79 C-4.59,9.85 -5.23,9.99 -5.98,10.01 C-6.74,10.02 -7.50,10.04 -8.13,9.89 C-8.76,9.74 -9.36,9.47 -9.77,9.09 C-10.19,8.70 -10.47,8.15 -10.64,7.56 C-10.80,6.97 -10.78,6.26 -10.77,5.56 C-10.75,4.86 -10.59,4.26 -10.53,3.34 C-10.47,2.41 -10.39,1.11 -10.39,0.00 C-10.39,-1.11 -10.47,-2.41 -10.53,-3.34 C-10.59,-4.26 -10.75,-4.86 -10.77,-5.56 C-10.78,-6.26 -10.80,-6.97 -10.64,-7.56 C-10.47,-8.15 -10.19,-8.70 -9.77,-9.09 C-9.36,-9.47 -8.76,-9.74 -8.13,-9.89 C-7.50,-10.04 -6.74,-10.02 -5.98,-10.01 C-5.23,-9.99 -4.59,-9.85 -3.59,-9.79 C-2.59,-9.73 -1.20,-9.65 -0.00,-9.65 C1.20,-9.65 2.59,-9.73 3.59,-9.79 C4.59,-9.85 5.23,-9.99 5.98,-10.01 C6.74,-10.02 7.50,-10.04 8.13,-9.89 C8.76,-9.74 9.36,-9.47 9.77,-9.09 C10.19,-8.70 10.47,-8.15 10.64,-7.56 C10.80,-6.97 10.78,-6.26 10.77,-5.56 C10.75,-4.86 10.59,-4.26 10.53,-3.34 C10.47,-2.41 10.39,-1.11 10.39,0.00 Z"/><ellipse class="cusp" cx="-4.5" cy="-4.2" rx="3.7" ry="3.3"/><ellipse class="cusp" cx="-4.5" cy="4.2" rx="3.7" ry="3.3"/><ellipse class="cusp" cx="4.5" cy="-4.2" rx="3.7" ry="3.3"/><ellipse class="cusp" cx="4.5" cy="4.2" rx="3.7" ry="3.3"/><path class="fis" d="M-4.8,0 H4.8 M0,-4.4 V4.4"/></g>
-        <g class="th" transform="translate(228.6,284.9) rotate(125.0)"><path class="crown" d="M10.89,0.00 C10.89,1.14 10.97,2.47 11.04,3.41 C11.11,4.36 11.27,4.97 11.29,5.69 C11.31,6.41 11.33,7.14 11.15,7.74 C10.98,8.34 10.69,8.90 10.25,9.30 C9.81,9.70 9.19,9.97 8.53,10.12 C7.86,10.28 7.07,10.26 6.27,10.24 C5.48,10.23 4.81,10.08 3.76,10.02 C2.72,9.96 1.25,9.88 0.00,9.88 C-1.25,9.88 -2.72,9.96 -3.76,10.02 C-4.81,10.08 -5.48,10.23 -6.27,10.24 C-7.07,10.26 -7.86,10.28 -8.53,10.12 C-9.19,9.97 -9.81,9.70 -10.25,9.30 C-10.69,8.90 -10.98,8.34 -11.15,7.74 C-11.33,7.14 -11.31,6.41 -11.29,5.69 C-11.27,4.97 -11.11,4.36 -11.04,3.41 C-10.97,2.47 -10.89,1.14 -10.89,0.00 C-10.89,-1.14 -10.97,-2.47 -11.04,-3.41 C-11.11,-4.36 -11.27,-4.97 -11.29,-5.69 C-11.31,-6.41 -11.33,-7.14 -11.15,-7.74 C-10.98,-8.34 -10.69,-8.90 -10.25,-9.30 C-9.81,-9.70 -9.19,-9.97 -8.53,-10.12 C-7.86,-10.28 -7.07,-10.26 -6.27,-10.24 C-5.48,-10.23 -4.81,-10.08 -3.76,-10.02 C-2.72,-9.96 -1.25,-9.88 -0.00,-9.88 C1.25,-9.88 2.72,-9.96 3.76,-10.02 C4.81,-10.08 5.48,-10.23 6.27,-10.24 C7.07,-10.26 7.86,-10.28 8.53,-10.12 C9.19,-9.97 9.81,-9.70 10.25,-9.30 C10.69,-8.90 10.98,-8.34 11.15,-7.74 C11.33,-7.14 11.31,-6.41 11.29,-5.69 C11.27,-4.97 11.11,-4.36 11.04,-3.41 C10.97,-2.47 10.89,-1.14 10.89,0.00 Z"/><ellipse class="cusp" cx="-4.8" cy="-4.3" rx="3.9" ry="3.3"/><ellipse class="cusp" cx="-4.8" cy="4.3" rx="3.9" ry="3.3"/><ellipse class="cusp" cx="4.8" cy="-4.3" rx="3.9" ry="3.3"/><ellipse class="cusp" cx="4.8" cy="4.3" rx="3.9" ry="3.3"/><path class="fis" d="M-5.0,0 H5.0 M0,-4.5 V4.5"/></g>
-        <circle class="glow" cx="217.9" cy="304.7" r="14.7"/>
-        <g class="th blue" transform="translate(217.9,304.7) rotate(135.0)"><path class="crown" d="M8.00,0.00 C8.00,0.99 7.99,2.20 7.95,2.98 C7.91,3.76 7.87,4.17 7.78,4.69 C7.70,5.21 7.60,5.67 7.46,6.12 C7.31,6.56 7.14,6.98 6.92,7.36 C6.69,7.74 6.43,8.09 6.09,8.40 C5.75,8.71 5.38,8.99 4.90,9.21 C4.42,9.42 4.04,9.60 3.22,9.72 C2.41,9.83 1.07,9.89 0.00,9.89 C-1.07,9.89 -2.41,9.83 -3.22,9.72 C-4.04,9.60 -4.42,9.42 -4.90,9.21 C-5.38,8.99 -5.75,8.71 -6.09,8.40 C-6.43,8.09 -6.69,7.74 -6.92,7.36 C-7.14,6.98 -7.31,6.56 -7.46,6.12 C-7.60,5.67 -7.70,5.21 -7.78,4.69 C-7.87,4.17 -7.91,3.76 -7.95,2.98 C-7.99,2.20 -8.00,0.99 -8.00,0.00 C-8.00,-0.99 -7.99,-2.20 -7.95,-2.98 C-7.91,-3.76 -7.87,-4.17 -7.78,-4.69 C-7.70,-5.21 -7.60,-5.67 -7.46,-6.12 C-7.31,-6.56 -7.14,-6.98 -6.92,-7.36 C-6.69,-7.74 -6.43,-8.09 -6.09,-8.40 C-5.75,-8.71 -5.38,-8.99 -4.90,-9.21 C-4.42,-9.42 -4.04,-9.60 -3.22,-9.72 C-2.41,-9.83 -1.07,-9.89 -0.00,-9.89 C1.07,-9.89 2.41,-9.83 3.22,-9.72 C4.04,-9.60 4.42,-9.42 4.90,-9.21 C5.38,-8.99 5.75,-8.71 6.09,-8.40 C6.43,-8.09 6.69,-7.74 6.92,-7.36 C7.14,-6.98 7.31,-6.56 7.46,-6.12 C7.60,-5.67 7.70,-5.21 7.78,-4.69 C7.87,-4.17 7.91,-3.76 7.95,-2.98 C7.99,-2.20 8.00,-0.99 8.00,0.00 Z"/><ellipse class="cusp" cx="0" cy="-3.1" rx="3.8" ry="2.4"/><ellipse class="cusp" cx="0" cy="3.1" rx="3.8" ry="2.4"/><path class="fis" d="M-4.0,0 H4.0"/></g>
-        <g class="th" transform="translate(205.1,321.2) rotate(145.0)"><path class="crown" d="M8.00,0.00 C8.00,0.99 7.99,2.20 7.95,2.98 C7.91,3.76 7.87,4.17 7.78,4.69 C7.70,5.21 7.60,5.67 7.46,6.12 C7.31,6.56 7.14,6.98 6.92,7.36 C6.69,7.74 6.43,8.09 6.09,8.40 C5.75,8.71 5.38,8.99 4.90,9.21 C4.42,9.42 4.04,9.60 3.22,9.72 C2.41,9.83 1.07,9.89 0.00,9.89 C-1.07,9.89 -2.41,9.83 -3.22,9.72 C-4.04,9.60 -4.42,9.42 -4.90,9.21 C-5.38,8.99 -5.75,8.71 -6.09,8.40 C-6.43,8.09 -6.69,7.74 -6.92,7.36 C-7.14,6.98 -7.31,6.56 -7.46,6.12 C-7.60,5.67 -7.70,5.21 -7.78,4.69 C-7.87,4.17 -7.91,3.76 -7.95,2.98 C-7.99,2.20 -8.00,0.99 -8.00,0.00 C-8.00,-0.99 -7.99,-2.20 -7.95,-2.98 C-7.91,-3.76 -7.87,-4.17 -7.78,-4.69 C-7.70,-5.21 -7.60,-5.67 -7.46,-6.12 C-7.31,-6.56 -7.14,-6.98 -6.92,-7.36 C-6.69,-7.74 -6.43,-8.09 -6.09,-8.40 C-5.75,-8.71 -5.38,-8.99 -4.90,-9.21 C-4.42,-9.42 -4.04,-9.60 -3.22,-9.72 C-2.41,-9.83 -1.07,-9.89 -0.00,-9.89 C1.07,-9.89 2.41,-9.83 3.22,-9.72 C4.04,-9.60 4.42,-9.42 4.90,-9.21 C5.38,-8.99 5.75,-8.71 6.09,-8.40 C6.43,-8.09 6.69,-7.74 6.92,-7.36 C7.14,-6.98 7.31,-6.56 7.46,-6.12 C7.60,-5.67 7.70,-5.21 7.78,-4.69 C7.87,-4.17 7.91,-3.76 7.95,-2.98 C7.99,-2.20 8.00,-0.99 8.00,0.00 Z"/><ellipse class="cusp" cx="0" cy="-3.1" rx="3.8" ry="2.4"/><ellipse class="cusp" cx="0" cy="3.1" rx="3.8" ry="2.4"/><path class="fis" d="M-4.0,0 H4.0"/></g>
-        <g class="th" transform="translate(190.6,334.1) rotate(155.0)"><path class="crown" d="M-8.7,3.3 C-8.7,-1.9 -2.9,-8.7 0,-8.7 C2.9,-8.7 8.7,-1.9 8.7,3.3 Q0,10.2 -8.7,3.3 Z"/><ellipse class="cusp" cx="0" cy="-2.4" rx="2.9" ry="2.6"/><path class="fis" d="M0,-2.9 V2.6"/></g>
-        <g class="th" transform="translate(174.8,343.0) rotate(165.0)"><path class="crown" d="M8.35,0.00 C8.35,0.91 8.32,2.06 8.26,2.72 C8.20,3.38 8.11,3.60 7.99,3.96 C7.87,4.32 7.72,4.60 7.54,4.87 C7.35,5.14 7.14,5.36 6.89,5.57 C6.64,5.77 6.36,5.94 6.02,6.09 C5.69,6.24 5.34,6.36 4.90,6.46 C4.45,6.56 4.18,6.63 3.37,6.68 C2.55,6.73 1.12,6.75 0.00,6.75 C-1.12,6.75 -2.55,6.73 -3.37,6.68 C-4.18,6.63 -4.45,6.56 -4.90,6.46 C-5.34,6.36 -5.69,6.24 -6.02,6.09 C-6.36,5.94 -6.64,5.77 -6.89,5.57 C-7.14,5.36 -7.35,5.14 -7.54,4.87 C-7.72,4.60 -7.87,4.32 -7.99,3.96 C-8.11,3.60 -8.20,3.38 -8.26,2.72 C-8.32,2.06 -8.35,0.91 -8.35,0.00 C-8.35,-0.91 -8.32,-2.06 -8.26,-2.72 C-8.20,-3.38 -8.11,-3.60 -7.99,-3.96 C-7.87,-4.32 -7.72,-4.60 -7.54,-4.87 C-7.35,-5.14 -7.14,-5.36 -6.89,-5.57 C-6.64,-5.77 -6.36,-5.94 -6.02,-6.09 C-5.69,-6.24 -5.34,-6.36 -4.90,-6.46 C-4.45,-6.56 -4.18,-6.63 -3.37,-6.68 C-2.55,-6.73 -1.12,-6.75 -0.00,-6.75 C1.12,-6.75 2.55,-6.73 3.37,-6.68 C4.18,-6.63 4.45,-6.56 4.90,-6.46 C5.34,-6.36 5.69,-6.24 6.02,-6.09 C6.36,-5.94 6.64,-5.77 6.89,-5.57 C7.14,-5.36 7.35,-5.14 7.54,-4.87 C7.72,-4.60 7.87,-4.32 7.99,-3.96 C8.11,-3.60 8.20,-3.38 8.26,-2.72 C8.32,-2.06 8.35,-0.91 8.35,0.00 Z"/><ellipse class="cusp" cx="0" cy="-1.8" rx="5.2" ry="2.0"/><path class="fis" d="M-4.3,-0.4 Q0,-2.3 4.3,-0.4"/></g>
-        <g class="th" transform="translate(158.4,347.4) rotate(175.0)"><path class="crown" d="M9.70,0.00 C9.70,0.94 9.67,2.14 9.60,2.82 C9.53,3.51 9.42,3.73 9.28,4.11 C9.14,4.48 8.97,4.77 8.75,5.05 C8.54,5.33 8.29,5.56 8.00,5.77 C7.71,5.99 7.38,6.16 7.00,6.32 C6.61,6.47 6.20,6.60 5.69,6.70 C5.17,6.80 4.86,6.87 3.91,6.92 C2.96,6.98 1.30,7.00 0.00,7.00 C-1.30,7.00 -2.96,6.98 -3.91,6.92 C-4.86,6.87 -5.17,6.80 -5.69,6.70 C-6.20,6.60 -6.61,6.47 -7.00,6.32 C-7.38,6.16 -7.71,5.99 -8.00,5.77 C-8.29,5.56 -8.54,5.33 -8.75,5.05 C-8.97,4.77 -9.14,4.48 -9.28,4.11 C-9.42,3.73 -9.53,3.51 -9.60,2.82 C-9.67,2.14 -9.70,0.94 -9.70,0.00 C-9.70,-0.94 -9.67,-2.14 -9.60,-2.82 C-9.53,-3.51 -9.42,-3.73 -9.28,-4.11 C-9.14,-4.48 -8.97,-4.77 -8.75,-5.05 C-8.54,-5.33 -8.29,-5.56 -8.00,-5.77 C-7.71,-5.99 -7.38,-6.16 -7.00,-6.32 C-6.61,-6.47 -6.20,-6.60 -5.69,-6.70 C-5.17,-6.80 -4.86,-6.87 -3.91,-6.92 C-2.96,-6.98 -1.30,-7.00 -0.00,-7.00 C1.30,-7.00 2.96,-6.98 3.91,-6.92 C4.86,-6.87 5.17,-6.80 5.69,-6.70 C6.20,-6.60 6.61,-6.47 7.00,-6.32 C7.38,-6.16 7.71,-5.99 8.00,-5.77 C8.29,-5.56 8.54,-5.33 8.75,-5.05 C8.97,-4.77 9.14,-4.48 9.28,-4.11 C9.42,-3.73 9.53,-3.51 9.60,-2.82 C9.67,-2.14 9.70,-0.94 9.70,0.00 Z"/><ellipse class="cusp" cx="0" cy="-1.8" rx="6.0" ry="2.1"/><path class="fis" d="M-5.0,-0.4 Q0,-2.4 5.0,-0.4"/></g>
-        <g class="th" transform="translate(141.6,347.4) rotate(185.0)"><path class="crown" d="M9.70,0.00 C9.70,0.94 9.67,2.14 9.60,2.82 C9.53,3.51 9.42,3.73 9.28,4.11 C9.14,4.48 8.97,4.77 8.75,5.05 C8.54,5.33 8.29,5.56 8.00,5.77 C7.71,5.99 7.38,6.16 7.00,6.32 C6.61,6.47 6.20,6.60 5.69,6.70 C5.17,6.80 4.86,6.87 3.91,6.92 C2.96,6.98 1.30,7.00 0.00,7.00 C-1.30,7.00 -2.96,6.98 -3.91,6.92 C-4.86,6.87 -5.17,6.80 -5.69,6.70 C-6.20,6.60 -6.61,6.47 -7.00,6.32 C-7.38,6.16 -7.71,5.99 -8.00,5.77 C-8.29,5.56 -8.54,5.33 -8.75,5.05 C-8.97,4.77 -9.14,4.48 -9.28,4.11 C-9.42,3.73 -9.53,3.51 -9.60,2.82 C-9.67,2.14 -9.70,0.94 -9.70,0.00 C-9.70,-0.94 -9.67,-2.14 -9.60,-2.82 C-9.53,-3.51 -9.42,-3.73 -9.28,-4.11 C-9.14,-4.48 -8.97,-4.77 -8.75,-5.05 C-8.54,-5.33 -8.29,-5.56 -8.00,-5.77 C-7.71,-5.99 -7.38,-6.16 -7.00,-6.32 C-6.61,-6.47 -6.20,-6.60 -5.69,-6.70 C-5.17,-6.80 -4.86,-6.87 -3.91,-6.92 C-2.96,-6.98 -1.30,-7.00 -0.00,-7.00 C1.30,-7.00 2.96,-6.98 3.91,-6.92 C4.86,-6.87 5.17,-6.80 5.69,-6.70 C6.20,-6.60 6.61,-6.47 7.00,-6.32 C7.38,-6.16 7.71,-5.99 8.00,-5.77 C8.29,-5.56 8.54,-5.33 8.75,-5.05 C8.97,-4.77 9.14,-4.48 9.28,-4.11 C9.42,-3.73 9.53,-3.51 9.60,-2.82 C9.67,-2.14 9.70,-0.94 9.70,0.00 Z"/><ellipse class="cusp" cx="0" cy="-1.8" rx="6.0" ry="2.1"/><path class="fis" d="M-5.0,-0.4 Q0,-2.4 5.0,-0.4"/></g>
-        <g class="th" transform="translate(125.2,343.0) rotate(195.0)"><path class="crown" d="M8.35,0.00 C8.35,0.91 8.32,2.06 8.26,2.72 C8.20,3.38 8.11,3.60 7.99,3.96 C7.87,4.32 7.72,4.60 7.54,4.87 C7.35,5.14 7.14,5.36 6.89,5.57 C6.64,5.77 6.36,5.94 6.02,6.09 C5.69,6.24 5.34,6.36 4.90,6.46 C4.45,6.56 4.18,6.63 3.37,6.68 C2.55,6.73 1.12,6.75 0.00,6.75 C-1.12,6.75 -2.55,6.73 -3.37,6.68 C-4.18,6.63 -4.45,6.56 -4.90,6.46 C-5.34,6.36 -5.69,6.24 -6.02,6.09 C-6.36,5.94 -6.64,5.77 -6.89,5.57 C-7.14,5.36 -7.35,5.14 -7.54,4.87 C-7.72,4.60 -7.87,4.32 -7.99,3.96 C-8.11,3.60 -8.20,3.38 -8.26,2.72 C-8.32,2.06 -8.35,0.91 -8.35,0.00 C-8.35,-0.91 -8.32,-2.06 -8.26,-2.72 C-8.20,-3.38 -8.11,-3.60 -7.99,-3.96 C-7.87,-4.32 -7.72,-4.60 -7.54,-4.87 C-7.35,-5.14 -7.14,-5.36 -6.89,-5.57 C-6.64,-5.77 -6.36,-5.94 -6.02,-6.09 C-5.69,-6.24 -5.34,-6.36 -4.90,-6.46 C-4.45,-6.56 -4.18,-6.63 -3.37,-6.68 C-2.55,-6.73 -1.12,-6.75 -0.00,-6.75 C1.12,-6.75 2.55,-6.73 3.37,-6.68 C4.18,-6.63 4.45,-6.56 4.90,-6.46 C5.34,-6.36 5.69,-6.24 6.02,-6.09 C6.36,-5.94 6.64,-5.77 6.89,-5.57 C7.14,-5.36 7.35,-5.14 7.54,-4.87 C7.72,-4.60 7.87,-4.32 7.99,-3.96 C8.11,-3.60 8.20,-3.38 8.26,-2.72 C8.32,-2.06 8.35,-0.91 8.35,0.00 Z"/><ellipse class="cusp" cx="0" cy="-1.8" rx="5.2" ry="2.0"/><path class="fis" d="M-4.3,-0.4 Q0,-2.3 4.3,-0.4"/></g>
-        <g class="th" transform="translate(109.4,334.1) rotate(205.0)"><path class="crown" d="M-8.7,3.3 C-8.7,-1.9 -2.9,-8.7 0,-8.7 C2.9,-8.7 8.7,-1.9 8.7,3.3 Q0,10.2 -8.7,3.3 Z"/><ellipse class="cusp" cx="0" cy="-2.4" rx="2.9" ry="2.6"/><path class="fis" d="M0,-2.9 V2.6"/></g>
-        <g class="th" transform="translate(94.9,321.2) rotate(215.0)"><path class="crown" d="M8.00,0.00 C8.00,0.99 7.99,2.20 7.95,2.98 C7.91,3.76 7.87,4.17 7.78,4.69 C7.70,5.21 7.60,5.67 7.46,6.12 C7.31,6.56 7.14,6.98 6.92,7.36 C6.69,7.74 6.43,8.09 6.09,8.40 C5.75,8.71 5.38,8.99 4.90,9.21 C4.42,9.42 4.04,9.60 3.22,9.72 C2.41,9.83 1.07,9.89 0.00,9.89 C-1.07,9.89 -2.41,9.83 -3.22,9.72 C-4.04,9.60 -4.42,9.42 -4.90,9.21 C-5.38,8.99 -5.75,8.71 -6.09,8.40 C-6.43,8.09 -6.69,7.74 -6.92,7.36 C-7.14,6.98 -7.31,6.56 -7.46,6.12 C-7.60,5.67 -7.70,5.21 -7.78,4.69 C-7.87,4.17 -7.91,3.76 -7.95,2.98 C-7.99,2.20 -8.00,0.99 -8.00,0.00 C-8.00,-0.99 -7.99,-2.20 -7.95,-2.98 C-7.91,-3.76 -7.87,-4.17 -7.78,-4.69 C-7.70,-5.21 -7.60,-5.67 -7.46,-6.12 C-7.31,-6.56 -7.14,-6.98 -6.92,-7.36 C-6.69,-7.74 -6.43,-8.09 -6.09,-8.40 C-5.75,-8.71 -5.38,-8.99 -4.90,-9.21 C-4.42,-9.42 -4.04,-9.60 -3.22,-9.72 C-2.41,-9.83 -1.07,-9.89 -0.00,-9.89 C1.07,-9.89 2.41,-9.83 3.22,-9.72 C4.04,-9.60 4.42,-9.42 4.90,-9.21 C5.38,-8.99 5.75,-8.71 6.09,-8.40 C6.43,-8.09 6.69,-7.74 6.92,-7.36 C7.14,-6.98 7.31,-6.56 7.46,-6.12 C7.60,-5.67 7.70,-5.21 7.78,-4.69 C7.87,-4.17 7.91,-3.76 7.95,-2.98 C7.99,-2.20 8.00,-0.99 8.00,0.00 Z"/><ellipse class="cusp" cx="0" cy="-3.1" rx="3.8" ry="2.4"/><ellipse class="cusp" cx="0" cy="3.1" rx="3.8" ry="2.4"/><path class="fis" d="M-4.0,0 H4.0"/></g>
-        <g class="th" transform="translate(82.1,304.7) rotate(225.0)"><path class="crown" d="M8.00,0.00 C8.00,0.99 7.99,2.20 7.95,2.98 C7.91,3.76 7.87,4.17 7.78,4.69 C7.70,5.21 7.60,5.67 7.46,6.12 C7.31,6.56 7.14,6.98 6.92,7.36 C6.69,7.74 6.43,8.09 6.09,8.40 C5.75,8.71 5.38,8.99 4.90,9.21 C4.42,9.42 4.04,9.60 3.22,9.72 C2.41,9.83 1.07,9.89 0.00,9.89 C-1.07,9.89 -2.41,9.83 -3.22,9.72 C-4.04,9.60 -4.42,9.42 -4.90,9.21 C-5.38,8.99 -5.75,8.71 -6.09,8.40 C-6.43,8.09 -6.69,7.74 -6.92,7.36 C-7.14,6.98 -7.31,6.56 -7.46,6.12 C-7.60,5.67 -7.70,5.21 -7.78,4.69 C-7.87,4.17 -7.91,3.76 -7.95,2.98 C-7.99,2.20 -8.00,0.99 -8.00,0.00 C-8.00,-0.99 -7.99,-2.20 -7.95,-2.98 C-7.91,-3.76 -7.87,-4.17 -7.78,-4.69 C-7.70,-5.21 -7.60,-5.67 -7.46,-6.12 C-7.31,-6.56 -7.14,-6.98 -6.92,-7.36 C-6.69,-7.74 -6.43,-8.09 -6.09,-8.40 C-5.75,-8.71 -5.38,-8.99 -4.90,-9.21 C-4.42,-9.42 -4.04,-9.60 -3.22,-9.72 C-2.41,-9.83 -1.07,-9.89 -0.00,-9.89 C1.07,-9.89 2.41,-9.83 3.22,-9.72 C4.04,-9.60 4.42,-9.42 4.90,-9.21 C5.38,-8.99 5.75,-8.71 6.09,-8.40 C6.43,-8.09 6.69,-7.74 6.92,-7.36 C7.14,-6.98 7.31,-6.56 7.46,-6.12 C7.60,-5.67 7.70,-5.21 7.78,-4.69 C7.87,-4.17 7.91,-3.76 7.95,-2.98 C7.99,-2.20 8.00,-0.99 8.00,0.00 Z"/><ellipse class="cusp" cx="0" cy="-3.1" rx="3.8" ry="2.4"/><ellipse class="cusp" cx="0" cy="3.1" rx="3.8" ry="2.4"/><path class="fis" d="M-4.0,0 H4.0"/></g>
-        <g class="th gold" transform="translate(71.4,284.9) rotate(235.0)"><path class="crown" d="M10.89,0.00 C10.89,1.14 10.97,2.47 11.04,3.41 C11.11,4.36 11.27,4.97 11.29,5.69 C11.31,6.41 11.33,7.14 11.15,7.74 C10.98,8.34 10.69,8.90 10.25,9.30 C9.81,9.70 9.19,9.97 8.53,10.12 C7.86,10.28 7.07,10.26 6.27,10.24 C5.48,10.23 4.81,10.08 3.76,10.02 C2.72,9.96 1.25,9.88 0.00,9.88 C-1.25,9.88 -2.72,9.96 -3.76,10.02 C-4.81,10.08 -5.48,10.23 -6.27,10.24 C-7.07,10.26 -7.86,10.28 -8.53,10.12 C-9.19,9.97 -9.81,9.70 -10.25,9.30 C-10.69,8.90 -10.98,8.34 -11.15,7.74 C-11.33,7.14 -11.31,6.41 -11.29,5.69 C-11.27,4.97 -11.11,4.36 -11.04,3.41 C-10.97,2.47 -10.89,1.14 -10.89,0.00 C-10.89,-1.14 -10.97,-2.47 -11.04,-3.41 C-11.11,-4.36 -11.27,-4.97 -11.29,-5.69 C-11.31,-6.41 -11.33,-7.14 -11.15,-7.74 C-10.98,-8.34 -10.69,-8.90 -10.25,-9.30 C-9.81,-9.70 -9.19,-9.97 -8.53,-10.12 C-7.86,-10.28 -7.07,-10.26 -6.27,-10.24 C-5.48,-10.23 -4.81,-10.08 -3.76,-10.02 C-2.72,-9.96 -1.25,-9.88 -0.00,-9.88 C1.25,-9.88 2.72,-9.96 3.76,-10.02 C4.81,-10.08 5.48,-10.23 6.27,-10.24 C7.07,-10.26 7.86,-10.28 8.53,-10.12 C9.19,-9.97 9.81,-9.70 10.25,-9.30 C10.69,-8.90 10.98,-8.34 11.15,-7.74 C11.33,-7.14 11.31,-6.41 11.29,-5.69 C11.27,-4.97 11.11,-4.36 11.04,-3.41 C10.97,-2.47 10.89,-1.14 10.89,0.00 Z"/><ellipse class="cusp" cx="-4.8" cy="-4.3" rx="3.9" ry="3.3"/><ellipse class="cusp" cx="-4.8" cy="4.3" rx="3.9" ry="3.3"/><ellipse class="cusp" cx="4.8" cy="-4.3" rx="3.9" ry="3.3"/><ellipse class="cusp" cx="4.8" cy="4.3" rx="3.9" ry="3.3"/><path class="fis" d="M-5.0,0 H5.0 M0,-4.5 V4.5"/></g>
-        <g class="th" transform="translate(63.0,262.5) rotate(245.0)"><path class="crown" d="M10.39,0.00 C10.39,1.11 10.47,2.41 10.53,3.34 C10.59,4.26 10.75,4.86 10.77,5.56 C10.78,6.26 10.80,6.97 10.64,7.56 C10.47,8.15 10.19,8.70 9.77,9.09 C9.36,9.47 8.76,9.74 8.13,9.89 C7.50,10.04 6.74,10.02 5.98,10.01 C5.23,9.99 4.59,9.85 3.59,9.79 C2.59,9.73 1.20,9.65 0.00,9.65 C-1.20,9.65 -2.59,9.73 -3.59,9.79 C-4.59,9.85 -5.23,9.99 -5.98,10.01 C-6.74,10.02 -7.50,10.04 -8.13,9.89 C-8.76,9.74 -9.36,9.47 -9.77,9.09 C-10.19,8.70 -10.47,8.15 -10.64,7.56 C-10.80,6.97 -10.78,6.26 -10.77,5.56 C-10.75,4.86 -10.59,4.26 -10.53,3.34 C-10.47,2.41 -10.39,1.11 -10.39,0.00 C-10.39,-1.11 -10.47,-2.41 -10.53,-3.34 C-10.59,-4.26 -10.75,-4.86 -10.77,-5.56 C-10.78,-6.26 -10.80,-6.97 -10.64,-7.56 C-10.47,-8.15 -10.19,-8.70 -9.77,-9.09 C-9.36,-9.47 -8.76,-9.74 -8.13,-9.89 C-7.50,-10.04 -6.74,-10.02 -5.98,-10.01 C-5.23,-9.99 -4.59,-9.85 -3.59,-9.79 C-2.59,-9.73 -1.20,-9.65 -0.00,-9.65 C1.20,-9.65 2.59,-9.73 3.59,-9.79 C4.59,-9.85 5.23,-9.99 5.98,-10.01 C6.74,-10.02 7.50,-10.04 8.13,-9.89 C8.76,-9.74 9.36,-9.47 9.77,-9.09 C10.19,-8.70 10.47,-8.15 10.64,-7.56 C10.80,-6.97 10.78,-6.26 10.77,-5.56 C10.75,-4.86 10.59,-4.26 10.53,-3.34 C10.47,-2.41 10.39,-1.11 10.39,0.00 Z"/><ellipse class="cusp" cx="-4.5" cy="-4.2" rx="3.7" ry="3.3"/><ellipse class="cusp" cx="-4.5" cy="4.2" rx="3.7" ry="3.3"/><ellipse class="cusp" cx="4.5" cy="-4.2" rx="3.7" ry="3.3"/><ellipse class="cusp" cx="4.5" cy="4.2" rx="3.7" ry="3.3"/><path class="fis" d="M-4.8,0 H4.8 M0,-4.4 V4.4"/></g>
-        <g class="th" transform="translate(57.3,238.3) rotate(255.0)"><path class="crown" d="M9.38,0.00 C9.38,1.08 9.45,2.34 9.51,3.24 C9.57,4.14 9.71,4.72 9.72,5.40 C9.74,6.09 9.76,6.77 9.61,7.34 C9.46,7.91 9.20,8.45 8.83,8.83 C8.45,9.20 7.91,9.46 7.34,9.61 C6.77,9.76 6.09,9.74 5.40,9.72 C4.72,9.71 4.14,9.57 3.24,9.51 C2.34,9.45 1.08,9.38 0.00,9.38 C-1.08,9.38 -2.34,9.45 -3.24,9.51 C-4.14,9.57 -4.72,9.71 -5.40,9.72 C-6.09,9.74 -6.77,9.76 -7.34,9.61 C-7.91,9.46 -8.45,9.20 -8.83,8.83 C-9.20,8.45 -9.46,7.91 -9.61,7.34 C-9.76,6.77 -9.74,6.09 -9.72,5.40 C-9.71,4.72 -9.57,4.14 -9.51,3.24 C-9.45,2.34 -9.38,1.08 -9.38,0.00 C-9.38,-1.08 -9.45,-2.34 -9.51,-3.24 C-9.57,-4.14 -9.71,-4.72 -9.72,-5.40 C-9.74,-6.09 -9.76,-6.77 -9.61,-7.34 C-9.46,-7.91 -9.20,-8.45 -8.83,-8.83 C-8.45,-9.20 -7.91,-9.46 -7.34,-9.61 C-6.77,-9.76 -6.09,-9.74 -5.40,-9.72 C-4.72,-9.71 -4.14,-9.57 -3.24,-9.51 C-2.34,-9.45 -1.08,-9.38 -0.00,-9.38 C1.08,-9.38 2.34,-9.45 3.24,-9.51 C4.14,-9.57 4.72,-9.71 5.40,-9.72 C6.09,-9.74 6.77,-9.76 7.34,-9.61 C7.91,-9.46 8.45,-9.20 8.83,-8.83 C9.20,-8.45 9.46,-7.91 9.61,-7.34 C9.76,-6.77 9.74,-6.09 9.72,-5.40 C9.71,-4.72 9.57,-4.14 9.51,-3.24 C9.45,-2.34 9.38,-1.08 9.38,0.00 Z"/><ellipse class="cusp" cx="-4.1" cy="-4.1" rx="3.4" ry="3.2"/><ellipse class="cusp" cx="-4.1" cy="4.1" rx="3.4" ry="3.2"/><ellipse class="cusp" cx="4.1" cy="-4.1" rx="3.4" ry="3.2"/><ellipse class="cusp" cx="4.1" cy="4.1" rx="3.4" ry="3.2"/><path class="fis" d="M-4.3,0 H4.3 M0,-4.3 V4.3"/></g>
-    </svg>
+        <text class="alab" x="150" y="140" text-anchor="middle">UPPER</text>
+        <text class="alab" x="150" y="270" text-anchor="middle">LOWER</text>
+        <circle class="glow" cx="223.4" cy="290.0" r="19"/>
+        <g class="th" transform="translate(61.7,153.0) rotate(290.0)"><rect class="crown" x="-13.00" y="-12.00" width="26.00" height="24.00" rx="8.16"/></g><g class="th" transform="translate(68.1,130.5) rotate(299.3)"><rect class="crown" x="-12.40" y="-11.80" width="24.80" height="23.60" rx="8.02"/></g><g class="th gold" transform="translate(76.6,110.0) rotate(308.7)"><rect class="crown" x="-11.80" y="-11.60" width="23.60" height="23.20" rx="7.89"/></g><g class="th" transform="translate(87.1,92.0) rotate(318.0)"><rect class="crown" x="-11.20" y="-11.40" width="22.40" height="22.80" rx="7.62"/></g><g class="th" transform="translate(99.3,77.0) rotate(327.3)"><rect class="crown" x="-10.60" y="-11.20" width="21.20" height="22.40" rx="7.21"/></g><g class="th" transform="translate(112.8,65.4) rotate(336.7)"><rect class="crown" x="-10.00" y="-11.00" width="20.00" height="22.00" rx="6.80"/></g><g class="th" transform="translate(127.3,57.5) rotate(346.0)"><rect class="crown" x="-9.40" y="-10.80" width="18.80" height="21.60" rx="6.39"/></g><g class="th" transform="translate(142.4,53.5) rotate(355.3)"><rect class="crown" x="-8.80" y="-10.60" width="17.60" height="21.20" rx="5.98"/></g><g class="th" transform="translate(157.6,53.5) rotate(364.7)"><rect class="crown" x="-8.80" y="-10.60" width="17.60" height="21.20" rx="5.98"/></g><g class="th" transform="translate(172.7,57.5) rotate(374.0)"><rect class="crown" x="-9.40" y="-10.80" width="18.80" height="21.60" rx="6.39"/></g><g class="th" transform="translate(187.2,65.4) rotate(383.3)"><rect class="crown" x="-10.00" y="-11.00" width="20.00" height="22.00" rx="6.80"/></g><g class="th" transform="translate(200.7,77.0) rotate(392.7)"><rect class="crown" x="-10.60" y="-11.20" width="21.20" height="22.40" rx="7.21"/></g><g class="th" transform="translate(212.9,92.0) rotate(402.0)"><rect class="crown" x="-11.20" y="-11.40" width="22.40" height="22.80" rx="7.62"/></g><g class="th gold" transform="translate(223.4,110.0) rotate(411.3)"><rect class="crown" x="-11.80" y="-11.60" width="23.60" height="23.20" rx="7.89"/></g><g class="th" transform="translate(231.9,130.5) rotate(420.7)"><rect class="crown" x="-12.40" y="-11.80" width="24.80" height="23.60" rx="8.02"/></g><g class="th" transform="translate(238.3,153.0) rotate(430.0)"><rect class="crown" x="-13.00" y="-12.00" width="26.00" height="24.00" rx="8.16"/></g>
+        <g class="th" transform="translate(61.7,247.0) rotate(250.0)"><rect class="crown" x="-13.00" y="-12.00" width="26.00" height="24.00" rx="8.16"/></g><g class="th" transform="translate(68.1,269.5) rotate(240.7)"><rect class="crown" x="-12.40" y="-11.80" width="24.80" height="23.60" rx="8.02"/></g><g class="th gold" transform="translate(76.6,290.0) rotate(231.3)"><rect class="crown" x="-11.80" y="-11.60" width="23.60" height="23.20" rx="7.89"/></g><g class="th" transform="translate(87.1,308.0) rotate(222.0)"><rect class="crown" x="-11.20" y="-11.40" width="22.40" height="22.80" rx="7.62"/></g><g class="th" transform="translate(99.3,323.0) rotate(212.7)"><rect class="crown" x="-10.60" y="-11.20" width="21.20" height="22.40" rx="7.21"/></g><g class="th" transform="translate(112.8,334.6) rotate(203.3)"><rect class="crown" x="-10.00" y="-11.00" width="20.00" height="22.00" rx="6.80"/></g><g class="th" transform="translate(127.3,342.5) rotate(194.0)"><rect class="crown" x="-9.40" y="-10.80" width="18.80" height="21.60" rx="6.39"/></g><g class="th" transform="translate(142.4,346.5) rotate(184.7)"><rect class="crown" x="-8.80" y="-10.60" width="17.60" height="21.20" rx="5.98"/></g><g class="th" transform="translate(157.6,346.5) rotate(175.3)"><rect class="crown" x="-8.80" y="-10.60" width="17.60" height="21.20" rx="5.98"/></g><g class="th" transform="translate(172.7,342.5) rotate(166.0)"><rect class="crown" x="-9.40" y="-10.80" width="18.80" height="21.60" rx="6.39"/></g><g class="th" transform="translate(187.2,334.6) rotate(156.7)"><rect class="crown" x="-10.00" y="-11.00" width="20.00" height="22.00" rx="6.80"/></g><g class="th" transform="translate(200.7,323.0) rotate(147.3)"><rect class="crown" x="-10.60" y="-11.20" width="21.20" height="22.40" rx="7.21"/></g><g class="th" transform="translate(212.9,308.0) rotate(138.0)"><rect class="crown" x="-11.20" y="-11.40" width="22.40" height="22.80" rx="7.62"/></g><g class="th blue" transform="translate(223.4,290.0) rotate(128.7)"><rect class="crown" x="-11.80" y="-11.60" width="23.60" height="23.20" rx="7.89"/></g><g class="th" transform="translate(231.9,269.5) rotate(119.3)"><rect class="crown" x="-12.40" y="-11.80" width="24.80" height="23.60" rx="8.02"/></g><g class="th" transform="translate(238.3,247.0) rotate(110.0)"><rect class="crown" x="-13.00" y="-12.00" width="26.00" height="24.00" rx="8.16"/></g>
+      </svg>
     <div class="callout" style="left:50%;top:50%;transform:translate(-50%,-50%);width:172px;">
       <div class="f ac g5" style="margin-bottom:3px;"><i class="dot" style="background:var(--blue)"></i>
         <span style="font-size:9px;font-weight:800;color:var(--blue-d);letter-spacing:.5px;">LOWER LEFT MOLAR</span></div>
@@ -1679,7 +1650,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
         <rect x="126" y="42" width="52" height="42" fill="none" stroke="#F2C14E" stroke-width="2.5" rx="3"/>
         <rect x="112" y="66" width="80" height="76" fill="none" stroke="#7FC4EE" stroke-width="2.5" rx="3"/>
         <rect x="126" y="28" width="56" height="15" rx="3" fill="#F2C14E"/>
-        <text x="132" y="39" font-family="Roboto" font-size="10" font-weight="700" fill="#2A1E00">Calculus</text>
+        <text x="132" y="39" font-family="Roboto" font-size="10" font-weight="700" fill="#241A00">Calculus</text>
         <rect x="112" y="145" width="42" height="15" rx="3" fill="#7FC4EE"/>
         <text x="118" y="156" font-family="Roboto" font-size="10" font-weight="700" fill="#052434">Stain</text>
       </svg>
@@ -1972,7 +1943,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
                                   'Chat with assistant': 'chat' },
                           sel: { '.card .sq': 'camera-profile' } },
     'camera-profile':   { sel: { '.sq[style*="width:72px"]': 'profile-viewer' } },
-    'dashboard':        { sel: { '.promo': 'report-map' },
+    'dashboard':        { sel: { '.ring': 'report-map' },
                           text: { 'Start Scan': 'scan-select', 'My Reports': 'report-map',
                                   'My Dependents': 'dependents', 'Find Clinic': 'near-clinic',
                                   'Full mouth': 'report-map', 'Scan streak': 'progress',
