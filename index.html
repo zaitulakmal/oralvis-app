@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ORAVIU — Interactive Prototype</title>
-<meta name="build" content="05 Aug 2026 · 12:52">
+<meta name="build" content="05 Aug 2026 · 13:00">
 <script>
 /* Resolve mode BEFORE body parses so there is no layout flash.
    The start screen is injected as a CSS rule for the same reason. */
@@ -746,6 +746,31 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
         <div style="width:1px;height:24px;background:var(--line);"></div>
         <div class="fc ac fl1 g3"><span class="h3" style="font-size:16px;color:var(--ok-d);">90%</span><span class="cap" style="font-size:11px;">Enamel</span></div>
       </div>
+    </div>
+
+
+    <div class="shead"><span class="h3">Actions</span></div>
+    <div class="f g8">
+      <div class="card fl1 fc ac g8" style="padding:12px 6px;">
+        <div class="sq sq-40 tint-b"><span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">photo_camera</span></div>
+        <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">Start Scan</span></div>
+      <div class="card fl1 fc ac g8" style="padding:12px 6px;">
+        <div class="sq sq-40 tint-b"><span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">description</span></div>
+        <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">My Reports</span></div>
+      <div class="card fl1 fc ac g8" style="padding:12px 6px;">
+        <div class="sq sq-40 tint-b"><span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">family_restroom</span></div>
+        <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">My Dependents</span></div>
+    </div>
+    <div class="f g8">
+      <div class="card fl1 fc ac g8" style="padding:12px 6px;">
+        <div class="sq sq-40 tint-o"><span class="material-icons-round" style="font-size:20px;color:var(--ok-d);">place</span></div>
+        <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">Find Clinic</span></div>
+      <div class="card fl1 fc ac g8" style="padding:12px 6px;">
+        <div class="sq sq-40 tint-g"><span class="material-icons-round" style="font-size:20px;color:var(--gold-d);">shopping_bag</span></div>
+        <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">Store</span></div>
+      <div class="card fl1 fc ac g8" style="padding:12px 6px;">
+        <div class="sq sq-40 tint-b"><span class="material-icons-round" style="font-size:20px;color:var(--blue-d);">forum</span></div>
+        <span class="cap" style="font-size:9.5px;color:var(--ink);font-weight:600;text-align:center;">Chat</span></div>
     </div>
 
     <!-- Available clinic (reference: doctor card) -->
@@ -1922,7 +1947,10 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
                           sel: { '.card .sq': 'camera-profile' } },
     'camera-profile':   { sel: { '.sq[style*="width:72px"]': 'profile-viewer' } },
     'dashboard':        { sel: { '.card.fc.ac': 'report-map' },
-                          text: { 'Bright Smile Dental': 'near-clinic' } },
+                          text: { 'Start Scan': 'scan-select', 'My Reports': 'report-map',
+                                  'My Dependents': 'dependents', 'Find Clinic': 'near-clinic',
+                                  'Store': 'store', 'Chat': 'chat',
+                                  'Bright Smile Dental': 'near-clinic' } },
     'progress':         { cards: { 2: 'perfect', 3: 'report-map', 4: 'report-map', 5: 'report-map' } },
     'scan-select':      { cards: { 0: 'device-connect', 1: 'device-connect', 2: 'ai-upload' } },
     'ai-upload':        { btn: ['ai-processing'] },
@@ -1983,17 +2011,9 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
   /* grade letters shown in the UI become emoji (keeps the score context intact) */
   document.addEventListener('DOMContentLoaded', function () {
     randomizeReport();
-    /* .num alone: the .num inside .ring .mid already matches, and matching .mid
-       too meant overwriting the wrapper that centres it in the ring.
-       classList.add, not className= — the latter wiped .mid/.num outright, which
-       dropped the grade out of the ring and shrank it to the inherited size. */
-    document.querySelectorAll('.num').forEach(function (el) {
-      var txt = norm(el.textContent);
-      if (/^[A-F][+-]?$/.test(txt)) {
-        el.classList.add('emoji', 'pop');
-        el.textContent = emojiFor(txt.replace(/[+-]/g, '')) + (txt.indexOf('+') > -1 ? '✨' : '');
-      }
-    });
+    /* Grades stay as the letters the client's PDF uses. The emoji swap is kept
+       below but no longer applied — turning A/B/C into faces contradicts the
+       source document and was twice asked to be removed. */
   });
 
 
