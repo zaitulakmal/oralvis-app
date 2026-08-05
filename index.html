@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ORAVIU — Interactive Prototype</title>
-<meta name="build" content="05 Aug 2026 · 09:52">
+<meta name="build" content="05 Aug 2026 · 10:04">
 <script>
 /* Resolve mode BEFORE body parses so there is no layout flash.
    The start screen is injected as a CSS rule for the same reason. */
@@ -20,7 +20,7 @@
   var th=null;
   try{ th=new URLSearchParams(location.search).get('theme'); }catch(e){}
   if(th!=='dark'&&th!=='light'){ try{ th=localStorage.getItem('oraviuTheme'); }catch(e){} }
-  if(th!=='dark'&&th!=='light') th = 'dark';   /* Oral-B look is the default */
+  if(th!=='dark'&&th!=='light') th = 'light';  /* pastel reads best on the light page */
   document.documentElement.setAttribute('data-theme', th);
   var m=location.hash.match(/^#scr-([a-z-]+)$/), start=m?m[1]:'splash';
   var e=document.createElement('style'); e.id='oraviu-boot';
@@ -38,52 +38,54 @@
    ORAVIU v5 — clinical blue system
    ══════════════════════════════════════════════════════════ */
 :root{
-  /* Oral-B iO light: near-white page, true-black ink, colour only for status */
-  --bg:#F2F2F7;      --bg2:#FFFFFF;   --card:#FFFFFF;
-  --blue:#0069D9;    --blue-d:#0060DF; --blue-l:#5AA6E8; --blue-t:#EAF2FE; --blue-t2:#F4F8FE;
-  --grad:#000000;
-  --grad-s:#000000;
-  --gold:#E9B949;    --gold-d:#8A6100; --gold-t:#FBF2DC;
-  --ok:#0A7D57;      --ok-t:#E3F7EF;
-  --warn:#E8913C;    --warn-t:#FDF0E2;
-  --bad:#E5484D;     --bad-t:#FDEBEC;
-  --ink:#000000;     --ink2:#5A5A5F;  --ink3:#6E6E73;  --line:#E5E5EA;
-  --ok-d:#0A7D57;    --bad-d:#C4363B; --warn-d:#9A5B12;
-  --page:#F2F2F7;
-  --phone:#1C1C1E;   --sk1:#E5E5EA;   --sk2:#F2F2F7;
-  --map-bg:#E8E8ED;  --map-road:#FFFFFF; --map-park:#DCEBE1;
-  --tooth-stroke:#D1D1D6; --tooth-fis:#C7C7CC; --tooth-cross:#D8D8DD; --tooth-lab:#AEAEB2;
+  /* Pastel: soft tinted surfaces, ink softened off pure black.
+     -t tokens are pastel fills for dark text; -d tokens are the accent text
+     that has to stay readable ON those fills. */
+  --bg:#F6F5FB;      --bg2:#FFFFFF;   --card:#FFFFFF;
+  --blue:#3C7FBF;    --blue-d:#2B6CA8; --blue-l:#8FC2EA; --blue-t:#DCEBFB; --blue-t2:#EDF4FD;
+  --grad:#5A6BC4;
+  --grad-s:#5A6BC4;
+  --gold:#B0842A;    --gold-d:#8A6317; --gold-t:#FCEFD0;
+  --ok:#1F8A63;      --ok-t:#D7F2E3;
+  --warn:#BE6A2A;    --warn-t:#FDE4CE;
+  --bad:#C24F58;     --bad-t:#FBDDE0;
+  --ink:#332F45;     --ink2:#5A5570;  --ink3:#625D75;  --line:#EAE7F2;
+  --ok-d:#1F7A55;    --bad-d:#A83F49; --warn-d:#96551F;
+  --page:#F6F5FB;
+  --phone:#332F45;   --sk1:#EDEAF5;   --sk2:#F6F5FB;
+  --map-bg:#E7EDF6;  --map-road:#FFFFFF; --map-park:#D7EEDF;
+  --tooth-stroke:#D8DEEC; --tooth-fis:#C9D1E2; --tooth-cross:#DDE2EE; --tooth-lab:#9E99AE;
   --gold-stroke:#BE8D1C;  --gold-fis:#A2780F;
-  --blue-stroke:#0A84FF;  --blue-fis:#0060DF;  --note-brd:#B8E3CE;
-  --neutral:#F2F2F7;  --tooth-fill:#D3D8DE;
+  --blue-stroke:#3C7FBF;  --blue-fis:#2B6CA8;  --note-brd:#B8E3CE;
+  --neutral:#F0EEF8;  --tooth-fill:#DDE4F2;
   --sh:none;
   --sh2:0 -1px 0 var(--line);
   --shb:none;
-  --brd:#E5E5EA;     --brd2:#D1D1D6; --barbg:#C7C7CC;
+  --brd:#EAE7F2;     --brd2:#DAD5E6; --barbg:#D9D4E6;
 }
 :root[data-theme="dark"]{
-  /* Oral-B iO: pure black, white and one pale blue. Fills stay deep enough
-     for white labels; the -d tokens are the light accent-text variants. */
-  --bg:#000000;      --bg2:#000000;   --card:#1C1C1E;
-  --page:#000000;    --phone:#000000;  --neutral:#2C2C2E;  --tooth-fill:#E8E8ED;
-  --ink:#FFFFFF;     --ink2:#A1A1A6;  --ink3:#8A8A8F;  --line:#2C2C2E;
-  --brd:#2C2C2E;     --brd2:#48484A;  --barbg:#48484A;
+  /* Pastel after dark: the page warms off pure black so pastel accents
+     have something to sit on instead of punching holes in it. */
+  --bg:#14121C;      --bg2:#14121C;   --card:#221F2E;
+  --page:#14121C;    --phone:#0C0A12;  --neutral:#2B2739;  --tooth-fill:#E4E2F0;
+  --ink:#F4F2FA;     --ink2:#A9A3BE;  --ink3:#A39DB6;  --line:#332E44;
+  --brd:#332E44;     --brd2:#453F5A;  --barbg:#453F5A;
   --sh:none;
   --sh2:0 -1px 0 var(--line);
   --shb:none;
-  --blue:#0069D9;    --blue-d:#64B5FF; --blue-l:#64B5FF;
-  --blue-t:rgba(127,196,238,.18);      --blue-t2:rgba(127,196,238,.10);
-  --grad:#1C1C1E;
-  --grad-s:#1C1C1E;
-  --ok:#1E8F6B;      --ok-d:#5FD3A6;   --ok-t:rgba(95,211,166,.18);
-  --gold:#9A7213;    --gold-d:#F2C14E; --gold-t:rgba(242,193,78,.18);
-  --warn:#9C5C12;    --warn-d:#F2A24E; --warn-t:rgba(242,162,78,.18);
-  --bad:#A8323E;     --bad-d:#FF6B6B;  --bad-t:rgba(255,107,107,.19);
-  --sk1:#1A1A1C;     --sk2:#2C2C2E;
-  --map-bg:#080808;  --map-road:#1C1C1C; --map-park:#10201A;
-  --tooth-stroke:#3A3A3A; --tooth-fis:#4A4A4A; --tooth-cross:#2A2A2A; --tooth-lab:#5C5C5C;
+  --blue:#3C7FBF;    --blue-d:#9CCDF2; --blue-l:#9CCDF2;
+  --blue-t:#2A3A52;  --blue-t2:#232E42;
+  --grad:#5563C0;
+  --grad-s:#5563C0;
+  --ok:#1F8A63;      --ok-d:#8FE3BE;   --ok-t:#223F36;
+  --gold:#A87F1E;    --gold-d:#F5D68A; --gold-t:#3D3320;
+  --warn:#A8642A;    --warn-d:#F7BE8E; --warn-t:#402E20;
+  --bad:#A8484F;     --bad-d:#F7A6AC;  --bad-t:#3D2530;
+  --sk1:#221F2E;     --sk2:#332E44;
+  --map-bg:#100E17;  --map-road:#2B2739; --map-park:#1A2E26;
+  --tooth-stroke:#453F5A; --tooth-fis:#554E6E; --tooth-cross:#332E44; --tooth-lab:#7B7592;
   --gold-stroke:#8A6510;  --gold-fis:#6E5210;
-  --blue-stroke:#2E7DD2;  --blue-fis:#1E5A94;  --note-brd:#2A6B55;
+  --blue-stroke:#3C7FBF;  --blue-fis:#2B6CA8;  --note-brd:#2A6B55;
 }
 /* flat on black: separation from hairlines, not elevation */
 :root[data-theme="dark"] .card{border:none;}
@@ -102,7 +104,7 @@
 :root[data-theme="dark"] .ntab.on{background:transparent;}
 :root[data-theme="dark"] .ntab.on .material-icons-round,
 :root[data-theme="dark"] .ntab.on .ntab-l{color:#fff;}
-:root[data-theme="dark"] .btn-p{background:#fff;color:#000;}
+:root[data-theme="dark"] .btn-p{background:var(--grad-s);color:#fff;}
 :root[data-theme="dark"] .btn-o{background:var(--card);}
 :root[data-theme="dark"] .btn-w{background:#fff;color:#000;}
 :root[data-theme="dark"] .if{background:var(--card);border-color:var(--brd2);}
@@ -174,19 +176,18 @@ body{background:var(--page);
 .back .cbtn .material-icons-round{font-size:17px;}
 
 /* ── cards ── */
-.card{background:var(--card);border-radius:16px;padding:15px;box-shadow:none;}
+.card{background:var(--card);border-radius:20px;padding:15px;box-shadow:none;}
 .card.flat{box-shadow:none;border:1.5px solid var(--line);}
 /* bare border-style:dashed resolves to 3px currentColor — glaring white on black */
 .card.dash{border:1.5px dashed var(--blue-d);box-shadow:none;background:transparent;}
-/* iO carries status in the glyph, not in a pastel tile — squircles go neutral */
-.tint-b,.tint-g,.tint-o,.tint-w,.tint-r{background:var(--neutral);}
-.card.tint-b,.card.tint-g,.card.tint-o,.card.tint-w,.card.tint-r{background:var(--neutral);}
+.tint-b{background:var(--blue-t);} .tint-g{background:var(--gold-t);}
+.tint-o{background:var(--ok-t);} .tint-w{background:var(--warn-t);} .tint-r{background:var(--bad-t);}
 
 /* ── buttons ── */
 .btn{height:56px;border-radius:28px;display:flex;align-items:center;justify-content:center;gap:8px;
      font-size:16px;font-weight:600;letter-spacing:-.2px;flex-shrink:0;}
 .btn .material-icons-round{font-size:19px;}
-.btn-p{background:var(--ink);color:var(--card);box-shadow:none;}
+.btn-p{background:var(--grad-s);color:#fff;box-shadow:none;}
 .btn-w{background:#fff;color:var(--blue);}
 .btn-o{background:transparent;border:1.8px solid var(--blue);color:var(--blue-d);}
 .btn-r{background:linear-gradient(135deg,#EC7A83,#D9515D);color:#fff;box-shadow:0 10px 24px rgba(217,81,93,.3);}
@@ -206,13 +207,13 @@ body{background:var(--page);
 .dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0;}
 .sel{padding:10px 16px;border-radius:100px;font-size:13px;font-weight:500;background:var(--neutral);
      color:var(--ink2);border:1.5px solid transparent;display:inline-flex;align-items:center;gap:5px;}
-.sel.on{background:var(--ink);border-color:var(--ink);color:var(--card);font-weight:600;}
+.sel.on{background:var(--grad-s);border-color:var(--grad-s);color:#fff;font-weight:600;}
 
 /* ── inputs ── */
 .ig{display:flex;flex-direction:column;gap:7px;}
 .lbl{font-size:12px;font-weight:400;color:var(--ink3);padding-left:2px;}
 .iw{position:relative;}
-.if{height:54px;border:1.5px solid transparent;border-radius:12px;padding:0 14px 0 46px;font-size:15px;
+.if{height:54px;border:1.5px solid transparent;border-radius:15px;padding:0 14px 0 46px;font-size:15px;
     font-weight:400;color:var(--ink);background:var(--neutral);display:flex;align-items:center;box-shadow:none;}
 .if .ph{color:var(--ink3);font-weight:500;}
 .if.on{border-color:var(--ink);box-shadow:none;}
@@ -222,7 +223,7 @@ body{background:var(--page);
 .ia .material-icons-round{font-size:19px;}
 
 /* ── icon squircle ── */
-.sq{border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sq{border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .sq-34{width:34px;height:34px;border-radius:9px;} .sq-40{width:40px;height:40px;}
 .sq-46{width:46px;height:46px;border-radius:12px;} .sq-54{width:54px;height:54px;border-radius:14px;}
 
@@ -309,7 +310,7 @@ body{background:var(--page);
 .bcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;justify-content:flex-end;}
 .btrack{width:100%;height:66px;display:flex;align-items:flex-end;flex-shrink:0;}
 .bar{width:100%;flex-shrink:0;border-radius:5px;background:var(--barbg);animation:grow 1s cubic-bezier(.22,1,.36,1) both;transform-origin:bottom;}
-.bar.hi{background:var(--ink);}
+.bar.hi{background:var(--grad-s);}
 .bcol .bl{font-size:9.5px;font-weight:400;color:var(--ink3);}
 .bcol .bv{font-size:10px;font-weight:500;color:var(--ink3);}
 
@@ -319,7 +320,7 @@ body{background:var(--page);
 .day .d{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
   background:transparent;border:1.5px solid var(--brd2);color:var(--ink3);}
 .day .d .material-icons-round{font-size:16px;}
-.day .d.on{background:var(--ink);color:var(--card);}
+.day .d.on{background:var(--grad-s);color:#fff;}
 .day .d.today{background:transparent;border:1.5px dashed var(--ink2);color:var(--ink);}
 .day .n{font-size:10px;font-weight:400;color:var(--ink3);}
 
@@ -738,10 +739,10 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     <div class="ring" style="width:186px;height:186px;--off:50.9;">
       <svg width="186" height="186" viewBox="0 0 120 120">
         <circle class="trk" cx="60" cy="60" r="54" stroke-width="5"/>
-        <circle class="bar" cx="60" cy="60" r="54" stroke="var(--ink)" stroke-width="5" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="339.3"/>
+        <circle class="bar" cx="60" cy="60" r="54" stroke="var(--grad-s)" stroke-width="5" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="339.3"/>
       </svg>
       <div class="mid fc ac g2">
-        <span class="num" style="font-size:76px;line-height:.9;color:var(--ink);">A</span>
+        <span class="num" style="font-size:76px;line-height:.9;color:var(--grad-s);">A</span>
         <span class="eyebrow" style="font-size:10px;">Health score</span>
       </div>
     </div>
@@ -885,7 +886,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     <div class="card" style="background:var(--grad);padding:18px 16px;">
       <div class="tc" style="color:#fff;font-size:13px;font-weight:700;line-height:1.5;">
         Results displayed by ORAVIU do not constitute a complete medical diagnosis.</div>
-      <div class="f jc" style="margin:12px 0;"><span class="material-icons-round" style="font-size:30px;color:var(--gold);">warning</span></div>
+      <div class="f jc" style="margin:12px 0;"><span class="material-icons-round" style="font-size:30px;color:#FFD9A8;">warning</span></div>
       <div class="tc" style="color:rgba(255,255,255,.92);font-size:12px;line-height:1.55;font-weight:500;">
         <b>DO NOT</b> interpret or take clinical action based on ORAVIU results without first
         consulting a qualified healthcare professional.</div>
