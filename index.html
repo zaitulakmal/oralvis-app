@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ORAVIU — Interactive Prototype</title>
-<meta name="build" content="05 Aug 2026 · 15:55">
+<meta name="build" content="06 Aug 2026 · 09:46">
 <script>
 /* Resolve mode BEFORE body parses so there is no layout flash.
    The start screen is injected as a CSS rule for the same reason. */
@@ -128,6 +128,7 @@ html[data-mode="app"] .gnav{display:none!important;}
 .eyebrow{font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--ink3);}
 .lnk{color:var(--blue-d);font-weight:500;}
 .num{font-weight:200;letter-spacing:-2px;}
+.gface{width:1em;height:1em;display:block;overflow:visible;}
 
 /* ── section header with arrow ── */
 .shead{display:flex;align-items:center;justify-content:space-between;}
@@ -286,7 +287,7 @@ html[data-mode="app"] .gnav{display:none!important;}
 
 /* ══ SCORE RING ══ */
 .ring{position:relative;flex-shrink:0;}
-.ring svg{transform:rotate(-90deg);display:block;}
+.ring > svg{transform:rotate(-90deg);display:block;}
 .ring .trk{fill:none;stroke:rgba(255,255,255,.26);}
 .ring .bar{fill:none;stroke-linecap:round;animation:dash 1.6s cubic-bezier(.22,1,.36,1) forwards;}
 .ring .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
@@ -731,7 +732,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
           <circle class="trk" cx="60" cy="60" r="50" stroke-width="6"/>
           <circle class="bar" cx="60" cy="60" r="50" stroke="var(--grad-s)" stroke-width="6" stroke-linecap="round" stroke-dasharray="314.2" stroke-dashoffset="314.2"/>
         </svg>
-        <div class="mid"><span class="num" style="font-size:62px;line-height:1;color:var(--grad-s);">A</span></div>
+        <div class="mid"><span class="num" style="font-size:74px;line-height:1;color:var(--grad-s);">A</span></div>
       </div>
       <div class="h3" style="margin-top:16px;">Good condition</div>
       <div class="f ac g5" style="margin-top:7px;background:var(--neutral);border-radius:100px;padding:6px 13px;">
@@ -739,11 +740,11 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
         <span class="cap" style="color:var(--ink);font-weight:500;">Up from B last week</span>
       </div>
       <div class="f ac w100" style="margin-top:14px;">
-        <div class="fc ac fl1 g3"><span class="h3" style="color:var(--ok-d);">A</span><span class="cap" style="font-size:11px;">Gums</span></div>
+        <div class="fc ac fl1 g3"><span class="h3 num" style="font-size:24px;color:var(--ok-d);">A</span><span class="cap" style="font-size:11px;">Gums</span></div>
         <div style="width:1px;height:24px;background:var(--line);"></div>
-        <div class="fc ac fl1 g3"><span class="h3" style="color:var(--gold-d);">B</span><span class="cap" style="font-size:11px;">Plaque</span></div>
+        <div class="fc ac fl1 g3"><span class="h3 num" style="font-size:24px;color:var(--gold-d);">B</span><span class="cap" style="font-size:11px;">Plaque</span></div>
         <div style="width:1px;height:24px;background:var(--line);"></div>
-        <div class="fc ac fl1 g3"><span class="h3" style="color:var(--ok-d);">A</span><span class="cap" style="font-size:11px;">Enamel</span></div>
+        <div class="fc ac fl1 g3"><span class="h3 num" style="font-size:24px;color:var(--ok-d);">A</span><span class="cap" style="font-size:11px;">Enamel</span></div>
       </div>
     </div>
 
@@ -1977,6 +1978,33 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
 
   var PRESSABLE = '.sel,.chip,.btn-sm,.if,.day .d,.ntab,.cbtn';
 
+  /* ── grade → drawn face ───────────────────────────────────────────────
+     Line-art SVG, not an OS emoji: 😁 renders as a different picture on iOS,
+     Android and Windows, which is what made the old set look like WhatsApp.
+     Every stroke is currentColor, so each face inherits the grade colour
+     already on the element, and 1em sizing makes it track the font size from
+     the 18px list values up to the 62px ring. */
+  var FACE_MOUTH = {
+    'A+': 'M7.4 13.3c1.1 2.6 2.8 3.7 4.6 3.7s3.5-1.1 4.6-3.7',
+    'A':  'M8 13.8c.9 1.9 2.3 2.8 4 2.8s3.1-.9 4-2.8',
+    'B':  'M8.6 14.4c.8 1.2 2 1.8 3.4 1.8s2.6-.6 3.4-1.8',
+    'C':  'M8.4 15h7.2',
+    'D':  'M8.6 16.2c.8-1.2 2-1.8 3.4-1.8s2.6.6 3.4 1.8',
+    'E':  'M8 16.6c.9-1.9 2.3-2.8 4-2.8s3.1.9 4 2.8',
+    'F':  'M7.4 17c1.1-2.6 2.8-3.7 4.6-3.7s3.5 1.1 4.6 3.7'
+  };
+  function faceFor(g) {
+    var mouth = FACE_MOUTH[g] || FACE_MOUTH['C'];
+    var sparkle = g === 'A+'
+      ? '<path d="M20.4 3.1l.62 1.68 1.68.62-1.68.62-.62 1.68-.62-1.68-1.68-.62 1.68-.62z" fill="currentColor"/>'
+      : '';
+    return '<svg class="gface" viewBox="0 0 24 24" role="img" aria-label="Grade ' + g + '">' +
+      '<circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.6"/>' +
+      '<circle cx="8.8" cy="10" r="1.15" fill="currentColor"/>' +
+      '<circle cx="15.2" cy="10" r="1.15" fill="currentColor"/>' +
+      '<path d="' + mouth + '" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>' +
+      sparkle + '</svg>';
+  }
   /* ── randomize the AI report text (client: "randomize text report") ── */
   var REPORT_VARIANTS = [
     'Your gums look healthy overall. There is light plaque on the lower molars and one spot worth a dentist\'s eye — nothing urgent.',
@@ -2001,7 +2029,14 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     randomizeReport();
     /* Grades stay as the letters the client's PDF uses. The emoji swap is kept
        below but no longer applied — turning A/B/C into faces contradicts the
-       source document and was twice asked to be removed. */
+       source document. These are drawn instead. */
+    document.querySelectorAll('.num').forEach(function (el) {
+      var txt = norm(el.textContent);
+      if (/^[A-F][+-]?$/.test(txt)) {
+        el.setAttribute('data-grade', txt);
+        el.innerHTML = faceFor(txt);
+      }
+    });
   });
 
 
