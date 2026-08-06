@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ORAVIU — Interactive Prototype</title>
-<meta name="build" content="06 Aug 2026 · 09:46">
+<meta name="build" content="06 Aug 2026 · 10:00">
 <script>
 /* Resolve mode BEFORE body parses so there is no layout flash.
    The start screen is injected as a CSS rule for the same reason. */
@@ -128,7 +128,8 @@ html[data-mode="app"] .gnav{display:none!important;}
 .eyebrow{font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--ink3);}
 .lnk{color:var(--blue-d);font-weight:500;}
 .num{font-weight:200;letter-spacing:-2px;}
-.gface{width:1em;height:1em;display:block;overflow:visible;}
+.gface{width:1em;height:1em;display:block;overflow:visible;flex-shrink:0;}
+.chip .gface{width:1.2em;height:1.2em;margin-right:-1px;}
 
 /* ── section header with arrow ── */
 .shead{display:flex;align-items:center;justify-content:space-between;}
@@ -1993,12 +1994,14 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     'E':  'M8 16.6c.9-1.9 2.3-2.8 4-2.8s3.1.9 4 2.8',
     'F':  'M7.4 17c1.1-2.6 2.8-3.7 4.6-3.7s3.5 1.1 4.6 3.7'
   };
-  function faceFor(g) {
+  /* verdict chips mirror the same scale, so they reuse the same faces */
+  var STATUS_FACE = { 'Healthy':'A', 'Mild':'B', 'Attention':'D', 'Serious':'F' };
+  function faceFor(g, label) {
     var mouth = FACE_MOUTH[g] || FACE_MOUTH['C'];
     var sparkle = g === 'A+'
       ? '<path d="M20.4 3.1l.62 1.68 1.68.62-1.68.62-.62 1.68-.62-1.68-1.68-.62 1.68-.62z" fill="currentColor"/>'
       : '';
-    return '<svg class="gface" viewBox="0 0 24 24" role="img" aria-label="Grade ' + g + '">' +
+    return '<svg class="gface" viewBox="0 0 24 24" role="img" aria-label="' + (label || 'Grade ' + g) + '">' +
       '<circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.6"/>' +
       '<circle cx="8.8" cy="10" r="1.15" fill="currentColor"/>' +
       '<circle cx="15.2" cy="10" r="1.15" fill="currentColor"/>' +
@@ -2036,6 +2039,14 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
         el.setAttribute('data-grade', txt);
         el.innerHTML = faceFor(txt);
       }
+    });
+    /* Only the verdict chips get a reaction. "Scan #7", "Nearest first" and the
+       rest are metadata, not a judgement of the mouth. */
+    document.querySelectorAll('.chip').forEach(function (el) {
+      var key = STATUS_FACE[norm(el.textContent)];
+      if (!key) return;
+      el.setAttribute('data-verdict', norm(el.textContent));
+      el.insertAdjacentHTML('afterbegin', faceFor(key, norm(el.textContent)));
     });
   });
 
