@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ORAVIU — Interactive Prototype</title>
-<meta name="build" content="05 Nov 2026 · 09:25">
+<meta name="build" content="05 Nov 2026 · 10:03">
 <script>
 /* Resolve mode BEFORE body parses so there is no layout flash.
    The start screen is injected as a CSS rule for the same reason. */
@@ -191,9 +191,10 @@ html[data-mode="app"] .gnav{display:none!important;}
     font-weight:400;color:var(--ink);background:var(--neutral);display:flex;align-items:center;box-shadow:none;}
 .if .ph{color:var(--ink3);font-weight:500;}
 .if.on{border-color:var(--ink);box-shadow:none;}
-.ii{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--ink3);display:flex;}
+/* z-index: a pressed .if gets a transform, which lifts it above these and hid the icon */
+.ii{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--ink3);display:flex;z-index:1;}
 .ii .material-icons-round{font-size:20px;}
-.ia{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:var(--ink3);display:flex;}
+.ia{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:var(--ink3);display:flex;z-index:1;}
 .ia .material-icons-round{font-size:19px;}
 
 /* ── icon squircle ── */
@@ -472,7 +473,11 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
 .sheet-scrim{position:absolute;inset:0;z-index:30;background:rgba(19,43,68,.38);display:flex;align-items:flex-end;
   animation:fadeIn .16s ease both;}
 .sheet{width:100%;background:var(--card);border-radius:24px 24px 0 0;padding:10px 20px calc(22px + env(safe-area-inset-bottom));
-  box-shadow:0 -10px 30px rgba(19,43,68,.16);animation:sheetUp .22s cubic-bezier(.22,1,.36,1) both;}
+  box-shadow:0 -10px 30px rgba(19,43,68,.16);animation:sheetUp .22s cubic-bezier(.22,1,.36,1) both;
+  max-height:78%;display:flex;flex-direction:column;}
+/* 16 states / 16 Selangor towns outgrow the phone: the list scrolls, the title stays */
+.sheet .opts{position:relative;overflow-y:auto;overscroll-behavior:contain;min-height:0;margin:0 -20px;padding:0 20px;}
+[data-dd-city]:not([data-dd]) .ia{opacity:.4;}
 .sheet .grab{width:38px;height:4px;border-radius:2px;background:var(--line);margin:0 auto 14px;}
 .sheet .opt{display:flex;align-items:center;justify-content:space-between;min-height:50px;font-size:15px;
   color:var(--ink);border-top:1px solid var(--line);}
@@ -750,8 +755,8 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     <div class="iw" data-dd="Malay|Chinese|Indian|Bumiputera Sabah|Bumiputera Sarawak|Others" data-dd-title="Ethnicity"><span class="ii"><span class="material-icons-round">groups</span></span><div class="if" style="height:48px;"><span class="ph">Ethnicity</span></div><span class="ia"><span class="material-icons-round">expand_more</span></span></div>
     <div class="iw"><span class="ii"><span class="material-icons-round">work</span></span><div class="if" style="height:48px;"><span class="ph">Profession</span></div></div>
     <div class="iw"><span class="ii"><span class="material-icons-round">markunread_mailbox</span></span><div class="if" style="height:48px;"><span class="ph">Postcode</span></div></div>
-    <div class="iw"><span class="ii"><span class="material-icons-round">location_city</span></span><div class="if" style="height:48px;"><span class="ph">City</span></div></div>
-    <div class="iw"><span class="ii"><span class="material-icons-round">map</span></span><div class="if" style="height:48px;"><span class="ph">State</span></div></div>
+    <div class="iw" data-dd-title="State" data-dd-states><span class="ii"><span class="material-icons-round">map</span></span><div class="if" style="height:48px;"><span class="ph">State</span></div><span class="ia"><span class="material-icons-round">expand_more</span></span></div>
+    <div class="iw" data-dd-title="City" data-dd-city><span class="ii"><span class="material-icons-round">location_city</span></span><div class="if" style="height:48px;"><span class="ph">City · select a state first</span></div><span class="ia"><span class="material-icons-round">expand_more</span></span></div>
   </div>
   <div style="padding:0 20px 16px;" class="fs0"><div class="btn btn-p">Next</div></div>
 </div></div>
@@ -2440,6 +2445,41 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     });
   })();
 
+  /* ── State → City. City stays shut until a state is picked, then lists
+     only that state's towns. One table, so the lists are edited here only. ── */
+  var CITIES = {
+    'Johor': ['Batu Pahat', 'Iskandar Puteri', 'Johor Bahru', 'Kluang', 'Kota Tinggi', 'Kulai', 'Mersing', 'Muar', 'Pasir Gudang', 'Pontian', 'Segamat', 'Tangkak'],
+    'Kedah': ['Alor Setar', 'Baling', 'Gurun', 'Jitra', 'Kuala Kedah', 'Kulim', 'Langkawi', 'Pendang', 'Sungai Petani', 'Yan'],
+    'Kelantan': ['Bachok', 'Gua Musang', 'Jeli', 'Kota Bharu', 'Kuala Krai', 'Machang', 'Pasir Mas', 'Pasir Puteh', 'Tanah Merah', 'Tumpat'],
+    'Melaka': ['Alor Gajah', 'Ayer Keroh', 'Jasin', 'Masjid Tanah', 'Melaka', 'Merlimau'],
+    'Negeri Sembilan': ['Bahau', 'Kuala Pilah', 'Nilai', 'Port Dickson', 'Rembau', 'Seremban', 'Tampin'],
+    'Pahang': ['Bentong', 'Cameron Highlands', 'Jerantut', 'Kuala Lipis', 'Kuantan', 'Mentakab', 'Pekan', 'Raub', 'Rompin', 'Temerloh'],
+    'Perak': ['Batu Gajah', 'Ipoh', 'Kampar', 'Kuala Kangsar', 'Lumut', 'Parit Buntar', 'Sitiawan', 'Taiping', 'Tanjung Malim', 'Teluk Intan'],
+    'Perlis': ['Arau', 'Kangar', 'Kuala Perlis', 'Padang Besar'],
+    'Pulau Pinang': ['Balik Pulau', 'Bayan Lepas', 'Bukit Mertajam', 'Butterworth', 'George Town', 'Kepala Batas', 'Nibong Tebal', 'Seberang Jaya'],
+    'Sabah': ['Beaufort', 'Keningau', 'Kota Belud', 'Kota Kinabalu', 'Kudat', 'Lahad Datu', 'Penampang', 'Putatan', 'Sandakan', 'Semporna', 'Tawau'],
+    'Sarawak': ['Betong', 'Bintulu', 'Kapit', 'Kota Samarahan', 'Kuching', 'Limbang', 'Miri', 'Mukah', 'Sarikei', 'Sibu', 'Sri Aman'],
+    'Selangor': ['Ampang', 'Bangi', 'Banting', 'Cyberjaya', 'Kajang', 'Klang', 'Kuala Selangor', 'Petaling Jaya', 'Puchong', 'Rawang', 'Selayang', 'Semenyih', 'Sepang', 'Seri Kembangan', 'Shah Alam', 'Subang Jaya'],
+    'Terengganu': ['Chukai', 'Dungun', 'Jerteh', 'Kuala Berang', 'Kuala Terengganu', 'Marang', 'Paka', 'Permaisuri'],
+    'W.P. Kuala Lumpur': ['Kuala Lumpur'],
+    'W.P. Labuan': ['Labuan'],
+    'W.P. Putrajaya': ['Putrajaya']
+  };
+  document.querySelectorAll('[data-dd-states]').forEach(function (e) {
+    e.setAttribute('data-dd', Object.keys(CITIES).join('|')); });
+  function setField(dd, v, ph) {
+    var f = dd.querySelector('.if'), s = document.createElement('span');
+    if (ph) s.className = 'ph';
+    s.textContent = v; f.textContent = ''; f.appendChild(s);
+  }
+  function stateChosen(dd, st) {
+    var city = dd.closest('.body').querySelector('[data-dd-city]');
+    if (!city) return;
+    city.setAttribute('data-dd', CITIES[st].join('|'));
+    city.removeAttribute('data-val');
+    setField(city, 'City', true);
+  }
+
   /* ── dropdowns: data-dd="A|B|C" opens a bottom sheet on its own screen ── */
   function closeSheet() {
     document.querySelectorAll('.sheet-scrim').forEach(function (s) { s.remove(); });
@@ -2453,6 +2493,7 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
     t.className = 'h3'; t.style.marginBottom = '8px';
     t.textContent = 'Select ' + (dd.getAttribute('data-dd-title') || 'an option').toLowerCase();
     sh.appendChild(t);
+    var list = document.createElement('div'); list.className = 'opts';
     dd.getAttribute('data-dd').split('|').forEach(function (v) {
       var o = document.createElement('div');
       o.className = 'opt' + (v === val ? ' on' : '');
@@ -2461,16 +2502,20 @@ html[data-mode="app"] .pbar:hover,html[data-mode="app"] .pbar:active{opacity:1;}
       o.firstChild.textContent = v;
       o.addEventListener('click', function (e) {
         e.stopPropagation();
+        var was = dd.getAttribute('data-val');
         dd.setAttribute('data-val', v);
-        var f = dd.querySelector('.if'), s = document.createElement('span');
-        s.textContent = v; f.textContent = ''; f.appendChild(s);
+        setField(dd, v);
+        if (dd.hasAttribute('data-dd-states') && v !== was) stateChosen(dd, v);
         closeSheet();
       });
-      sh.appendChild(o);
+      list.appendChild(o);
     });
+    sh.appendChild(list);
     scrim.appendChild(sh);
     scrim.addEventListener('click', function (e) { if (e.target === scrim) closeSheet(); });
     scr.appendChild(scrim);
+    var on = list.querySelector('.opt.on');
+    if (on) list.scrollTop = on.offsetTop - list.clientHeight / 2;
   }
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSheet(); });
   document.addEventListener('click', function (e) {
