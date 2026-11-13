@@ -54,6 +54,9 @@ Add to cart, search, chat sending. Text fields take input but nothing is saved.
 ## Working rules
 - Commit or push only when Zaitul says so in this conversation; the live link
   is public.
+- No AI attribution in commits or PRs: no `Co-Authored-By: Claude` (or any
+  anthropic.com) trailer, no "Generated with Claude Code" line. Zaitul is the
+  only contributor shown on GitHub.
 - Never claim something works without running it.
 
 ## Open questions
